@@ -417,3 +417,10 @@ details.collapse summary .count-pill{margin-left:0}
 
 /* === ticket-detail upgrade :: badge.danger (rule did not exist in base system — spec assumed it) === */
 .badge.danger { background: var(--danger-50); color: var(--danger); }
+
+/* === ticket-detail upgrade :: hamburger position fix ===
+   spec's fixed top/left:16 lands under the sticky proto-bar (z100) and over the brij logo;
+   on mobile we dock it into the bar's empty right side instead (role-links are hidden there) */
+@media (max-width: 1024px) {
+  body[data-prefix="fm"] .d-hamburger { top: 8px; left: auto; right: 12px; z-index: 110; }
+}
