@@ -414,3 +414,6 @@ details.collapse summary .count-pill{margin-left:0}
 /* === ticket-detail upgrade :: phone copy === */
 .phone-masked { cursor: pointer; border-bottom: 1px dashed var(--ink-500); }
 .phone-masked:hover { color: var(--teal-500); border-bottom-color: var(--teal-500); }
+
+/* === ticket-detail upgrade :: badge.danger (rule did not exist in base system — spec assumed it) === */
+.badge.danger { background: var(--danger-50); color: var(--danger); }
