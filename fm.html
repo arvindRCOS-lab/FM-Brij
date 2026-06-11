@@ -6,9 +6,10 @@
 <link rel="stylesheet" href="brij.css">
 </head>
 <body data-prefix="fm">
+<button class="d-hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')" aria-label="Menu">☰</button>
 <div class="proto-bar">
   <a class="proto-logo" href="index.html">brij<span>.</span></a>
-  <div class="proto-tag">Prototype v0.4 · FM Manager</div>
+  <div class="proto-tag proto-pill">Prototype v0.4 · FM Manager</div>
   <div class="role-links">
     <a href="resident.html">Resident</a>
     <a href="fm.html" class="active">FM Manager</a>
@@ -22,6 +23,9 @@
 <nav class="sidebar">
   <div class="s-brand">brij<span style="color:#7FCFCB">.</span></div>
   <div class="s-building">VD Commercial · FM Manager — Kavita Rao</div>
+  <div class="s-building-switch" onclick="toast('Building switcher opened — 3 buildings: VD Commercial (active), Reneev Heights, Aspen Medicity')">
+    <span>VD Commercial</span> <span style="opacity:.6">▾</span>
+  </div>
   <button id="fm-nav-dash" class="active" onclick="dGo('fm','dash','dash')">📊 Dashboard</button>
   <div class="s-section">Daily operations</div>
   <button id="fm-nav-tickets" onclick="dGo('fm','tickets','tickets')">🎫 Tickets</button>
@@ -49,7 +53,6 @@
   <a class="s-link" href="fm-business.html#compliance">🛡 Compliance</a>
   <div class="s-section">Setup</div>
   <a class="s-link" href="fm-business.html#settings">⚙️ SLA &amp; escalation</a>
-  <div class="s-foot">Building: <b style="color:#fff">VD Commercial ▾</b><br>also Reneev Heights · Aspen Medicity</div>
 </nav>
 
 <main class="d-main">
@@ -265,7 +268,7 @@
       <div class="sub">Raised by Rohan Mehta · 9 Jun 2026, 9:12 AM · via app · 2 photos · <span class="badge progress">in progress</span> <span class="badge high">High</span></div>
     </div>
     <div class="actions">
-      <button class="btn secondary sm" onclick="toast('Note added to T-1042 · Rohan Mehta notified on WhatsApp')">+ Add note</button>
+      <button class="btn secondary sm" onclick="addNote()">+ Add note</button>
       <button class="btn secondary sm" onclick="toast('vendor_job spawned → CoolTech HVAC (4.4★) · quote request sent · payment will settle via Razorpay Route escrow on resident sign-off')">Route to vendor</button>
       <button class="btn danger sm" onclick="toast('Escalated to Kavita Rao + UrbanServe city ops · SLA timer flagged amber→red')">Escalate</button>
     </div>
@@ -277,9 +280,24 @@
         <div class="row between"><b>🤖 AI triage</b><span class="badge ai">confidence 92%</span></div>
         <div style="margin:8px 0">Category <b>HVAC</b> · Priority <b>High</b> · Linked asset <a href="#" onclick="event.preventDefault();dGo('fm','asset-detail','assets')"><b>AHU-02</b> →</a></div>
         <div class="muted">Why: photos show iced vent fins + "not cooling since morning" text; Unit 304 sits in AHU-02's served zone (301–312); similar pattern in 3 historical tickets.</div>
+        <details class="ai-similar">
+          <summary>3 similar resolved tickets ↓</summary>
+          <ul>
+            <li>
+              <b>T-0987</b> · AC weak in Unit 408 · 12 May 2026 · AHU-02 · resolved in 2h 40m by Ramesh K. · root cause: <b>low refrigerant</b> · ₹2,200 parts
+            </li>
+            <li>
+              <b>T-0941</b> · AC noisy in Unit 311 · 3 Apr 2026 · AHU-02 · resolved in 5h 10m by CoolTech HVAC · root cause: <b>blower belt</b> · ₹3,800 parts
+            </li>
+            <li>
+              <b>T-0902</b> · Unit 305 hot · 18 Mar 2026 · AHU-02 · resolved in 1h 20m by Ramesh K. · root cause: <b>clogged filter</b> · ₹900 parts
+            </li>
+          </ul>
+          <div class="muted" style="margin-top:8px">Pattern detected by Brij Agent · last refit 22 May 2026 missed the refrigerant top-up cycle — suggested PPM update logged → <a href="#" onclick="event.preventDefault();toast('PPM schedule update proposal added to AHU-02 — Kavita Rao to approve')">review PPM update →</a></div>
+        </details>
         <div class="row" style="margin-top:10px">
           <button class="btn primary sm" onclick="toast('AI triage accepted · routing &amp; SLA unchanged')">Accept</button>
-          <button class="btn ghost sm" onclick="toast('Override panel opened — manual category/priority · AI feedback loop recorded')">Override</button>
+          <button class="btn ghost sm" style="color:var(--ink-500);text-decoration:underline" onclick="toast('Override panel opened — manual category/priority · AI feedback loop recorded · model retraining flagged')">Override</button>
         </div>
       </div>
 
@@ -289,7 +307,17 @@
           <li><div class="t-title">Ticket raised via resident app — 2 photos attached</div><div class="t-meta">9 Jun, 9:12 AM · Rohan Mehta, Unit 304</div></li>
           <li><div class="t-title">AI triage: HVAC · High · linked AHU-02 · SLA set (resolve by 10 Jun 6:00 PM)</div><div class="t-meta">9 Jun, 9:12 AM · automatic</div></li>
           <li><div class="t-title">Assigned to Ramesh K. (in-house HVAC technician)</div><div class="t-meta">9 Jun, 9:40 AM · by Kavita Rao</div></li>
+          <li class="t-note">
+            <div class="t-title">📝 Internal note — Kavita Rao</div>
+            <div class="t-meta">9 Jun, 9:45 AM · visible to FM team only</div>
+            <div class="t-body">Ramesh, check refrigerant pressure first — third unit-304-line ticket in 3 months. If low again, flag CoolTech AMC scope.</div>
+          </li>
           <li><div class="t-title">Technician on site — initial inspection, gas pressure low</div><div class="t-meta">9 Jun, 11:40 AM · Ramesh K., QR check-in at AHU-02</div></li>
+          <li class="t-note">
+            <div class="t-title">📝 Internal note — Ramesh K.</div>
+            <div class="t-meta">9 Jun, 11:55 AM · visible to FM team only</div>
+            <div class="t-body">Confirmed low refrigerant. Drawing 2 filters from stores. Topping up R-410A 800g. Will retest at 1 PM.</div>
+          </li>
           <li><div class="t-title">2× AHU filters drawn from stores against this ticket</div><div class="t-meta">10 Jun, 10:55 AM · <a href="#" onclick="event.preventDefault();dGo('fm','inventory','inventory')">inventory log →</a></div></li>
           <li class="future"><div class="t-title">Resolve &amp; resident sign-off — SLA 6:00 PM today</div><div class="t-meta">3h 55m remaining</div></li>
         </ul>
@@ -302,28 +330,51 @@
       <div class="card">
         <h3 class="panel-title">Details</h3>
         <dl class="kv">
-          <dt>SLA</dt><dd style="color:var(--danger);font-weight:700">Today 6:00 PM · 3h 55m left</dd>
+          <dt>SLA</dt>
+          <dd id="slaCountdown" style="color:var(--danger);font-weight:700">Today 6:00 PM · <span class="sla-remaining">3h 55m left</span></dd>
           <dt>Unit / zone</dt><dd>304 · 3rd floor · AHU-02 zone</dd>
-          <dt>Raised by</dt><dd>Rohan Mehta · +91 98XXX 12304</dd>
+          <dt>Raised by</dt><dd>Rohan Mehta · <span class="phone-masked" onclick="navigator.clipboard.writeText('+919812312304');toast('Phone copied — +91 98123 12304')">+91 98XXX 12304 📋</span></dd>
           <dt>Channel</dt><dd>Resident app</dd>
           <dt>Assignee</dt><dd>Ramesh K. (in-house HVAC)</dd>
           <dt>Asset</dt><dd><a href="#" onclick="event.preventDefault();dGo('fm','asset-detail','assets')">AHU-02 · QR #BRJ-A-0042 →</a></dd>
-          <dt>Photos</dt><dd><span class="photo-stub">🖼</span> <span class="photo-stub">🖼</span></dd>
+          <dt>Photos</dt>
+          <dd>
+            <!-- TODO: arvind to add real photos at /assets/img/t1042-photo-1.jpg (iced AHU vent fins) and /assets/img/t1042-photo-2.jpg (cooling coil close-up), then swap the spans below for <img class="ticket-photo" src=...> per spec -->
+            <div class="photo-strip">
+              <span class="photo-stub" role="img" aria-label="AHU vent fins" onclick="toast('Photo opened — iced vent fins clearly visible · taken 9 Jun 9:11 AM by Rohan Mehta')">🖼</span>
+              <span class="photo-stub" role="img" aria-label="Cooling coil" onclick="toast('Photo opened — cooling coil close-up · low refrigerant pattern')">🖼</span>
+            </div>
+          </dd>
         </dl>
       </div>
       <div class="card">
-        <div class="row between"><h3 class="panel-title">Work-order costing</h3><span class="badge medium">+21% variance — approval required</span></div>
-        <dl class="kv">
-          <dt>Labour</dt><dd>2h × ₹450 = <b>₹900</b> · Ramesh K.</dd>
-          <dt>AHU filter</dt><dd>₹1,800</dd>
-          <dt>Refrigerant top-up</dt><dd>₹2,400</dd>
-          <dt>Total</dt><dd><b>₹5,100</b></dd>
-          <dt>Benchmark</dt><dd>₹4,200 (HVAC category avg)</dd>
-        </dl>
+        <div class="row between"><h3 class="panel-title">Work-order costing</h3><span class="badge danger">+21% variance — approval required</span></div>
+        <div class="cost-breakdown">
+          <div class="cost-row"><span>Labour · Ramesh K. · 2h × ₹450</span><b>₹900</b></div>
+          <div class="cost-row"><span>AHU filter × 2</span><b>₹1,800</b></div>
+          <div class="cost-row"><span>Refrigerant R-410A top-up · 800g</span><b>₹2,400</b></div>
+          <div class="cost-row total"><span>Total</span><b>₹5,100</b></div>
+          <div class="cost-bench">
+            <div class="cost-bench-bar">
+              <div class="cost-bench-actual" style="width:60%"></div>
+              <div class="cost-bench-mark" style="left:49%"></div>
+            </div>
+            <div class="cost-bench-labels"><span>Benchmark ₹4,200</span><span>Actual ₹5,100 (+21%)</span></div>
+          </div>
+        </div>
         <div class="row" style="margin-top:10px">
-          <button class="btn primary sm" onclick="toast('Work-order cost ₹5,100 approved by Kavita Rao · +21% variance logged to MIS · audit_log entry written')">Approve cost</button>
+          <button class="btn primary sm" onclick="toast('Work-order cost ₹5,100 approved by Kavita Rao · +21% variance logged to MIS · audit_log entry written')">Approve ₹5,100 (+21% over benchmark)</button>
         </div>
         <div class="muted" style="margin-top:8px">Parts auto-deduct from inventory — 2× AHU filters already drawn against this ticket → <a href="#" onclick="event.preventDefault();dGo('fm','inventory','inventory')">inventory log →</a></div>
+      </div>
+      <div class="card esg-card">
+        <h3 class="panel-title">🌱 ESG impact</h3>
+        <dl class="kv">
+          <dt>Energy wasted</dt><dd><b>47 kWh</b> during incident window</dd>
+          <dt>Cost @ ₹6.50/kWh</dt><dd>₹305</dd>
+          <dt>CO₂e</dt><dd>33 kg · rolling to Q2 ESG report</dd>
+        </dl>
+        <div class="muted" style="margin-top:6px">Auto-flows into VD Commercial ESG dashboard · LEED operational data row updated.</div>
       </div>
       <div class="card">
         <h3 class="panel-title">Message resident</h3>
@@ -925,6 +976,37 @@
 
 </main>
 </div>
+<div id="toast" aria-live="polite"></div>
 <script src="brij.js"></script>
+<script>
+  /* === ticket-detail upgrade :: live behaviours === */
+  (function(){
+    // Fake target: 3h 55m from initial page load. Resets every reload.
+    var slaTarget = Date.now() + (3 * 60 + 55) * 60 * 1000;
+    function tick() {
+      var el = document.querySelector('#slaCountdown .sla-remaining');
+      if (!el) return;
+      var ms = slaTarget - Date.now();
+      if (ms <= 0) { el.textContent = 'SLA BREACHED'; el.parentElement.style.background = '#FEE'; return; }
+      var h = Math.floor(ms / 3600000);
+      var m = Math.floor((ms % 3600000) / 60000);
+      el.textContent = h + 'h ' + m + 'm left';
+      // color pulse when under 1h
+      if (h === 0) { el.parentElement.style.animation = 'slaPulse 1.5s infinite'; }
+    }
+    tick(); setInterval(tick, 30000);
+  })();
+
+  function addNote() {
+    var txt = prompt('Internal note (visible to FM team only):');
+    if (!txt) return;
+    toast('Note added to T-1042 · 4 teammates notified on WhatsApp · Ramesh K. pinged');
+    // optional: dynamically inject into timeline
+  }
+
+  if (new URLSearchParams(location.search).get('demo') === '1') {
+    document.querySelectorAll('.proto-pill').forEach(function(e){ e.style.display = 'none'; });
+  }
+</script>
 </body>
 </html>

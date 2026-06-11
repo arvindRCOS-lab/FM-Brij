@@ -311,3 +311,106 @@ details.collapse summary .count-pill{margin-left:0}
 .demo-step .num::before{content:counter(step)}
 .demo-step:hover b{color:var(--teal-500)}
 
+
+/* === ticket-detail upgrade === */
+
+/* === ticket-detail upgrade :: responsive shell === */
+/* mobile hamburger button — hidden on desktop */
+.d-hamburger {
+  display: none;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 60;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-md);
+  border: 1px solid rgba(255,255,255,.2);
+  background: var(--teal-700);
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+/* scoped to body[data-prefix="fm"]: other desktop pages have no hamburger yet,
+   so collapsing their sidebar would strand them (adaptation noted in summary) */
+@media (max-width: 1024px) {
+  /* layout */
+  body[data-prefix="fm"] { padding-left: 0; }
+  body[data-prefix="fm"] .shell { flex-direction: column; }
+  body[data-prefix="fm"] .sidebar {
+    position: fixed; top: 0; left: 0; bottom: 0;
+    width: 280px; transform: translateX(-100%);
+    transition: transform .25s ease;
+    z-index: 50;
+    overflow-y: auto;
+  }
+  body[data-prefix="fm"] .sidebar.open { transform: translateX(0); box-shadow: 0 0 0 100vmax rgba(0,0,0,.4); }
+  body[data-prefix="fm"] .d-hamburger { display: flex; align-items: center; justify-content: center; }
+  /* content */
+  body[data-prefix="fm"] .d-main { padding: 64px 16px 32px !important; }
+  /* ticket-detail specific */
+  body[data-prefix="fm"] .two-col { grid-template-columns: 1fr; gap: 16px; }
+  body[data-prefix="fm"] .d-head { flex-direction: column; align-items: flex-start; gap: 12px; }
+  body[data-prefix="fm"] .d-head h1 { font-size: 22px; line-height: 1.25; }
+  body[data-prefix="fm"] .d-head .actions { width: 100%; flex-wrap: wrap; margin-left: 0; }
+  body[data-prefix="fm"] .d-head .actions .btn { flex: 1 1 calc(50% - 5px); min-width: 0; }
+  body[data-prefix="fm"] .d-head .back-btn { order: -1; }
+  body[data-prefix="fm"] .kv { grid-template-columns: 1fr; gap: 4px 0; }
+  body[data-prefix="fm"] .kv dt { color: var(--ink-500); font-size: 11px; text-transform: uppercase; letter-spacing: .5px; margin-top: 8px; }
+  body[data-prefix="fm"] .kv dd { margin: 0 0 4px; }
+  body[data-prefix="fm"] .ai-panel { padding: 14px; }
+  body[data-prefix="fm"] .timeline { padding-left: 20px; }
+  body[data-prefix="fm"] .role-links { display: none; } /* top role switcher hidden on mobile, use sidebar */
+}
+@media (max-width: 480px) {
+  body[data-prefix="fm"] .d-head .actions .btn { flex: 1 1 100%; }
+  body[data-prefix="fm"] .crosslink { font-size: 11px; }
+}
+
+/* === ticket-detail upgrade :: photos === */
+.ticket-photo { width: 64px; height: 64px; border-radius: var(--r-md); object-fit: cover; border: 1px solid #E5E2DA; cursor: pointer; transition: transform .15s; }
+.ticket-photo:hover { transform: scale(1.05); }
+.photo-strip { display: flex; gap: 8px; }
+.photo-strip .photo-stub { cursor: pointer; }
+.photo-strip .photo-more { width: 64px; height: 64px; border-radius: var(--r-md); background: var(--teal-50); display: flex; align-items: center; justify-content: center; color: var(--teal-500); font-weight: 700; font-size: 13px; }
+
+/* === ticket-detail upgrade :: SLA pulse === */
+@keyframes slaPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .55; }
+}
+
+/* === ticket-detail upgrade :: AI similar tickets === */
+.ai-similar { margin-top: 12px; border-top: 1px dashed rgba(1,105,111,.3); padding-top: 12px; }
+.ai-similar summary { cursor: pointer; font-weight: 600; color: var(--teal-500); list-style: none; user-select: none; }
+.ai-similar summary::-webkit-details-marker { display: none; }
+.ai-similar[open] summary { margin-bottom: 8px; }
+.ai-similar ul { list-style: none; padding: 0; margin: 0; }
+.ai-similar li { padding: 8px 10px; background: var(--surface); border-radius: var(--r-md); margin-bottom: 6px; font-size: 12px; line-height: 1.5; }
+.ai-similar li b { color: var(--teal-700); }
+
+/* === ticket-detail upgrade :: internal notes === */
+.timeline li.t-note { background: #FFF7D6; border-radius: var(--r-md); padding: 10px 12px; margin-left: -8px; border: 1px solid #F0E4A8; }
+.timeline li.t-note::before { background: #FCD34D; border-color: #F0E4A8; }
+.timeline li.t-note .t-body { margin-top: 6px; font-size: 13px; color: var(--ink-900); line-height: 1.5; }
+
+/* === ticket-detail upgrade :: cost breakdown === */
+.cost-breakdown { display: flex; flex-direction: column; gap: 6px; }
+.cost-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; color: var(--ink-700); padding: 6px 0; border-bottom: 1px dashed #ECE7DC; }
+.cost-row b { color: var(--ink-900); font-feature-settings: "tnum"; }
+.cost-row.total { border-bottom: none; border-top: 2px solid var(--ink-900); padding-top: 10px; margin-top: 4px; font-size: 14px; }
+.cost-bench { margin-top: 14px; }
+.cost-bench-bar { position: relative; height: 8px; background: var(--teal-50); border-radius: var(--r-pill); overflow: visible; }
+.cost-bench-actual { position: absolute; top: 0; left: 0; bottom: 0; background: var(--danger); border-radius: var(--r-pill); }
+.cost-bench-mark { position: absolute; top: -4px; bottom: -4px; width: 2px; background: var(--ink-900); }
+.cost-bench-mark::after { content: 'BM'; position: absolute; top: -16px; left: -8px; font-size: 9px; font-weight: 700; color: var(--ink-900); }
+.cost-bench-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--ink-500); margin-top: 8px; }
+.cost-bench-labels span:last-child { color: var(--danger); font-weight: 700; }
+
+/* === ticket-detail upgrade :: sidebar building switch === */
+.s-building-switch { font-size: 12px; color: #fff; background: rgba(255,255,255,.08); padding: 8px 12px; border-radius: var(--r-md); margin: 0 12px 14px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.s-building-switch:hover { background: rgba(255,255,255,.14); }
+
+/* === ticket-detail upgrade :: phone copy === */
+.phone-masked { cursor: pointer; border-bottom: 1px dashed var(--ink-500); }
+.phone-masked:hover { color: var(--teal-500); border-bottom-color: var(--teal-500); }
