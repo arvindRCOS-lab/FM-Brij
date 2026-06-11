@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brij — Vendor (AquaServ)</title>
+<link rel="stylesheet" href="brij.css">
+</head>
+<body>
+<div class="proto-bar">
+  <a class="proto-logo" href="index.html">brij<span>.</span></a>
+  <div class="proto-tag">Prototype v0.4 · Vendor app · Phase 2 preview</div>
+  <div class="role-links">
+    <a href="resident.html">Resident</a>
+    <a href="fm.html">FM Manager</a>
+    <a href="builder.html">Builder</a>
+    <a href="vendor.html" class="active">Vendor</a>
+    <a href="guard.html">Guard</a>
+  </div>
+</div>
+
+<div class="phone-wrap">
+<div class="phone">
+  <div class="notch"></div>
+  <div class="statusrow"><span>9:41</span><span>📶 ⚡ 78%</span></div>
+
+  <!-- ============ JOBS (home) ============ -->
+  <div id="m-jobs" class="m-screen active">
+    <div class="m-header">
+      <div style="flex:1">
+        <div class="muted">AquaServ Solutions · Sanjay Patil</div>
+        <h2>Jobs</h2>
+      </div>
+      <span class="badge resolved">4.6★ · 132 jobs</span>
+    </div>
+
+    <div class="intro-bar"><span class="ib-ico">🧰</span><div>Jobs come to you from buildings Brij runs — <b>quote fast, get paid Friday</b>.</div></div>
+
+    <div class="stack">
+      <div class="m-card" style="border-color:var(--warning)">
+        <div class="row between">
+          <strong>New offer · VJ-392</strong>
+          <span class="badge medium">Quote within 4h</span>
+        </div>
+        <div class="muted" style="margin:4px 0 8px">DG-01 day-tank inlet line leak · Basement 2 · VD Commercial, Vesu</div>
+        <div class="muted">Routed by UrbanServe FM · Plumbing · est. 1 visit</div>
+        <div class="field" style="margin:10px 0 8px">
+          <label>Your quote (₹, incl. parts)</label>
+          <input type="number" value="2800" inputmode="numeric">
+        </div>
+        <div class="row">
+          <button class="btn primary block" onclick="toast('Quote ₹2,800 sent to UrbanServe FM — response time 0.4h logged to your score')">Accept &amp; send quote</button>
+          <button class="btn ghost" onclick="toast('Offer declined — re-routed to next plumbing vendor')">Decline</button>
+        </div>
+        <div class="ai-panel" style="margin-top:10px;padding:10px 12px;font-size:12px">
+          <span class="badge ai">AI</span> Quotes under 4h win 2.3× more jobs on Brij. <strong>Why:</strong> FM auto-routes to fastest credible quote · confidence 81%
+        </div>
+      </div>
+
+      <div class="m-card" onclick="mGo('job-detail','jobs')" style="cursor:pointer">
+        <div class="row between">
+          <strong>VJ-388 · Low water pressure — Unit 702</strong>
+          <span class="badge assigned">Accepted</span>
+        </div>
+        <div class="muted" style="margin:4px 0 6px">VD Commercial, Vesu · from FM ticket T-1040 · Plumbing · Medium</div>
+        <div class="row between">
+          <span>Quote <strong>₹3,500</strong></span>
+          <span class="muted">Scheduled 11 Jun 2026 · 10:00 AM</span>
+        </div>
+        <div class="crosslink" style="margin-top:8px">⛓ Created from FM Ops ticket <strong>T-1040</strong> — scope &amp; photos synced</div>
+      </div>
+
+      <div class="m-card">
+        <strong>In progress today</strong>
+        <div class="empty-state" style="padding:28px 16px">
+          <span class="ico">🧰</span>
+          No jobs in progress today.<br>Next job: tomorrow 10:00 AM — VJ-388 at VD Commercial.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ JOB DETAIL VJ-388 ============ -->
+  <div id="m-job-detail" class="m-screen">
+    <div class="m-header">
+      <button class="m-back" onclick="mGo('jobs','jobs')">←</button>
+      <h2>VJ-388</h2>
+      <span class="badge assigned">Accepted</span>
+    </div>
+
+    <div class="stepper">
+      <div class="step done"><div class="bar"></div>Quoted</div>
+      <div class="step done"><div class="bar"></div>Accepted</div>
+      <div class="step"><div class="bar"></div>En route</div>
+      <div class="step"><div class="bar"></div>On site</div>
+      <div class="step"><div class="bar"></div>Completed</div>
+    </div>
+
+    <div class="stack">
+      <div class="m-card">
+        <dl class="kv" style="grid-template-columns:100px 1fr">
+          <dt>FM ticket</dt><dd>T-1040 · Low water pressure — Unit 702</dd>
+          <dt>Building</dt><dd>VD Commercial, Vesu, Surat</dd>
+          <dt>Scheduled</dt><dd>11 Jun 2026 · 10:00 AM</dd>
+          <dt>Quote</dt><dd>₹3,500 · Brij commission ₹280 (8%) · you receive ₹3,220</dd>
+        </dl>
+      </div>
+
+      <div class="m-card">
+        <strong>Customer &amp; access</strong>
+        <div class="muted" style="margin:6px 0">Contact the <strong>FM desk (Kavita Rao, UrbanServe)</strong> — do not call the occupant directly.</div>
+        <div class="crosslink">⛓ Gate pass auto-issued for worker <strong>Anil Yadav</strong> — valid 11 Jun 9:30 AM–1 PM. Gate 1 console already has it.</div>
+        <button class="btn secondary sm block" style="margin-top:10px" onclick="toast('WhatsApp chat opened with UrbanServe FM desk')">💬 Message FM desk on WhatsApp</button>
+      </div>
+
+      <div class="m-card">
+        <strong>Scope (from ticket T-1040)</strong>
+        <div class="muted" style="margin:6px 0">Low pressure in washroom taps, Unit 702 (7th floor). Suspect clogged aerators / branch-line valve. 4 similar complaints on floors 6–8 this week.</div>
+        <div class="row">
+          <div class="photo-stub">🚰</div>
+          <div class="photo-stub">🔧</div>
+          <span class="muted">2 photos from resident ticket</span>
+        </div>
+      </div>
+
+      <div class="ai-panel">
+        <span class="badge ai">AI parts estimate</span>
+        <div style="margin-top:8px;font-size:13px">
+          ½" CPVC ball valve ₹420 · tap aerators ×3 ₹180 · consumables ₹150 → <strong>parts ≈ ₹750</strong>
+        </div>
+        <div class="muted" style="margin-top:4px">Confidence 76% · Why: matched 14 similar low-pressure jobs in Vesu high-rises</div>
+      </div>
+
+      <button class="btn primary block" onclick="toast('Travel started — live ETA shared with FM desk · Kavita Rao notified on WhatsApp')">🚐 Start travel (shares ETA with FM)</button>
+
+      <div class="m-card">
+        <strong>On-site checklist</strong>
+        <div class="stack" style="margin-top:10px">
+          <div>
+            <label>1 · Before photos (mandatory)</label>
+            <div class="upload-zone" onclick="toast('Camera opened — before photos geo-tagged to Unit 702')">📷 Tap to capture before photos</div>
+          </div>
+          <div class="muted">2 · Carry out fix per scope · log parts used</div>
+          <div>
+            <label>3 · After photos</label>
+            <div class="upload-zone" onclick="toast('After photos captured — attached to VJ-388')">📷 Tap to capture after photos</div>
+          </div>
+          <div>
+            <label>4 · FM OTP confirms completion</label>
+            <div class="row">
+              <input placeholder="4-digit OTP from FM desk" inputmode="numeric" maxlength="4">
+              <button class="btn primary sm" onclick="toast('OTP verified ✓ — VJ-388 completed · ₹3,220 queued for Friday payout')">Verify</button>
+            </div>
+            <div class="muted" style="margin-top:4px">OTP verification triggers payment release.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SCHEDULE ============ -->
+  <div id="m-schedule" class="m-screen">
+    <div class="m-header"><h2>Schedule</h2><span class="muted">Wk of 8 Jun 2026</span></div>
+
+    <div class="m-card" style="margin-bottom:12px">
+      <div class="cal">
+        <div class="cal-h">M</div><div class="cal-h">T</div><div class="cal-h">W</div><div class="cal-h">T</div><div class="cal-h">F</div><div class="cal-h">S</div><div class="cal-h">S</div>
+        <div class="cal-d dim"><span class="dnum">8</span></div>
+        <div class="cal-d dim"><span class="dnum">9</span></div>
+        <div class="cal-d today"><span class="dnum">10</span></div>
+        <div class="cal-d"><span class="dnum">11</span><span class="cal-pill t" onclick="mGo('job-detail','jobs')">VJ-388 10A</span></div>
+        <div class="cal-d"><span class="dnum">12</span><span class="cal-pill g" onclick="toast('AMC visit — Reneev Heights pre-handover plumbing check')">AMC 11A</span></div>
+        <div class="cal-d"><span class="dnum">13</span></div>
+        <div class="cal-d"><span class="dnum">14</span></div>
+      </div>
+    </div>
+
+    <div class="stack">
+      <div class="m-card" onclick="mGo('job-detail','jobs')" style="cursor:pointer">
+        <div class="row between"><strong>Thu 11 Jun · 10:00 AM</strong><span class="badge assigned">Accepted</span></div>
+        <div class="muted">VJ-388 · Low water pressure — Unit 702 · VD Commercial · worker: Anil Yadav</div>
+      </div>
+      <div class="m-card" onclick="toast('AMC visit — Reneev Heights, Tower A pump room · contact Aditya Reneev (Builder PM)')" style="cursor:pointer">
+        <div class="row between"><strong>Fri 12 Jun · 11:00 AM</strong><span class="badge terra">AMC</span></div>
+        <div class="muted">Quarterly AMC visit · Reneev Heights (pre-handover) · booster pump &amp; riser check</div>
+      </div>
+      <div class="m-card">
+        <div class="empty-state" style="padding:24px 16px">
+          <span class="ico">🗓️</span>
+          Weekend free — no jobs Sat 13 / Sun 14 Jun.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ EARNINGS ============ -->
+  <div id="m-earnings" class="m-screen">
+    <div class="m-header"><h2>Earnings</h2><span class="muted">June 2026</span></div>
+
+    <div class="stat-grid" style="grid-template-columns:1fr 1fr;margin-bottom:12px">
+      <div class="stat-card" style="padding:14px"><div class="s-label">Gross (June)</div><div class="s-value" style="font-size:22px">₹48,200</div></div>
+      <div class="stat-card" style="padding:14px"><div class="s-label">Brij commission 8%</div><div class="s-value" style="font-size:22px">−₹3,856</div></div>
+    </div>
+    <div class="m-card" style="background:var(--teal-700);color:#fff;margin-bottom:12px;border:none">
+      <div class="row between">
+        <div>
+          <div style="font-size:11px;opacity:.8">NET PAYOUT (JUNE)</div>
+          <div style="font-family:var(--display);font-size:28px;font-weight:800">₹44,344</div>
+        </div>
+        <span class="badge resolved">Friday · Razorpay Route</span>
+      </div>
+      <div style="font-size:11px;opacity:.8;margin-top:6px">Next payout: Fri 12 Jun 2026 · auto-settled to HDFC ••4412</div>
+    </div>
+
+    <div class="m-card" style="margin-bottom:12px">
+      <strong>Payout history</strong>
+      <div class="list-row"><div style="flex:1">Fri 6 Jun 2026 · 4 jobs</div><strong>₹11,040</strong><span class="badge paid">Paid</span></div>
+      <div class="list-row"><div style="flex:1">Fri 30 May 2026 · 3 jobs</div><strong>₹9,200</strong><span class="badge paid">Paid</span></div>
+      <div class="list-row"><div style="flex:1">Fri 23 May 2026 · 5 jobs</div><strong>₹12,650</strong><span class="badge paid">Paid</span></div>
+    </div>
+
+    <button class="btn secondary block" onclick="toast('GST invoice + commission statement (Jun 2026) downloaded as PDF')">⬇ Download invoices &amp; statement</button>
+    <div class="muted" style="margin-top:10px">TDS 1% u/s 194-O is deducted at payout and deposited by Brij; auto-reconciled in your Form 26AS.</div>
+  </div>
+
+  <!-- ============ PROFILE ============ -->
+  <div id="m-vprofile" class="m-screen">
+    <div class="m-header">
+      <div style="flex:1"><h2>AquaServ Solutions</h2><div class="muted">Plumbing · Surat · admin: Sanjay Patil</div></div>
+      <div class="score-ring">4.6</div>
+    </div>
+
+    <div class="m-card" style="margin-bottom:12px">
+      <strong>Marketplace score</strong>
+      <div class="meter-row"><div style="width:110px">First-time fix</div><div class="prog" style="flex:1"><div style="width:87%"></div></div><strong>87%</strong></div>
+      <div class="meter-row"><div style="width:110px">On-time arrival</div><div class="prog" style="flex:1"><div style="width:91%"></div></div><strong>91%</strong></div>
+      <div class="meter-row"><div style="width:110px">Quote response</div><div class="prog warn" style="flex:1"><div style="width:52%"></div></div><strong>2.1h</strong></div>
+    </div>
+
+    <div class="ai-panel" style="margin-bottom:12px">
+      <span class="badge ai">AI score coach</span>
+      <div style="margin-top:8px;font-size:13px"><strong>3 jobs lost last month</strong> due to &gt;4h quote response. Enabling quote alerts for both workers could lift win rate ~18%.</div>
+      <div class="muted" style="margin-top:4px">Confidence 84% · Why: offers VJ-371, VJ-375, VJ-380 re-routed after your 4h window lapsed</div>
+      <button class="btn primary sm" style="margin-top:8px" onclick="toast('Quote alerts enabled for all workers — WhatsApp + push')">Enable quote alerts</button>
+    </div>
+
+    <div class="m-card" style="margin-bottom:12px">
+      <strong>Documents</strong>
+      <div class="list-row"><div style="flex:1">GSTIN 24AAQCA1234F1Z6</div><span class="badge resolved">Verified ✓</span></div>
+      <div class="list-row"><div style="flex:1">MSME / Udyam certificate</div><span class="badge resolved">Verified ✓</span></div>
+      <div class="list-row"><div style="flex:1">Liability insurance · renews 30 Sep</div><button class="btn ghost sm" onclick="toast('Renewal reminder set — 15 Sep 2026')">Remind</button></div>
+    </div>
+
+    <div class="m-card" style="margin-bottom:12px">
+      <strong>Service areas (Surat)</strong>
+      <div class="filter-chips" style="margin-top:8px">
+        <span class="chip on" onclick="toggleChip(this);toast('Service areas updated')">Vesu 395007</span>
+        <span class="chip on" onclick="toggleChip(this);toast('Service areas updated')">Piplod 395007</span>
+        <span class="chip on" onclick="toggleChip(this);toast('Service areas updated')">Adajan 395009</span>
+        <span class="chip" onclick="toggleChip(this);toast('Service areas updated')">Athwa 395001</span>
+      </div>
+    </div>
+
+    <div class="m-card">
+      <strong>Workers (2)</strong>
+      <div class="list-row">
+        <div class="photo-stub" style="width:40px;height:40px;font-size:16px">👷</div>
+        <div style="flex:1"><strong>Anil Yadav</strong><div class="muted">Plumber · 6 yrs · assigned VJ-388 tomorrow</div></div>
+        <span class="chip on" onclick="toggleChip(this);toast('Anil Yadav availability updated')">Available</span>
+      </div>
+      <div class="list-row">
+        <div class="photo-stub" style="width:40px;height:40px;font-size:16px">👷</div>
+        <div style="flex:1"><strong>Prakash More</strong><div class="muted">Plumber · 3 yrs</div></div>
+        <span class="chip" onclick="toggleChip(this);toast('Prakash More availability updated')">Off today</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- single shared tab bar -->
+  <div class="bottom-tabs">
+    <button id="tab-jobs" class="active" onclick="mGo('jobs','jobs')"><span class="ico">🧰</span>Jobs</button>
+    <button id="tab-schedule" onclick="mGo('schedule','schedule')"><span class="ico">📅</span>Schedule</button>
+    <button id="tab-earnings" onclick="mGo('earnings','earnings')"><span class="ico">₹</span>Earnings</button>
+    <button id="tab-vprofile" onclick="mGo('vprofile','vprofile')"><span class="ico">👤</span>Profile</button>
+  </div>
+
+</div><!-- /phone -->
+
+<div class="annot">
+  <span class="badge terra">Phase 2 preview</span>
+  <h4>Vendor marketplace app</h4>
+  <p>The supply side of Brij's marketplace. AquaServ Solutions (plumbing, 4.6★, 132 jobs) receives jobs routed straight from FM tickets, quotes in-app, executes with photo proof, and gets paid automatically.</p>
+  <h4>Why it exists</h4>
+  <p>Brij earns an <strong>8% take-rate</strong> on every marketplace job (₹280 on VJ-388's ₹3,500). Vendors accept it because Brij brings demand, Friday Razorpay Route payouts, and a portable rating. FM-OTP completion = zero payment disputes.</p>
+  <h4>Try clicking</h4>
+  <ul>
+    <li><strong>VJ-388 card</strong> → full job flow: stepper, auto gate pass, AI parts estimate, FM-OTP completion</li>
+    <li><strong>Accept &amp; send quote</strong> on the new DG-01 offer (4h response window)</li>
+    <li><strong>Profile → AI score coach</strong> — "3 jobs lost to slow quotes" nudge</li>
+  </ul>
+  <h4>Cross-module story</h4>
+  <p>⛓ VJ-388 was born from resident ticket T-1040 in FM Ops; worker Anil Yadav's gate pass shows up automatically in the Guard console (Staff tab).</p>
+</div>
+</div><!-- /phone-wrap -->
+
+<script src="brij.js"></script>
+</body>
+</html>

@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brij — FM Manager</title>
+<link rel="stylesheet" href="brij.css">
+</head>
+<body data-prefix="fmb">
+<div class="proto-bar">
+  <a class="proto-logo" href="index.html">brij<span>.</span></a>
+  <div class="proto-tag">Prototype v0.4 · FM Manager</div>
+  <div class="role-links">
+    <a href="resident.html">Resident</a>
+    <a href="fm.html" class="active">FM Manager</a>
+    <a href="builder.html">Builder</a>
+    <a href="vendor.html">Vendor</a>
+    <a href="guard.html">Guard</a>
+  </div>
+</div>
+
+<div class="shell">
+  <nav class="sidebar">
+    <div class="s-brand">brij<span style="color:#7FCFCB">.</span></div>
+    <div class="s-building">VD Commercial · FM Manager — Kavita Rao</div>
+    <a class="s-link" href="fm.html#dash">📊 Dashboard</a>
+    <div class="s-section">Daily operations</div>
+    <a class="s-link" href="fm.html#tickets">🎫 Tickets</a>
+    <a class="s-link" href="fm.html#assets">🏗 Assets</a>
+    <a class="s-link" href="fm.html#ppm">🗓 PPM Calendar</a>
+    <a class="s-link" href="fm.html#checklist">✅ Checklists</a>
+    <a class="s-link" href="fm.html#ptw">🔥 Permits</a>
+    <a class="s-link" href="fm.html#inventory">📦 Inventory</a>
+    <a class="s-link" href="fm.html#meters">⚡ Meters</a>
+    <div class="s-section">Money</div>
+    <button id="fmb-nav-collections" onclick="dGo('fmb','collections','collections')">🧾 Collections</button>
+    <button id="fmb-nav-gst" onclick="dGo('fmb','gst','gst')">📑 GST engine</button>
+    <button id="fmb-nav-finance" onclick="dGo('fmb','finance','finance')">₹ Finance &amp; audit</button>
+    <button id="fmb-nav-vendors" onclick="dGo('fmb','vendors','vendors')">🤝 Vendors</button>
+    <div class="s-section">People &amp; site</div>
+    <button id="fmb-nav-workforce" class="active" onclick="dGo('fmb','workforce','workforce')">👷 Workforce</button>
+    <button id="fmb-nav-taskboard" onclick="dGo('fmb','taskboard','taskboard')">🗂 Task board</button>
+    <a class="s-link" href="fm.html#gate">🚧 Gate &amp; visitors</a>
+    <a class="s-link" href="fm.html#announce">📣 Announcements</a>
+    <div class="s-section">Intelligence</div>
+    <a class="s-link" href="fm.html#agents">🤖 Brij Agents</a>
+    <button id="fmb-nav-benchmark" onclick="dGo('fmb','benchmark','benchmark')">📈 Benchmarks</button>
+    <button id="fmb-nav-energy" onclick="dGo('fmb','energy','energy')">🔌 Energy &amp; IoT</button>
+    <button id="fmb-nav-esg" onclick="dGo('fmb','esg','esg')">🌿 ESG</button>
+    <button id="fmb-nav-compliance" onclick="dGo('fmb','compliance','compliance')">🛡 Compliance</button>
+    <div class="s-section">Setup</div>
+    <button id="fmb-nav-settings" onclick="dGo('fmb','settings','settings')">⚙️ SLA &amp; escalation</button>
+    <div class="s-foot">Building: <b style="color:#fff">VD Commercial ▾</b><br>also Reneev Heights · Aspen Medicity</div>
+  </nav>
+
+  <main class="d-main">
+
+  <!-- ============ 1. WORKFORCE (default) ============ -->
+  <div id="fmb-workforce" class="d-screen active">
+    <div class="d-head">
+      <div>
+        <span class="eyebrow">FM · People &amp; site</span>
+        <h1>Workforce</h1>
+        <div class="sub">UrbanServe deployed staff · VD Commercial · Wed 10 Jun 2026</div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary sm" onclick="toast('Duty roster (June) exported as PDF')">Export roster</button>
+        <button class="btn primary sm" onclick="toast('Add-staff form would open — HR module, Phase 1.1')">+ Add staff</button>
+      </div>
+    </div>
+
+    <div class="intro-bar"><span class="ib-ico">💡</span><div>Your site team at a glance: <b>who's in, who's on leave, who covers</b>. Attendance feeds the payroll muster roll automatically.</div></div>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="s-label">On duty today</div><div class="s-value">12/14</div><div class="s-delta up">All posts covered</div></div>
+      <div class="stat-card"><div class="s-label">On leave</div><div class="s-value">2</div><div class="s-delta warn">Raju S. · Bharat C.</div></div>
+      <div class="stat-card"><div class="s-label">Check-in compliance</div><div class="s-value">100%</div><div class="s-delta up">Geo + QR verified</div></div>
+      <div class="stat-card"><div class="s-label">Leave requests</div><div class="s-value">1</div><div class="s-delta warn">Pending approval</div></div>
+    </div>
+
+    <div class="tabbar">
+      <button class="active" onclick="setTab(this,'fmb-wf-roster')">Roster</button>
+      <button onclick="setTab(this,'fmb-wf-attendance')">Attendance</button>
+      <button onclick="setTab(this,'fmb-wf-leaves')">Leaves</button>
+    </div>
+
+    <div id="fmb-wf-roster" class="tabpane active">
+      <div class="card" style="padding:0">
+        <div class="row between" style="padding:16px 16px 0">
+          <h3 class="panel-title" style="margin-bottom:0">Shift grid — today</h3>
+          <span class="muted">Shift A 6 AM–2 PM · Shift B 2 PM–10 PM · G General 9 AM–6 PM</span>
+        </div>
+        <table class="dt" style="border:none;margin-top:12px">
+          <tr><th>Staff</th><th>Role</th><th>Shift</th><th>Post / zone</th><th>Status</th></tr>
+          <tr class="clickable" onclick="toast('Staff profile: Ramesh K. — HVAC technician, 2 open tasks (DG-01 load test, T-1042)')"><td><b>Ramesh K.</b></td><td>HVAC Technician</td><td><span class="badge assigned">A</span></td><td>3rd-floor plant room</td><td><span class="badge progress">On T-1042 site</span></td></tr>
+          <tr class="clickable" onclick="toast('Staff profile: Imran Shaikh — electrician, shift B')"><td><b>Imran Shaikh</b></td><td>Electrician</td><td><span class="badge progress">B</span></td><td>Common areas</td><td><span class="badge done">Present</span></td></tr>
+          <tr class="clickable" onclick="toast('Staff profile: Meena Joshi — housekeeping supervisor, team of 5')"><td><b>Meena Joshi</b></td><td>Housekeeping Sup.</td><td><span class="badge neutral">G</span></td><td>Lobby + floors 1–7</td><td><span class="badge done">Present</span></td></tr>
+          <tr class="clickable" onclick="toast('Staff profile: Lakshmi Nair — front desk')"><td><b>Lakshmi Nair</b></td><td>Front Desk</td><td><span class="badge neutral">G</span></td><td>Main lobby</td><td><span class="badge done">Present</span></td></tr>
+          <tr class="clickable" onclick="toast('Staff profile: Vijay Singh — security, Gate 1')"><td><b>Vijay Singh</b></td><td>Security</td><td><span class="badge assigned">A</span></td><td>Gate 1</td><td><span class="badge done">Present</span></td></tr>
+          <tr class="clickable" onclick="toast('Staff profile: Arif Khan — security, shift B')"><td><b>Arif Khan</b></td><td>Security</td><td><span class="badge progress">B</span></td><td>Gate 1</td><td><span class="badge done">Present</span></td></tr>
+          <tr class="clickable" onclick="toast('Staff profile: Dinesh Rathod — security, basement + parking')"><td><b>Dinesh Rathod</b></td><td>Security</td><td><span class="badge neutral">G</span></td><td>Basement / parking</td><td><span class="badge done">Present</span></td></tr>
+          <tr class="clickable" onclick="toast('Staff profile: Mahesh Pawar — plumber')"><td><b>Mahesh Pawar</b></td><td>Plumber</td><td><span class="badge assigned">A</span></td><td>Basement 2 pump room</td><td><span class="badge done">Present</span></td></tr>
+          <tr class="clickable" onclick="toast('Staff profile: Kiran Patel — multi-skill technician')"><td><b>Kiran Patel</b></td><td>Multi-skill Tech</td><td><span class="badge progress">B</span></td><td>Floors 8–14</td><td><span class="badge done">Present</span></td></tr>
+          <tr class="clickable" onclick="toast('Staff profile: Sunil Yadav — housekeeping')"><td><b>Sunil Yadav</b></td><td>Housekeeping</td><td><span class="badge assigned">A</span></td><td>Floors 1–7</td><td><span class="badge done">Present</span></td></tr>
+          <tr class="clickable" onclick="toast('Staff profile: Pooja Desai — housekeeping')"><td><b>Pooja Desai</b></td><td>Housekeeping</td><td><span class="badge assigned">A</span></td><td>Floors 8–14</td><td><span class="badge done">Present</span></td></tr>
+          <tr class="clickable" onclick="toast('Staff profile: Geeta Ben Solanki — housekeeping')"><td><b>Geeta Ben Solanki</b></td><td>Housekeeping</td><td><span class="badge progress">B</span></td><td>Common areas</td><td><span class="badge done">Present</span></td></tr>
+          <tr class="clickable" onclick="toast('Raju Solanki — approved casual leave 9–11 Jun. Cover: Sunil Yadav')"><td><b>Raju Solanki</b></td><td>Housekeeping</td><td><span class="badge assigned">A</span></td><td>—</td><td><span class="badge medium">On leave</span></td></tr>
+          <tr class="clickable" onclick="toast('Bharat Chauhan — approved sick leave 10 Jun. Cover: Imran Shaikh')"><td><b>Bharat Chauhan</b></td><td>Electrician</td><td><span class="badge progress">B</span></td><td>—</td><td><span class="badge medium">On leave</span></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div id="fmb-wf-attendance" class="tabpane">
+      <div class="two-col">
+        <div class="card" style="padding:0">
+          <h3 class="panel-title" style="padding:16px 16px 0">Today's check-ins — geo-fenced QR (10 Jun)</h3>
+          <table class="dt" style="border:none;margin-top:12px">
+            <tr><th>Staff</th><th>Shift</th><th>Check-in</th><th>Method</th><th>Geo-fence</th></tr>
+            <tr><td>Ramesh K.</td><td>A</td><td>5:54 AM</td><td>QR — basement scanner</td><td><span class="badge done">Inside ✓</span></td></tr>
+            <tr><td>Vijay Singh</td><td>A</td><td>5:58 AM</td><td>QR — Gate 1</td><td><span class="badge done">Inside ✓</span></td></tr>
+            <tr><td>Mahesh Pawar</td><td>A</td><td>6:02 AM</td><td>QR — basement scanner</td><td><span class="badge done">Inside ✓</span></td></tr>
+            <tr><td>Sunil Yadav</td><td>A</td><td>6:05 AM</td><td>App geo check-in</td><td><span class="badge done">Inside ✓</span></td></tr>
+            <tr><td>Pooja Desai</td><td>A</td><td>6:11 AM</td><td>QR — lobby scanner</td><td><span class="badge done">Inside ✓</span></td></tr>
+            <tr><td>Meena Joshi</td><td>G</td><td>8:52 AM</td><td>QR — lobby scanner</td><td><span class="badge done">Inside ✓</span></td></tr>
+            <tr><td>Lakshmi Nair</td><td>G</td><td>8:55 AM</td><td>QR — lobby scanner</td><td><span class="badge done">Inside ✓</span></td></tr>
+            <tr><td>Dinesh Rathod</td><td>G</td><td>9:18 AM</td><td>App geo check-in</td><td><span class="badge medium">Late 18 min</span></td></tr>
+            <tr><td>Imran Shaikh</td><td>B</td><td>1:48 PM</td><td>QR — lobby scanner</td><td><span class="badge done">Inside ✓</span></td></tr>
+            <tr><td>Arif Khan</td><td>B</td><td>1:51 PM</td><td>QR — Gate 1</td><td><span class="badge done">Inside ✓</span></td></tr>
+            <tr><td>Kiran Patel</td><td>B</td><td>1:55 PM</td><td>App geo check-in</td><td><span class="badge done">Inside ✓</span></td></tr>
+            <tr><td>Geeta Ben Solanki</td><td>B</td><td>1:57 PM</td><td>QR — lobby scanner</td><td><span class="badge done">Inside ✓</span></td></tr>
+          </table>
+        </div>
+        <div class="stack">
+          <div class="card">
+            <h3 class="panel-title">June attendance %</h3>
+            <div class="meter-row"><span style="width:90px">Security</span><div class="prog" style="flex:1"><div style="width:97%"></div></div><b>97%</b></div>
+            <div class="meter-row"><span style="width:90px">Technical</span><div class="prog" style="flex:1"><div style="width:94%"></div></div><b>94%</b></div>
+            <div class="meter-row"><span style="width:90px">Housekeeping</span><div class="prog warn" style="flex:1"><div style="width:88%"></div></div><b>88%</b></div>
+            <div class="meter-row"><span style="width:90px">Front desk</span><div class="prog" style="flex:1"><div style="width:100%"></div></div><b>100%</b></div>
+            <div class="divider"></div>
+            <button class="btn secondary sm block" onclick="toast('June muster roll exported — payroll-ready CSV')">Export muster roll (payroll)</button>
+          </div>
+          <div class="card" style="border-color:var(--danger)">
+            <h3 class="panel-title">⚠ Exception — 9 Jun</h3>
+            <p style="font-size:13px">Dinesh Rathod's geo check-in (9 Jun, 9:04 AM) was <b>outside the geo-fence</b> (420 m from site). Marked unverified — pending supervisor confirmation.</p>
+            <div class="row" style="margin-top:10px">
+              <button class="btn sm primary" onclick="toast('Check-in confirmed manually — noted against supervisor approval')">Confirm manually</button>
+              <button class="btn sm ghost" onclick="toast('Marked absent for 9 Jun — staff notified on WhatsApp')">Mark absent</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="fmb-wf-leaves" class="tabpane">
+      <div class="two-col">
+        <div class="card">
+          <h3 class="panel-title">Pending requests (1)</h3>
+          <div class="list-row">
+            <div style="flex:1">
+              <b>Kiran Patel</b> — Casual leave · <b>13–14 Jun</b> (2 days)<br>
+              <span class="muted">Reason: family function · Balance: 6 CL remaining · Cover suggested: Imran Shaikh</span>
+            </div>
+            <button class="btn sm primary" onclick="toast('Leave approved — roster updated, Imran Shaikh assigned as cover for 13–14 Jun')">Approve</button>
+            <button class="btn sm ghost" onclick="toast('Leave declined — Kiran Patel notified on WhatsApp')">Decline</button>
+          </div>
+          <div class="divider"></div>
+          <h3 class="panel-title">On leave today</h3>
+          <div class="list-row"><span class="badge medium">CL</span><div style="flex:1"><b>Raju Solanki</b> · 9–11 Jun · approved 5 Jun</div><span class="muted">Cover: Sunil Yadav</span></div>
+          <div class="list-row"><span class="badge medium">SL</span><div style="flex:1"><b>Bharat Chauhan</b> · 10 Jun · approved today 7:10 AM</div><span class="muted">Cover: Imran Shaikh</span></div>
+        </div>
+        <div class="card">
+          <h3 class="panel-title">Upcoming approved leaves</h3>
+          <div class="empty-state">
+            <span class="ico">🗓️</span>
+            <b>Nothing scheduled</b><br>
+            No approved leaves after 11 Jun. Approve Kiran Patel's request to see it here.
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:16px">Attendance feeds the muster roll export for UrbanServe payroll; on-leave staff are auto-removed from the Task board assignee list.</p>
+  </div>
+
+  <!-- ============ 2. TASK BOARD ============ -->
+  <div id="fmb-taskboard" class="d-screen">
+    <div class="d-head">
+      <div>
+        <span class="eyebrow">FM · People &amp; site</span>
+        <h1>Task board</h1>
+        <div class="sub">Internal work allocation · today + this week · drag-drop in product (click to view here)</div>
+      </div>
+      <div class="actions">
+        <div class="filter-chips">
+          <span class="chip on" onclick="toggleChip(this)">Today</span>
+          <span class="chip" onclick="toggleChip(this)">This week</span>
+          <span class="chip" onclick="toggleChip(this)">Tickets only</span>
+        </div>
+        <button class="btn primary sm" onclick="toast('New task form would open — assignee list excludes staff on leave')">+ New task</button>
+      </div>
+    </div>
+
+    <div class="intro-bar"><span class="ib-ico">💡</span><div>Today's work on one board. <b>Ticket cards mirror live ticket status</b> — closing a card here closes the ticket too.</div></div>
+
+    <div class="kanban">
+      <div class="kcol">
+        <h4>To-do · 3</h4>
+        <div class="kcard" onclick="toast('T-1041 — Critical, SLA breached 2h. Assign from roster or route to vendor (Daily operations → Tickets)')">
+          <span class="badge critical">CRITICAL · SLA breach</span>
+          <div style="font-weight:700;margin:6px 0 2px">T-1041 · Foul smell near STP</div>
+          <div class="muted">Basement 2 · ⚠ Unassigned · AI 88%</div>
+        </div>
+        <div class="kcard" onclick="toast('DG-01 load test — PPM due today. Checklist: 12 steps, Cummins 500kVA')">
+          <span class="badge medium">PPM · due today</span>
+          <div style="font-weight:700;margin:6px 0 2px">DG-01 load test</div>
+          <div class="muted">👤 Ramesh K. · Basement 1 · 60 min</div>
+        </div>
+        <div class="kcard" onclick="toast('Fire-drill prep — mock drill scheduled 14 Jun, fire officer visit confirmed')">
+          <span class="badge neutral">Compliance</span>
+          <div style="font-weight:700;margin:6px 0 2px">Fire-drill prep — 14 Jun</div>
+          <div class="muted">👤 Meena Joshi + Vijay Singh</div>
+        </div>
+      </div>
+      <div class="kcol">
+        <h4>In progress · 2</h4>
+        <div class="kcard" onclick="toast('T-1042 — Ramesh on site since 11:40 AM (9 Jun). SLA today 6:00 PM — at risk. Detail in Daily operations → Tickets')">
+          <span class="badge high">High · SLA at risk</span>
+          <div style="font-weight:700;margin:6px 0 2px">T-1042 · AC not cooling — Unit 304</div>
+          <div class="muted">👤 Ramesh K. · AHU-02 · SLA 6:00 PM</div>
+        </div>
+        <div class="kcard" onclick="toast('Lobby deep clean — 60% done, machines on floor 1. ETA 4:30 PM')">
+          <span class="badge progress">Scheduled</span>
+          <div style="font-weight:700;margin:6px 0 2px">Lobby deep clean</div>
+          <div class="muted">👤 Meena team (4) · ETA 4:30 PM</div>
+        </div>
+      </div>
+      <div class="kcol">
+        <h4>Blocked · 1</h4>
+        <div class="kcard" onclick="toast('STP-01 repair — blocked 3 days awaiting Thermax-authorised vendor quote. Nudge sent to 2 vendors')">
+          <span class="badge overdue">Blocked · 3 days</span>
+          <div style="font-weight:700;margin:6px 0 2px">STP-01 repair (Thermax 50KLD)</div>
+          <div class="muted">Waiting vendor quote · asset BROKEN</div>
+        </div>
+      </div>
+      <div class="kcol">
+        <h4>Done · 2</h4>
+        <div class="kcard" onclick="toast('T-1038 closed 10:15 AM — choke ballast replaced, 20 min')">
+          <span class="badge done">Closed today</span>
+          <div style="font-weight:700;margin:6px 0 2px">T-1038 · Corridor light flicker — 3F</div>
+          <div class="muted">👤 Imran Shaikh · in-house</div>
+        </div>
+        <div class="kcard" onclick="toast('Water tank chlorination done — log + photo attached to compliance evidence')">
+          <span class="badge done">Closed today</span>
+          <div style="font-weight:700;margin:6px 0 2px">OH tank chlorination — Tower A</div>
+          <div class="muted">👤 Mahesh Pawar · evidence ✓</div>
+        </div>
+      </div>
+    </div>
+    <div class="crosslink" style="margin-top:16px">⛓ Ticket cards (T-1041, T-1042, T-1038) mirror live status from <a href="fm.html#tickets" style="color:var(--terra);font-weight:700">Daily operations → Tickets</a>. Closing here closes there.</div>
+  </div>
+
+  <!-- ============ 3. FINANCE ============ -->
+  <div id="fmb-finance" class="d-screen">
+    <div class="d-head">
+      <div>
+        <span class="eyebrow">FM · Money</span>
+        <h1>Finance — budget vs actuals</h1>
+        <div class="sub">VD Commercial OPEX · June 2026 (to date) · FY 2026–27</div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary sm" onclick="toast('GST-ready expense export queued — Tally-compatible XML + CSV, emailed to accounts@urbanserve.in')">⬇ GST-ready export</button>
+        <button class="btn primary sm" onclick="toast('Record-expense form would open — PO / bill upload with GST capture')">+ Record expense</button>
+      </div>
+    </div>
+
+    <div class="intro-bar"><span class="ib-ico">💡</span><div>Budget vs actual spend, <b>approvals waiting for your tap</b>, and exports your accountant and auditor can use as-is — no re-keying.</div></div>
+
+    <div class="card" style="border-color:var(--success);margin-bottom:20px">
+      <div class="row between">
+        <div>
+          <b>🔒 Audit mode — FY 2025-26 LOCKED 28 May 2026</b><br>
+          <span class="muted">Audited by <b>M/s Desai &amp; Co</b> (govt panel) · auditor read-only role active · registrar filing pack generated ✓ · locked entries cannot be edited, only annotated</span>
+        </div>
+        <div class="row">
+          <span class="badge done">Filing pack ✓</span>
+          <button class="btn sm ghost" onclick="toast('Unlock requires committee resolution + auditor sign-off — request form drafted')">Request unlock</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="s-label">June budget</div><div class="s-value">₹9.5L</div><div class="s-delta">Approved OPEX plan</div></div>
+      <div class="stat-card"><div class="s-label">Actual (to 10 Jun)</div><div class="s-value">₹8.1L</div><div class="s-delta up">Committed + booked</div></div>
+      <div class="stat-card"><div class="s-label">Variance</div><div class="s-value">+15%</div><div class="s-delta up">Under budget</div></div>
+      <div class="stat-card"><div class="s-label">YTD spend (FY 26–27)</div><div class="s-value">₹26.4L</div><div class="s-delta">Apr–Jun · vs plan ₹28.2L</div></div>
+    </div>
+
+    <div class="two-col">
+      <div class="card" style="padding:0">
+        <h3 class="panel-title" style="padding:16px 16px 0">By expense head — June</h3>
+        <table class="dt" style="border:none;margin-top:12px">
+          <tr><th>Head</th><th>Budget</th><th>Actual</th><th>Variance</th><th style="width:160px">Utilisation</th></tr>
+          <tr><td><b>Housekeeping</b><br><span class="muted">Manpower + consumables</span></td><td>₹2,40,000</td><td>₹2,12,000</td><td><span class="s-delta up">+12% under</span></td><td><div class="prog"><div style="width:88%"></div></div></td></tr>
+          <tr><td><b>Security</b><br><span class="muted">Guards · 3 shifts</span></td><td>₹2,60,000</td><td>₹2,54,000</td><td><span class="s-delta up">+2% under</span></td><td><div class="prog warn"><div style="width:98%"></div></div></td></tr>
+          <tr><td><b>R&amp;M</b><br><span class="muted">Repairs, spares, AMC calls</span></td><td>₹1,80,000</td><td>₹1,38,000</td><td><span class="s-delta up">+23% under</span></td><td><div class="prog"><div style="width:77%"></div></div></td></tr>
+          <tr><td><b>Utilities</b><br><span class="muted">Power, water, diesel</span></td><td>₹2,00,000</td><td>₹1,73,000</td><td><span class="s-delta up">+14% under</span></td><td><div class="prog"><div style="width:86%"></div></div></td></tr>
+          <tr><td><b>Admin</b><br><span class="muted">Office, insurance, misc.</span></td><td>₹70,000</td><td>₹53,000</td><td><span class="s-delta up">+24% under</span></td><td><div class="prog"><div style="width:76%"></div></div></td></tr>
+          <tr style="background:#FBFAF7"><td><b>Total</b></td><td><b>₹9,50,000</b></td><td><b>₹8,30,000*</b></td><td><span class="s-delta up">+15% under</span></td><td><span class="muted">*incl. ₹20k accruals</span></td></tr>
+        </table>
+      </div>
+
+      <div class="stack">
+        <div class="card">
+          <h3 class="panel-title">Expense approvals — 2 pending</h3>
+          <div class="list-row">
+            <div style="flex:1">
+              <b>PO — Pump seal kit, ₹18,500</b><br>
+              <span class="muted">Booster Pump P-04 (Grundfos, Basement 2) · raised by Ramesh K. · vendor: AquaServ</span>
+              <div class="crosslink" style="margin-top:8px">⛓ Linked to <b>Anomaly A-07</b> (Daily operations → Assets): 4 water-pressure complaints, floors 6–8 — inspect before failure.</div>
+            </div>
+          </div>
+          <div class="row" style="margin-bottom:14px">
+            <button class="btn sm primary" onclick="toast('PO-2026-114 approved ₹18,500 — sent to AquaServ, booked under R&M')">Approve</button>
+            <button class="btn sm ghost" onclick="toast('PO rejected — returned to Ramesh K. with comments')">Reject</button>
+          </div>
+          <div class="divider" style="margin:0 0 14px"></div>
+          <div class="list-row">
+            <div style="flex:1">
+              <b>Housekeeping consumables, ₹7,200</b><br>
+              <span class="muted">Monthly top-up · raised by Meena Joshi · 3 quotes attached</span>
+            </div>
+          </div>
+          <div class="row">
+            <button class="btn sm primary" onclick="toast('₹7,200 approved — booked under Housekeeping, GST input captured')">Approve</button>
+            <button class="btn sm ghost" onclick="toast('Rejected — Meena Joshi notified')">Reject</button>
+          </div>
+        </div>
+        <div class="ai-panel">
+          <b>🤖 AI insight · 84% confidence</b>
+          <p style="font-size:13px;margin-top:6px">R&amp;M is trending 23% under, but DG-01 PPM (today) + STP-01 repair quote will likely consume ₹35k–₹50k by month-end. Suggest holding ₹40k of the R&amp;M surplus.</p>
+          <p class="muted" style="margin-top:6px">Why: open PPM job + blocked repair task on board, priced from last 3 similar jobs.</p>
+        </div>
+        <div class="card">
+          <h3 class="panel-title">Tally export — voucher XML</h3>
+          <p style="font-size:13px">Receipts &amp; expenses export as Tally voucher XML, mapped to ledger heads: <b>service charges · sinking fund · repair fund · NOC · water</b>. No re-keying at the accountant's desk.</p>
+          <dl class="kv" style="grid-template-columns:130px 1fr;margin-top:8px">
+            <dt>Last export</dt><dd>31 May 2026 · by auditor (M/s Desai &amp; Co)</dd>
+            <dt>Ledger mapping</dt><dd>5 heads mapped ✓ · 0 unmapped entries</dd>
+          </dl>
+          <button class="btn sm secondary block" style="margin-top:12px" onclick="toast('Tally voucher XML (1–10 Jun) exported — 5 ledger heads, 214 vouchers, emailed to accounts@urbanserve.in')">⬇ Export Tally vouchers (XML)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 4. COLLECTIONS ============ -->
+  <div id="fmb-collections" class="d-screen">
+    <div class="d-head">
+      <div>
+        <span class="eyebrow">FM · Money</span>
+        <h1>Collections — CAM billing</h1>
+        <div class="sub">June 2026 cycle · 120 units · VD Commercial</div>
+      </div>
+      <div class="actions">
+        <button class="btn wa sm" onclick="toast('WhatsApp reminders sent to 9 overdue units — payment links attached')">Send reminders (9)</button>
+        <button class="btn primary sm" onclick="toast('Invoice batch queued — 120 drafts. Review &amp; release by 12 Jun for 15 Jun due date')">Generate June batch</button>
+      </div>
+    </div>
+
+    <div class="intro-bar"><span class="ib-ico">💡</span><div>Who has paid CAM and who hasn't. <b>Reminders go on WhatsApp with a payment link</b>; late interest applies itself per the bye-laws.</div></div>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="s-label">Billed (June)</div><div class="s-value">₹11.2L</div><div class="s-delta">120 units</div></div>
+      <div class="stat-card"><div class="s-label">Collected</div><div class="s-value">₹8.4L</div><div class="s-delta up">75% · ahead of May pace</div></div>
+      <div class="stat-card"><div class="s-label">Overdue</div><div class="s-value">₹1.1L</div><div class="s-delta down">9 units · 3 chronic</div></div>
+      <div class="stat-card"><div class="s-label">Worst defaulter</div><div class="s-value">₹13,100</div><div class="s-delta down">Unit 702 · 26 days</div></div>
+    </div>
+
+    <div class="two-col">
+      <div class="card" style="padding:0">
+        <h3 class="panel-title" style="padding:16px 16px 0">Invoices</h3>
+        <div class="filter-chips" style="padding:10px 16px 0">
+          <span class="chip on" onclick="toggleChip(this)">All</span>
+          <span class="chip" onclick="toggleChip(this)">Due</span>
+          <span class="chip" onclick="toggleChip(this)">Overdue</span>
+          <span class="chip" onclick="toggleChip(this)">Paid</span>
+        </div>
+        <table class="dt" style="border:none;margin-top:12px">
+          <tr><th>Invoice</th><th>Unit</th><th>Amount</th><th>Due</th><th>Status</th><th></th></tr>
+          <tr class="clickable" onclick="toast('INV-0626-304 · Rohan Mehta: CAM ₹9,800 + water ₹1,200 + sinking fund ₹500 + GST ₹1,000 = ₹12,500 · due 15 Jun')">
+            <td><b>INV-0626-304</b></td><td>304 · Rohan Mehta</td><td>₹12,500</td><td>15 Jun</td><td><span class="badge open">Due</span></td>
+            <td><button class="btn sm wa" onclick="event.stopPropagation();toast('WhatsApp payment link sent to +91 98XXX 12304')">Remind</button></td>
+          </tr>
+          <tr class="clickable" onclick="toast('INV-0626-511 · ₹10,900 paid 6 Jun via UPI — receipt auto-sent on WhatsApp')">
+            <td><b>INV-0626-511</b></td><td>511</td><td>₹10,900</td><td>15 Jun</td><td><span class="badge paid">Paid 6 Jun</span></td>
+            <td><button class="btn sm ghost" onclick="event.stopPropagation();toast('Receipt re-sent on WhatsApp')">Receipt</button></td>
+          </tr>
+          <tr class="clickable" onclick="toast('Unit 702 ledger — ₹13,100 outstanding, 26 days. Interest @18% p.a. ₹168 accrued. Chronic: 3rd consecutive default')">
+            <td><b>INV-0526-702</b></td><td>702 · chronic</td><td>₹13,100</td><td>15 May</td><td><span class="badge overdue">Overdue 26d</span></td>
+            <td><button class="btn sm danger" onclick="event.stopPropagation();toast('Escalated — formal notice draft created, society committee + Reneev Developers copied')">Escalate</button></td>
+          </tr>
+          <tr class="clickable" onclick="toast('INV-0526-1108 · ₹11,400 overdue 14 days — day-7 WhatsApp reminder already sent, day-15 due 13 Jun')">
+            <td><b>INV-0526-1108</b></td><td>1108</td><td>₹11,400</td><td>27 May</td><td><span class="badge overdue">Overdue 14d</span></td>
+            <td><button class="btn sm wa" onclick="event.stopPropagation();toast('Manual WhatsApp reminder sent — day-15 template')">Remind</button></td>
+          </tr>
+          <tr class="clickable" onclick="toast('INV-0626-209 · ₹9,600 paid 4 Jun via net banking')">
+            <td><b>INV-0626-209</b></td><td>209</td><td>₹9,600</td><td>15 Jun</td><td><span class="badge paid">Paid 4 Jun</span></td>
+            <td><button class="btn sm ghost" onclick="event.stopPropagation();toast('Receipt re-sent on WhatsApp')">Receipt</button></td>
+          </tr>
+        </table>
+        <p class="muted" style="padding:12px 16px">Showing 5 of 120 · <a href="#" onclick="toast('Full invoice register would load — 120 rows with filters');return false">view all</a></p>
+      </div>
+
+      <div class="stack">
+        <div class="card">
+          <h3 class="panel-title">Defaulter management</h3>
+          <div class="row between" style="margin-bottom:8px"><span>Aging 0–30 days</span><b>₹62,000 · 5 units</b></div>
+          <div class="prog warn" style="margin-bottom:12px"><div style="width:56%"></div></div>
+          <div class="row between" style="margin-bottom:8px"><span>Aging 31–60 days</span><b>₹35,000 · 3 units</b></div>
+          <div class="prog warn" style="margin-bottom:12px"><div style="width:32%"></div></div>
+          <div class="row between" style="margin-bottom:8px"><span>Aging 60+ days</span><b>₹13,000 · 1 unit</b></div>
+          <div class="prog bad" style="margin-bottom:12px"><div style="width:12%"></div></div>
+          <div class="divider"></div>
+          <div class="row between">
+            <div><b>Interest @18% p.a.</b><br><span class="muted">Auto-applied after due date, per society bye-laws</span></div>
+            <button class="btn sm secondary" onclick="toast('Auto-interest is ON — toggled OFF would need committee approval')">ON ✓</button>
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="panel-title">WhatsApp reminder sequence</h3>
+          <ul class="timeline">
+            <li><div class="t-title">Day 1 after due — gentle nudge</div><div class="t-meta">"Your June CAM invoice is pending…" + UPI link · auto</div></li>
+            <li><div class="t-title">Day 7 — reminder + interest note</div><div class="t-meta">Mentions 18% p.a. interest accrual · auto</div></li>
+            <li class="future"><div class="t-title">Day 15 — formal notice PDF</div><div class="t-meta">Committee-signed letter + ledger attached · needs your tap</div></li>
+          </ul>
+          <button class="btn sm ghost" onclick="toast('Template editor would open — 3 templates, Gujarati + Hindi + English variants')">Edit templates</button>
+        </div>
+      </div>
+    </div>
+    <div class="two-col" style="margin-top:20px">
+      <div class="card" style="padding:0">
+        <h3 class="panel-title" style="padding:16px 16px 0">Head-wise billing — every invoice splits into ledger heads</h3>
+        <table class="dt" style="border:none;margin-top:12px">
+          <tr><th>Billing head</th><th>Basis</th><th>June (120 units)</th><th>Routing</th></tr>
+          <tr><td><b>Service charges</b><br><span class="muted">CAM — manpower, R&amp;M, utilities</span></td><td>Per sqft, equal rate</td><td>₹8.6L</td><td>Operating a/c</td></tr>
+          <tr><td><b>Sinking fund</b></td><td>0.25% of construction cost → <b>₹3.1L/yr</b></td><td>₹26,000</td><td><span class="badge done">Separate HDFC a/c ****4521</span></td></tr>
+          <tr><td><b>Repair fund</b></td><td>0.75% of construction cost</td><td>₹78,000</td><td>Earmarked sub-ledger</td></tr>
+          <tr><td><b>Non-occupancy charges</b></td><td>@10% of service charges · <b>14 rented units</b> · auto-computed</td><td>₹13,200</td><td>Operating a/c</td></tr>
+          <tr><td><b>Water</b></td><td>At actuals (metered)</td><td>₹1.4L</td><td>Pass-through · GST-exempt head</td></tr>
+        </table>
+        <p class="muted" style="padding:12px 16px">⚠ A single "maintenance" line breaks Maharashtra compliance — head-wise split is mandatory under the model bye-laws, and feeds the Tally ledger mapping in Finance.</p>
+      </div>
+
+      <div class="card">
+        <h3 class="panel-title">E-mandate ops — UPI Autopay</h3>
+        <div class="row between" style="margin-bottom:10px"><span>Active mandates</span><b>64 units</b></div>
+        <div class="prog" style="margin-bottom:14px"><div style="width:53%"></div></div>
+        <dl class="kv" style="grid-template-columns:160px 1fr">
+          <dt>No-AFA cap</dt><dd>₹15,000 per debit (RBI)</dd>
+          <dt>Units above cap</dt><dd><b>11 premium units</b> → <span class="badge medium">split-billing fallback</span> (two debits under cap)</dd>
+          <dt>Pre-debit notice</dt><dd>T-24h notifications auto-sent ✓ · next batch 14 Jun for the 15 Jun pull</dd>
+          <dt>Failed mandates (May)</dt><dd>2 · auto-retry day 3, then WhatsApp link</dd>
+        </dl>
+        <div class="row" style="margin-top:12px">
+          <button class="btn sm primary" onclick="toast('Mandate invite sent on WhatsApp to 47 non-mandate units — one-tap UPI Autopay setup')">Invite remaining 47 units</button>
+          <button class="btn sm ghost" onclick="toast('Mandate register exported — UMN, cap, status per unit')">Export register</button>
+        </div>
+      </div>
+    </div>
+
+    <p class="muted" style="margin-top:16px">Receipts auto-issue on UPI webhook; ledger entries flow into the GST-ready export under Finance.</p>
+  </div>
+
+  <!-- ============ 5. VENDORS ============ -->
+  <div id="fmb-vendors" class="d-screen">
+    <div class="d-head">
+      <div>
+        <span class="eyebrow">FM · Money</span>
+        <h1>Vendor marketplace</h1>
+        <div class="sub">Brij-verified vendors · Surat region · ratings from real job outcomes</div>
+      </div>
+      <div class="actions">
+        <button class="btn primary sm" onclick="toast('Invite sent — vendor gets WhatsApp onboarding link: GST + bank + trade licence upload')">+ Invite vendor</button>
+      </div>
+    </div>
+
+    <div class="intro-bar"><span class="ib-ico">💡</span><div>Verified outside vendors, <b>rated on real job outcomes</b> — quotes, payouts and TDS all run through here, not over phone calls.</div></div>
+
+    <div class="filter-chips" style="margin-bottom:20px">
+      <span class="chip on" onclick="toggleChip(this)">All</span>
+      <span class="chip" onclick="toggleChip(this)">Plumbing</span>
+      <span class="chip" onclick="toggleChip(this)">HVAC</span>
+      <span class="chip" onclick="toggleChip(this)">Electrical</span>
+      <span class="chip" onclick="toggleChip(this)">Landscaping</span>
+      <span class="chip" onclick="toggleChip(this)">Empanelled only</span>
+    </div>
+
+    <div class="two-col">
+      <div class="four-col" style="grid-template-columns:repeat(2,1fr)">
+        <div class="card" style="cursor:pointer;border-color:var(--teal-500)" onclick="dGo('fmb','vendor-detail','vendors')">
+          <div class="row between"><span class="layer-chip">Plumbing</span><span class="badge done">Empanelled</span></div>
+          <h3 style="margin:10px 0 2px">AquaServ Solutions</h3>
+          <div class="muted">Sanjay Patil · GST verified ✓</div>
+          <div class="divider"></div>
+          <div class="row between" style="font-size:13px"><span>⭐ <b>4.6</b> · 132 jobs</span><span>FTF <b>87%</b></span></div>
+          <button class="btn sm secondary block" style="margin-top:12px" onclick="event.stopPropagation();dGo('fmb','vendor-detail','vendors')">View profile →</button>
+        </div>
+        <div class="card" style="cursor:pointer" onclick="toast('CoolTech HVAC profile — same layout as AquaServ (built for one vendor in this prototype)')">
+          <div class="row between"><span class="layer-chip">HVAC</span><span class="badge done">Empanelled</span></div>
+          <h3 style="margin:10px 0 2px">CoolTech HVAC</h3>
+          <div class="muted">GST verified ✓</div>
+          <div class="divider"></div>
+          <div class="row between" style="font-size:13px"><span>⭐ <b>4.4</b> · 89 jobs</span><span>FTF <b>81%</b></span></div>
+          <button class="btn sm secondary block" style="margin-top:12px" onclick="event.stopPropagation();toast('Quote requested from CoolTech for STP-01 adjacent HVAC works')">Request quote</button>
+        </div>
+        <div class="card" style="cursor:pointer" onclick="toast('SparkSafe Electricals profile — 4.1★, 67 jobs')">
+          <div class="row between"><span class="layer-chip">Electrical</span><span class="badge neutral">Marketplace</span></div>
+          <h3 style="margin:10px 0 2px">SparkSafe Electricals</h3>
+          <div class="muted">GST verified ✓</div>
+          <div class="divider"></div>
+          <div class="row between" style="font-size:13px"><span>⭐ <b>4.1</b> · 67 jobs</span><span>FTF <b>74%</b></span></div>
+          <button class="btn sm secondary block" style="margin-top:12px" onclick="event.stopPropagation();toast('Quote requested from SparkSafe')">Request quote</button>
+        </div>
+        <div class="card" style="cursor:pointer" onclick="toast('GreenLeaf Landscaping profile — 4.8★, 41 jobs')">
+          <div class="row between"><span class="layer-chip">Landscaping</span><span class="badge neutral">Marketplace</span></div>
+          <h3 style="margin:10px 0 2px">GreenLeaf Landscaping</h3>
+          <div class="muted">GST verified ✓</div>
+          <div class="divider"></div>
+          <div class="row between" style="font-size:13px"><span>⭐ <b>4.8</b> · 41 jobs</span><span>FTF <b>92%</b></span></div>
+          <button class="btn sm secondary block" style="margin-top:12px" onclick="event.stopPropagation();toast('Quote requested from GreenLeaf for terrace garden AMC')">Request quote</button>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="card">
+          <h3 class="panel-title">Open vendor jobs</h3>
+          <div class="list-row" style="cursor:pointer" onclick="toast('VJ-388 — from ticket T-1040 (low water pressure, Unit 702). Quote ₹3,500 accepted, ₹280 Brij commission. Vendor app shows same job')">
+            <span class="badge assigned">VJ-388</span>
+            <div style="flex:1"><b>AquaServ</b> · T-1040 low water pressure, Unit 702<br><span class="muted">Quote ₹3,500 · accepted · scheduled <b>11 Jun, 10 AM</b></span></div>
+          </div>
+          <div class="list-row" style="cursor:pointer" onclick="toast('RFQ sent to 2 Thermax-authorised vendors for STP-01 — 0 quotes received yet (blocking task on board)')">
+            <span class="badge open">RFQ</span>
+            <div style="flex:1"><b>STP-01 repair</b> · Thermax 50KLD<br><span class="muted">2 vendors invited · ⚠ no quotes after 3 days</span></div>
+          </div>
+          <div class="crosslink" style="margin-top:10px">⛓ VJ-388 was auto-created from <b>ticket T-1040</b> (<a href="fm.html#tickets" style="color:var(--terra);font-weight:700">Daily operations → Tickets</a>); status syncs both ways and into the vendor app.</div>
+        </div>
+        <div class="ai-panel">
+          <b>🤖 Routing suggestion · 79% confidence</b>
+          <p style="font-size:13px;margin-top:6px">STP-01 RFQ is stale. SparkSafe isn't qualified; suggest widening to Thermax-authorised vendors in Ahmedabad (2 available on Brij network).</p>
+          <p class="muted" style="margin-top:6px">Why: 0/2 quotes in 72h; category match score below threshold for local pool.</p>
+          <button class="btn sm primary" style="margin-top:10px" onclick="toast('RFQ widened — 2 Ahmedabad vendors invited, responses expected in 24h')">Widen RFQ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 6. VENDOR DETAIL — AQUASERV ============ -->
+  <div id="fmb-vendor-detail" class="d-screen">
+    <div class="d-head">
+      <button class="back-btn" onclick="dGo('fmb','vendors','vendors')">←</button>
+      <div>
+        <span class="eyebrow">FM · Money</span>
+        <h1>AquaServ Solutions</h1>
+        <div class="sub">Plumbing · Surat · Admin: Sanjay Patil · on Brij since Nov 2025</div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary sm" onclick="toast('Direct job assignment form would open — bypasses RFQ for empanelled vendors')">Assign job</button>
+        <button class="btn ghost sm" onclick="toast('Vendor suspended from new jobs — existing VJ-388 unaffected. Reversible by you')">Suspend</button>
+        <button class="btn danger sm" onclick="toast('Blacklist requires a reason + 2nd approver (UrbanServe regional head) — request drafted')">Blacklist</button>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="stack">
+        <div class="card">
+          <div class="row" style="gap:20px">
+            <span class="score-ring">86</span>
+            <div style="flex:1">
+              <b>Brij vendor score</b> — composite of FTF, response time, ratings, dispute rate<br>
+              <span class="muted">Top 10% of plumbing vendors in Surat region</span>
+            </div>
+            <span class="badge done">Empanelled · UrbanServe</span>
+          </div>
+          <div class="divider"></div>
+          <dl class="kv">
+            <dt>GST</dt><dd>24AAACA1234F1Z5 · Verified ✓</dd>
+            <dt>Jobs completed</dt><dd>132 (lifetime, Brij network)</dd>
+            <dt>First-time-fix</dt><dd>87%</dd>
+            <dt>Avg response</dt><dd>2.1 h (quote on RFQ)</dd>
+            <dt>Rating</dt><dd>⭐ 4.6 / 5 (118 rated jobs)</dd>
+            <dt>Brij commission</dt><dd>8% per job</dd>
+            <dt>Disputes</dt><dd>1 in last 12 months (resolved)</dd>
+          </dl>
+        </div>
+
+        <div class="card" style="padding:0">
+          <h3 class="panel-title" style="padding:16px 16px 0">Recent jobs — VD Commercial</h3>
+          <table class="dt" style="border:none;margin-top:12px">
+            <tr><th>Job</th><th>Ticket</th><th>Value</th><th>Status</th><th>Rating</th></tr>
+            <tr class="clickable" onclick="toast('VJ-388 — accepted, scheduled 11 Jun 10 AM. OTP-verified site entry; payment releases on resident confirmation')"><td><b>VJ-388</b> · Low water pressure</td><td>T-1040</td><td>₹3,500</td><td><span class="badge assigned">Accepted · 11 Jun</span></td><td>—</td></tr>
+            <tr class="clickable" onclick="toast('VJ-371 — flush valve replacement, Unit 909. Completed 2 Jun, paid')"><td><b>VJ-371</b> · Flush valve, Unit 909</td><td>T-1027</td><td>₹2,200</td><td><span class="badge done">Done · 2 Jun</span></td><td>⭐ 5.0</td></tr>
+            <tr class="clickable" onclick="toast('VJ-355 — terrace line leak. Completed 24 May, paid. FTF: yes')"><td><b>VJ-355</b> · Terrace line leak</td><td>T-1011</td><td>₹6,800</td><td><span class="badge done">Done · 24 May</span></td><td>⭐ 4.5</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="card">
+          <h3 class="panel-title">6-month performance (jobs/month)</h3>
+          <div class="row" style="align-items:flex-end;gap:18px">
+            <div class="spark" style="height:60px"><i style="height:22px"></i><i style="height:30px"></i><i style="height:26px"></i><i style="height:38px"></i><i style="height:46px"></i><i style="height:52px"></i></div>
+            <div class="muted">Jan → Jun 2026<br>9 → 21 jobs · FTF steady 85–89%</div>
+          </div>
+          <div class="divider"></div>
+          <h3 class="panel-title">Ratings breakdown</h3>
+          <div class="meter-row"><span style="width:34px">5★</span><div class="prog" style="flex:1"><div style="width:68%"></div></div><span class="muted">68%</span></div>
+          <div class="meter-row"><span style="width:34px">4★</span><div class="prog" style="flex:1"><div style="width:24%"></div></div><span class="muted">24%</span></div>
+          <div class="meter-row"><span style="width:34px">3★</span><div class="prog warn" style="flex:1"><div style="width:6%"></div></div><span class="muted">6%</span></div>
+          <div class="meter-row"><span style="width:34px">≤2★</span><div class="prog bad" style="flex:1"><div style="width:2%"></div></div><span class="muted">2%</span></div>
+        </div>
+        <div class="card">
+          <h3 class="panel-title">Payouts</h3>
+          <dl class="kv" style="grid-template-columns:130px 1fr">
+            <dt>June gross</dt><dd>₹48,200</dd>
+            <dt>Brij commission</dt><dd>₹3,856 (8%)</dd>
+            <dt>Net payable</dt><dd>₹44,344</dd>
+            <dt>Settlement</dt><dd>Friday weekly cycle · Razorpay Route</dd>
+            <dt>Next payout</dt><dd>Fri 12 Jun 2026</dd>
+          </dl>
+          <button class="btn sm secondary block" style="margin-top:12px" onclick="toast('Payout statement (Jun) downloaded — GST invoice from AquaServ attached')">Download statement</button>
+        </div>
+        <div class="card">
+          <h3 class="panel-title">TDS — auto-withheld at payout</h3>
+          <dl class="kv" style="grid-template-columns:160px 1fr">
+            <dt>Section 194C @2%</dt><dd><b>₹964 withheld</b> on ₹48,200 June payout (works contract)</dd>
+            <dt>Marketplace jobs</dt><dd>Flagged <b>194-O @0.1%</b> — e-commerce operator deduction</dd>
+            <dt>PAN</dt><dd>Verified ✓ <span class="muted">(no PAN → 20% rate would apply)</span></dd>
+            <dt>Form 26Q (Q1)</dt><dd><span class="badge medium">Export due 31 Jul</span></dd>
+          </dl>
+          <button class="btn sm secondary block" style="margin-top:12px" onclick="toast('Form 26Q (Q1 FY 26-27) draft exported — AquaServ + 6 other deductees, ready for TRACES filing')">⬇ Export Form 26Q (Q1)</button>
+          <p class="muted" style="margin-top:8px">TDS certificates (Form 16A) auto-shared to the vendor app after quarterly filing.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 7. ENERGY / IoT ============ -->
+  <div id="fmb-energy" class="d-screen">
+    <div class="d-head">
+      <div>
+        <span class="eyebrow">FM · Intelligence</span>
+        <h1>Energy &amp; IoT <span class="badge terra" style="vertical-align:middle">Coming · Phase 2</span></h1>
+        <div class="sub">Live sensor feed (teaser with pilot sensors) · VD Commercial</div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary sm" onclick="toast('Sensor onboarding wizard is a Phase 2 module — register interest noted for pilot')">+ Add sensor</button>
+      </div>
+    </div>
+
+    <div class="intro-bar"><span class="ib-ico">💡</span><div>Live power, water and fuel from <b>4 pilot sensors</b> — the full IoT mesh (40+ points) lands in Phase 2. Until then, Meters carries the daily readings.</div></div>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="s-label">DG-01 fuel</div><div class="s-value">64%</div><div class="s-delta">Cummins 500kVA · ~9 h runtime</div></div>
+      <div class="stat-card" style="border-color:var(--danger)"><div class="s-label">STP-01 <span class="badge live">OFFLINE</span></div><div class="s-value" style="color:var(--danger)">ALARM</div><div class="s-delta down">No telemetry 41 h · asset BROKEN</div></div>
+      <div class="stat-card"><div class="s-label">Energy today</div><div class="s-value">412 kWh</div><div class="s-delta up">Common areas · −4% vs avg</div></div>
+      <div class="stat-card"><div class="s-label">Water today</div><div class="s-value">38 KL</div><div class="s-delta">Municipal + borewell</div></div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h3 class="panel-title">Monthly energy spend</h3>
+        <div class="row" style="align-items:flex-end;gap:24px">
+          <div class="spark" style="height:72px"><i style="height:50px"></i><i style="height:54px"></i><i style="height:60px"></i><i style="height:66px"></i><i style="height:64px"></i><i style="height:58px"></i></div>
+          <div>
+            <div style="font-family:var(--display);font-size:26px;font-weight:800;color:var(--ink-900)">₹2.8L <span class="s-delta up" style="font-size:13px">−9% vs May</span></div>
+            <div class="muted">June (projected) vs ₹3.1L in May · Jan–Jun trend</div>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="row between"><span>Solar offset</span><b>11% of consumption</b></div>
+        <div class="prog" style="margin-top:8px"><div style="width:11%"></div></div>
+        <div class="row between" style="margin-top:14px"><span>DG run hours (June)</span><b>14.2 h · ₹31,000 diesel</b></div>
+        <div class="row between" style="margin-top:8px"><span>Peak demand</span><b>96 kVA of 120 kVA sanctioned</b></div>
+        <div class="crosslink" style="margin-top:14px">⛓ STP-01 alarm mirrors asset status in <a href="fm.html#assets" style="color:var(--terra);font-weight:700">Daily operations → Assets</a>; repair task is Blocked on the Task board.</div>
+      </div>
+
+      <div class="stack">
+        <div class="ai-panel">
+          <b>🤖 Anomaly detected · 91% confidence</b>
+          <p style="font-size:13px;margin-top:6px">Common-area HVAC is drawing load <b>10:00 PM – 6:00 AM</b> daily since 3 Jun — likely a schedule misconfig after the BMS reset. Estimated waste: <b>₹14k/month</b>.</p>
+          <p class="muted" style="margin-top:6px">Why: night-window load matches daytime AHU signature; building is unoccupied 10 PM–7 AM.</p>
+          <div class="row" style="margin-top:10px">
+            <button class="btn sm primary" onclick="toast('Task created on board: Verify BMS HVAC schedule — assigned Ramesh K., due 11 Jun')">Create task</button>
+            <button class="btn sm ghost" onclick="toast('Anomaly snoozed for 7 days')">Snooze</button>
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="panel-title">Live meters</h3>
+          <div class="meter-row"><span style="width:120px">DG-01 fuel</span><div class="prog warn" style="flex:1"><div style="width:64%"></div></div><b>64%</b></div>
+          <div class="meter-row"><span style="width:120px">OH tank level</span><div class="prog" style="flex:1"><div style="width:78%"></div></div><b>78%</b></div>
+          <div class="meter-row"><span style="width:120px">Borewell flow</span><div class="prog" style="flex:1"><div style="width:41%"></div></div><b>41%</b></div>
+          <div class="meter-row"><span style="width:120px">STP-01 telemetry</span><div class="prog bad" style="flex:1"><div style="width:4%"></div></div><b style="color:var(--danger)">offline</b></div>
+          <p class="muted" style="margin-top:10px">4 pilot sensors installed · full IoT mesh (40+ points) ships in Phase 2.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 8. ESG ============ -->
+  <div id="fmb-esg" class="d-screen">
+    <div class="d-head">
+      <div>
+        <span class="eyebrow">FM · Intelligence</span>
+        <h1>ESG report <span class="badge neutral" style="vertical-align:middle">v0 · BRSR-lite</span></h1>
+        <div class="sub">Sustainability metrics for owner association &amp; Reneev Developers BRSR rollup · June 2026</div>
+      </div>
+      <div class="actions">
+        <button class="btn primary sm" onclick="toast('ESG summary for owner association (PDF) generated — 4 pages, ready to share on WhatsApp / email')">⬇ Export ESG summary (PDF)</button>
+      </div>
+    </div>
+
+    <div class="intro-bar"><span class="ib-ico">💡</span><div>Simple sustainability numbers for the owner association — <b>entered monthly with evidence</b>, no consultants required. Sensors auto-fill these in Phase 2.</div></div>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="s-label">Energy intensity</div><div class="s-value">2.1</div><div class="s-delta up">kWh/sqft/month · −6% vs May</div></div>
+      <div class="stat-card"><div class="s-label">Water use</div><div class="s-value">47 L</div><div class="s-delta">per person/day · 820 occupants</div></div>
+      <div class="stat-card"><div class="s-label">Waste segregation</div><div class="s-value">72%</div><div class="s-delta warn">Target 85% · wet/dry/e-waste</div></div>
+      <div class="stat-card"><div class="s-label">Solar share</div><div class="s-value">11%</div><div class="s-delta up">90 kWp rooftop array</div></div>
+    </div>
+
+    <div class="two-col">
+      <div class="card" style="padding:0">
+        <h3 class="panel-title" style="padding:16px 16px 0">Monthly indicators — June (manual inputs, v1)</h3>
+        <table class="dt" style="border:none;margin-top:12px">
+          <tr><th>Indicator</th><th>Value</th><th>vs May</th><th>Source</th></tr>
+          <tr><td>Grid electricity</td><td>11,840 kWh</td><td><span class="s-delta up">−9%</span></td><td>DGVCL bill upload</td></tr>
+          <tr><td>Diesel (DG-01)</td><td>410 L</td><td><span class="s-delta down">+12%</span></td><td>Fuel log (manual)</td></tr>
+          <tr><td>Water — municipal</td><td>880 KL</td><td><span class="s-delta up">−3%</span></td><td>Meter reading</td></tr>
+          <tr><td>Water — recycled (STP)</td><td>0 KL</td><td><span class="s-delta down">STP-01 broken</span></td><td><span class="badge critical">Edge: no reuse</span></td></tr>
+          <tr><td>Wet waste composted</td><td>1.9 T</td><td><span class="s-delta up">+8%</span></td><td>Vendor weighbridge slip</td></tr>
+          <tr><td>E-waste handed over</td><td>40 kg</td><td>—</td><td>Authorised recycler cert.</td></tr>
+        </table>
+        <p class="muted" style="padding:12px 16px">v1 note: values entered monthly by FM team with evidence uploads; Phase 2 sensors auto-fill energy &amp; water rows.</p>
+      </div>
+
+      <div class="stack">
+        <div class="card">
+          <h3 class="panel-title">Add June reading</h3>
+          <div class="field"><label>Indicator</label>
+            <select><option>Grid electricity (kWh)</option><option>Diesel (L)</option><option>Water — municipal (KL)</option><option>Wet waste composted (T)</option></select>
+          </div>
+          <div class="field"><label>Value</label><input placeholder="e.g. 11,840"></div>
+          <div class="upload-zone" style="margin-bottom:14px">📎 Drop evidence — bill / weighbridge slip / certificate</div>
+          <button class="btn primary sm block" onclick="toast('Reading saved with evidence — reflected in BRSR-lite rollup for Reneev Developers')">Save reading</button>
+        </div>
+        <div class="crosslink">⛓ STP-01 breakdown (Daily operations → Assets) is suppressing recycled-water reuse to 0 KL — flagged in the owner-association summary.</div>
+        <div class="ai-panel">
+          <b>🤖 ESG nudge · 76% confidence</b>
+          <p style="font-size:13px;margin-top:6px">Waste segregation stuck at 72% for 3 months. Floors 9–12 contribute most mixed waste — a 1-week floor-marshal drive typically lifts this 8–10 points.</p>
+          <p class="muted" style="margin-top:6px">Why: per-floor bin audit logs, pattern matched from 2 similar Brij buildings.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 9. COMPLIANCE ============ -->
+  <div id="fmb-compliance" class="d-screen">
+    <div class="d-head">
+      <div>
+        <span class="eyebrow">FM · Intelligence</span>
+        <h1>Compliance calendar</h1>
+        <div class="sub">Statutory licences &amp; tests · VD Commercial · auto-reminders 60/30/7 days before expiry</div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary sm" onclick="toast('Audit pack exported — all valid certificates + evidence in one PDF (38 pages), indexed for fire/factory inspector')">⬇ Audit pack</button>
+        <button class="btn primary sm" onclick="toast('Add-compliance-item form would open — type, authority, renewal cycle, owner')">+ Add item</button>
+      </div>
+    </div>
+
+    <div class="intro-bar"><span class="ib-ico">💡</span><div>Every licence and statutory test in one register, <b>with expiry alarms 60/30/7 days out</b> — nothing lapses silently.</div></div>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="s-label">Items tracked</div><div class="s-value">12</div><div class="s-delta">5 shown below</div></div>
+      <div class="stat-card"><div class="s-label">Valid</div><div class="s-value">9</div><div class="s-delta up">Evidence on file</div></div>
+      <div class="stat-card"><div class="s-label">Due ≤ 30 days</div><div class="s-value">2</div><div class="s-delta warn">Lift licence · DG test</div></div>
+      <div class="stat-card"><div class="s-label">Expired</div><div class="s-value" style="color:var(--danger)">1</div><div class="s-delta down">STP consent — act now</div></div>
+    </div>
+
+    <div class="card" style="padding:0">
+      <table class="dt" style="border:none">
+        <tr><th>Statutory item</th><th>Authority</th><th>Status</th><th>Owner</th><th>Evidence</th><th></th></tr>
+        <tr class="clickable" onclick="toast('Fire NOC #FN/SRT/2024/8812 — issued Mar 2024, valid till Mar 2027. Annual mock drill due 14 Jun (on Task board)')">
+          <td><b>Fire NOC</b></td><td>Surat Fire &amp; Emergency</td><td><span class="badge done">Valid till Mar 2027 ✓</span></td><td>Kavita Rao</td><td><a href="#" onclick="event.stopPropagation();toast('Fire NOC certificate PDF opened');return false">📄 NOC.pdf</a></td>
+          <td><button class="btn sm ghost" onclick="event.stopPropagation();toast('Reminder schedule: 60/30/7 days before Mar 2027')">Reminders</button></td>
+        </tr>
+        <tr class="clickable" onclick="toast('Lift licence (Lift 1 & 2, Kone) — renewal due 30 Jun, same date the Kone AMC expires. Inspector slot booked 24 Jun')">
+          <td><b>Lift licence renewal</b><br><span class="muted">Lift 1 &amp; 2 · Kone</span></td><td>Gujarat Lift Inspector</td><td><span class="badge medium">⚠ Due 30 Jun</span></td><td>Kavita Rao</td><td><a href="#" onclick="event.stopPropagation();toast('Current lift licence (expiring) opened');return false">📄 Licence.pdf</a></td>
+          <td><button class="btn sm primary" onclick="event.stopPropagation();toast('Renewal application pre-filled — inspector visit 24 Jun confirmed. Note: Kone AMC also expires 30 Jun')">Renew</button></td>
+        </tr>
+        <tr class="clickable" onclick="toast('DG-01 emission test — half-yearly, due Jul 2026. Lab: EnviroCheck, last result within limits')">
+          <td><b>DG emission test</b><br><span class="muted">DG-01 Cummins 500kVA</span></td><td>GPCB</td><td><span class="badge open">Due Jul 2026</span></td><td>Ramesh K.</td><td><a href="#" onclick="event.stopPropagation();toast('Last emission test report (Jan 2026) opened — within limits');return false">📄 Jan-26 report</a></td>
+          <td><button class="btn sm ghost" onclick="event.stopPropagation();toast('EnviroCheck lab booking requested for 1st week of July')">Book test</button></td>
+        </tr>
+        <tr class="clickable" style="background:var(--danger-50)" onclick="toast('STP Consent to Operate EXPIRED 31 May 2026. Renewal blocked: GPCB needs the plant functional — STP-01 is BROKEN. Legal exposure flagged to UrbanServe + Reneev')">
+          <td><b>STP consent to operate</b><br><span class="muted">STP-01 Thermax 50KLD</span></td><td>GPCB</td><td><span class="badge critical">EXPIRED 31 May</span></td><td>Kavita Rao</td><td><a href="#" onclick="event.stopPropagation();toast('Expired consent + renewal application draft opened');return false">📄 Expired CTO</a></td>
+          <td><button class="btn sm danger" onclick="event.stopPropagation();toast('Escalated: STP-01 repair is the blocker (Task board → Blocked). Interim tanker-disposal log started for GPCB')">Escalate</button></td>
+        </tr>
+        <tr class="clickable" onclick="toast('Pollution NOC (CTE/CTO consolidated) — valid till Dec 2026, renewal window opens Oct')">
+          <td><b>Pollution NOC</b></td><td>GPCB</td><td><span class="badge done">Valid till Dec 2026 ✓</span></td><td>Kavita Rao</td><td><a href="#" onclick="event.stopPropagation();toast('Pollution NOC PDF opened');return false">📄 NOC.pdf</a></td>
+          <td><button class="btn sm ghost" onclick="event.stopPropagation();toast('Reminder schedule: 60/30/7 days before Dec 2026')">Reminders</button></td>
+        </tr>
+      </table>
+    </div>
+    <div class="crosslink" style="margin-top:16px">⛓ STP consent expiry is chained to asset <b>STP-01 (BROKEN)</b> in Daily operations → Assets and the Blocked repair task — fixing the plant unblocks the GPCB renewal.</div>
+    <p class="muted" style="margin-top:10px">Auto-reminders go to the item owner on WhatsApp at 60/30/7 days; every status change is evidence-stamped for the audit pack.</p>
+  </div>
+
+  <!-- ============ 10. SETTINGS ============ -->
+  <div id="fmb-settings" class="d-screen">
+    <div class="d-head">
+      <div>
+        <span class="eyebrow">FM · Setup</span>
+        <h1>SLA &amp; escalation</h1>
+        <div class="sub">VD Commercial service config · changes apply to new tickets only</div>
+      </div>
+      <div class="actions">
+        <button class="btn primary sm" onclick="toast('SLA config saved — version 4 active from tomorrow 12:00 AM IST, audit-logged')">Save changes</button>
+      </div>
+    </div>
+
+    <div class="intro-bar"><span class="ib-ico">💡</span><div>Set <b>how fast issues must be fixed</b> (the SLA matrix) and <b>who gets called when they aren't</b> (the escalation ladder).</div></div>
+
+    <div class="two-col">
+      <div class="stack">
+        <div class="card" style="padding:0">
+          <h3 class="panel-title" style="padding:16px 16px 0">SLA matrix — response / resolution targets</h3>
+          <table class="dt" style="border:none;margin-top:12px">
+            <tr><th>Category</th><th>Critical</th><th>High</th><th>Medium</th><th>Low</th></tr>
+            <tr class="clickable" onclick="toast('Edit HVAC SLA row — T-1042 (High) is running on the 2h/8h target')"><td><b>HVAC</b></td><td>30m / 4h</td><td><b>2h / 8h</b></td><td>4h / 24h</td><td>8h / 72h</td></tr>
+            <tr class="clickable" onclick="toast('Edit Plumbing SLA row')"><td><b>Plumbing</b></td><td>30m / 4h</td><td>2h / 8h</td><td>4h / 24h</td><td>8h / 72h</td></tr>
+            <tr class="clickable" onclick="toast('Edit Electrical SLA row')"><td><b>Electrical</b></td><td>15m / 2h</td><td>1h / 6h</td><td>4h / 24h</td><td>8h / 48h</td></tr>
+            <tr class="clickable" onclick="toast('Edit STP/Drainage SLA row — T-1041 breached the Critical 30m/4h target')"><td><b>STP / Drainage</b></td><td><b>30m / 4h</b></td><td>2h / 12h</td><td>8h / 48h</td><td>24h / 96h</td></tr>
+            <tr class="clickable" onclick="toast('Edit Housekeeping SLA row')"><td><b>Housekeeping</b></td><td>30m / 2h</td><td>1h / 4h</td><td>4h / 24h</td><td>24h / 72h</td></tr>
+            <tr class="clickable" onclick="toast('Edit Lift SLA row — entrapment auto-pages L2 immediately')"><td><b>Lift</b></td><td>10m / 2h</td><td>1h / 6h</td><td>4h / 24h</td><td>8h / 48h</td></tr>
+          </table>
+          <p class="muted" style="padding:12px 16px">Format: response / resolution · clock runs in business hours except Critical (24×7).</p>
+        </div>
+
+        <div class="card" style="padding:0">
+          <h3 class="panel-title" style="padding:16px 16px 0">Roles &amp; permissions <span class="badge neutral">Teaser · Phase 1.1</span></h3>
+          <table class="dt" style="border:none;margin-top:12px">
+            <tr><th>Role</th><th>Approve PO</th><th>Edit SLA</th><th>Vendor mgmt</th><th>Collections</th></tr>
+            <tr><td><b>FM Manager</b> (Kavita)</td><td>≤ ₹50,000</td><td>✓</td><td>✓</td><td>✓</td></tr>
+            <tr><td><b>Supervisor</b> (Meena)</td><td>≤ ₹5,000</td><td>—</td><td>view</td><td>view</td></tr>
+            <tr><td><b>Technician</b></td><td>raise only</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td><b>Builder PM</b> (Aditya)</td><td>—</td><td>—</td><td>view</td><td>view</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="card">
+          <h3 class="panel-title">Escalation ladder — SLA at risk / breach</h3>
+          <ul class="timeline">
+            <li><div class="t-title">L1 — Shift supervisor · +30 min</div><div class="t-meta">WhatsApp + app ping to Meena Joshi (or on-duty sup.)</div></li>
+            <li><div class="t-title">L2 — FM Manager · +2 h</div><div class="t-meta">Kavita Rao — call + WhatsApp, ticket pinned on dashboard</div></li>
+            <li class="future"><div class="t-title">L3 — Client owner · +6 h</div><div class="t-meta">Aditya Reneev (Reneev Developers) — daily breach digest</div></li>
+          </ul>
+          <button class="btn sm secondary" onclick="toast('Escalation ladder editor opened — drag levels, change waits, swap contacts')">Edit ladder</button>
+        </div>
+        <div class="card">
+          <h3 class="panel-title">Business hours (IST)</h3>
+          <dl class="kv" style="grid-template-columns:130px 1fr">
+            <dt>Mon–Sat</dt><dd>9:00 AM – 6:00 PM</dd>
+            <dt>Sunday</dt><dd>Emergency only (Critical SLA runs 24×7)</dd>
+            <dt>Holidays</dt><dd>Gujarat govt. list 2026 (synced)</dd>
+          </dl>
+          <button class="btn sm ghost" style="margin-top:10px" onclick="toast('Business-hours editor opened — changes re-baseline SLA clocks for new tickets')">Edit hours</button>
+        </div>
+        <div class="card">
+          <h3 class="panel-title">Notification channels</h3>
+          <div class="row between" style="margin-bottom:10px"><span>WhatsApp (primary)</span><span class="badge done">ON</span></div>
+          <div class="row between" style="margin-bottom:10px"><span>Email digest (daily 8 AM)</span><span class="badge done">ON</span></div>
+          <div class="row between"><span>SMS fallback</span><button class="btn sm ghost" onclick="toast('SMS fallback enabled — used only when WhatsApp delivery fails')">Enable</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 11. PORTFOLIO BENCHMARK (v0.3) ============ -->
+  <div id="fmb-benchmark" class="d-screen">
+    <div class="d-head">
+      <div>
+        <span class="eyebrow">FM · Intelligence</span>
+        <h1>Portfolio benchmark</h1>
+        <div class="sub">UrbanServe league table · 3 sites · June 2026 (to date) · same metric definitions across buildings</div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary sm" onclick="toast('Benchmark pack exported (PDF) — 3-site league table + trend charts, ready for the Reneev Developers review on WhatsApp / email')">⬇ Export benchmark pack</button>
+      </div>
+    </div>
+
+    <div class="intro-bar"><span class="ib-ico">💡</span><div>All your buildings on <b>the same metrics, one league table</b> — spot the expensive site before the client review does.</div></div>
+
+    <div class="two-col">
+      <div class="card" style="padding:0">
+        <h3 class="panel-title" style="padding:16px 16px 0">Site comparison — operating metrics</h3>
+        <table class="dt" style="border:none;margin-top:12px">
+          <tr><th>Metric</th><th>VD Commercial<br><span class="muted">120 units · offices</span></th><th>Reneev Heights<br><span class="muted">240 units · pre-handover</span></th><th>Aspen Medicity<br><span class="muted">hospital · onboarding</span></th></tr>
+          <tr class="clickable" onclick="toast('R&M cost/sqft drill-down — head-wise spend per site, normalised to carpet area')">
+            <td><b>R&amp;M cost / sqft / mo</b></td>
+            <td><span class="heat h1" style="width:auto;padding:0 10px">₹4.10</span></td>
+            <td><span class="heat h0" style="width:auto;padding:0 10px">—</span></td>
+            <td><span class="heat h3" style="width:auto;padding:0 10px">₹6.80</span></td>
+          </tr>
+          <tr class="clickable" onclick="toast('SLA compliance drill-down — resolution within target, by category and severity')">
+            <td><b>SLA compliance</b></td>
+            <td><span class="heat h1" style="width:auto;padding:0 10px">94%</span></td>
+            <td><span class="heat h0" style="width:auto;padding:0 10px">—</span></td>
+            <td><span class="heat h2" style="width:auto;padding:0 10px">88%</span></td>
+          </tr>
+          <tr class="clickable" onclick="toast('Energy intensity drill-down — common-area kWh/sqft; hospital baseline naturally higher, but Aspen is above hospital peer median too')">
+            <td><b>Energy kWh / sqft</b></td>
+            <td><span class="heat h1" style="width:auto;padding:0 10px">2.1</span></td>
+            <td><span class="heat h0" style="width:auto;padding:0 10px">—</span></td>
+            <td><span class="heat h3" style="width:auto;padding:0 10px">3.4</span></td>
+          </tr>
+          <tr class="clickable" onclick="toast('Collections drill-down — billed vs collected by site; Aspen runs corporate billing (fewer, larger payers)')">
+            <td><b>Collections</b></td>
+            <td><span class="heat h2" style="width:auto;padding:0 10px">75%</span></td>
+            <td><span class="heat h0" style="width:auto;padding:0 10px">—</span></td>
+            <td><span class="heat h1" style="width:auto;padding:0 10px">91%</span></td>
+          </tr>
+        </table>
+        <p class="muted" style="padding:12px 16px">Reneev Heights is pre-handover (Aug 2026) — no operating data yet; it joins the league table from month 1 of operations. <span class="heat h1" style="width:auto;padding:0 8px">best</span> <span class="heat h2" style="width:auto;padding:0 8px">watch</span> <span class="heat h3" style="width:auto;padding:0 8px">worst</span></p>
+      </div>
+
+      <div class="stack">
+        <div class="card">
+          <h3 class="panel-title">League table — composite ops score</h3>
+          <div class="list-row"><span class="score-ring">87</span><div style="flex:1"><b>1. VD Commercial</b><br><span class="muted">Vesu, Surat · best on 3 of 4 metrics</span></div><span class="badge done">Leader</span></div>
+          <div class="list-row"><span class="score-ring mid">74</span><div style="flex:1"><b>2. Aspen Medicity</b><br><span class="muted">Hospital · onboarding · wins on collections</span></div><span class="badge medium">Improving</span></div>
+          <div class="list-row"><span class="score-ring low" style="border-style:dashed;border-color:var(--border)">—</span><div style="flex:1"><b>Reneev Heights</b><br><span class="muted">Pre-handover · not ranked yet</span></div><span class="badge neutral">From Aug 2026</span></div>
+          <p class="muted" style="margin-top:8px">Composite = R&amp;M efficiency + SLA + energy + collections, weighted; same formula every site, every month.</p>
+        </div>
+        <div class="ai-panel">
+          <b>🤖 Benchmark insight · 81% confidence</b>
+          <p style="font-size:13px;margin-top:6px">Aspen R&amp;M is <b>66% above VD</b> (₹6.80 vs ₹4.10/sqft/mo) — driver: reactive vs planned ratio <b>72:28</b> at Aspen vs 31:69 at VD. Suggest a <b>PPM coverage audit</b> at Aspen before renewing vendor AMCs.</p>
+          <p class="muted" style="margin-top:6px">Why: work-order mix by origin (breakdown vs scheduled) over the last 90 days, normalised per sqft.</p>
+          <button class="btn sm primary" style="margin-top:10px" onclick="toast('PPM coverage audit task created for Aspen Medicity FM team — asset register vs PPM plan gap report queued')">Create audit task</button>
+        </div>
+      </div>
+    </div>
+    <div class="crosslink" style="margin-top:16px">⛓ VD Commercial values mirror <b>Finance</b> (R&amp;M actuals), <b>Collections</b> (75%) and <b>ESG</b> (2.1 kWh/sqft) on this page — one number, everywhere.</div>
+  </div>
+
+  <!-- ============ 12. GST ENGINE (v0.3) ============ -->
+  <div id="fmb-gst" class="d-screen">
+    <div class="d-head">
+      <div>
+        <span class="eyebrow">FM · Money</span>
+        <h1>GST engine — CAM billing</h1>
+        <div class="sub">Exemption cliff per CBIC Circular 109/28/2019 · applied per member, per month · VD Commercial</div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary sm" onclick="toast('GSTR-1 draft (June) exported — outward supplies from 42 taxable units, ₹1.9L tax, ready for portal upload')">⬇ GSTR-1 draft</button>
+      </div>
+    </div>
+
+    <div class="intro-bar"><span class="ib-ico">💡</span><div>The ₹7,500 GST cliff, handled per member per month — <b>the engine warns you before a billing change tips a unit over</b>.</div></div>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="s-label">Exempt units</div><div class="s-value">78</div><div class="s-delta up">≤ ₹7,500 /member/mo</div></div>
+      <div class="stat-card"><div class="s-label">Taxable units</div><div class="s-value">42</div><div class="s-delta warn">18% on ENTIRE amount</div></div>
+      <div class="stat-card"><div class="s-label">GST collected (June)</div><div class="s-value">₹1.9L</div><div class="s-delta">Auto-lined on invoices</div></div>
+      <div class="stat-card"><div class="s-label">Cliff-watch units</div><div class="s-value">6</div><div class="s-delta warn">Within ₹500 of the cliff</div></div>
+    </div>
+
+    <div class="two-col">
+      <div class="stack">
+        <div class="card">
+          <h3 class="panel-title">The cliff rule — why it's not a slab</h3>
+          <p style="font-size:13px">If maintenance charges are <b>≤ ₹7,500 per member per month</b>, the supply is exempt. Cross ₹7,500 by even ₹1 and <b>18% GST applies to the ENTIRE amount — not just the excess</b> (CBIC Circular 109/28/2019).</p>
+          <div class="divider"></div>
+          <div class="row between" style="font-size:13px;margin-bottom:6px"><span>Example — <b>Unit 1101</b>, CAM ₹8,200</span><span class="badge open">Taxable</span></div>
+          <dl class="kv" style="grid-template-columns:160px 1fr">
+            <dt>Taxable base</dt><dd>₹8,200 (full amount — not ₹700 excess)</dd>
+            <dt>GST @18%</dt><dd><b>₹1,476</b> on the full amount</dd>
+            <dt>Invoice total</dt><dd>₹9,676</dd>
+          </dl>
+          <p class="muted" style="margin-top:8px">A ₹700 step over the cliff costs the member ₹1,476 — the engine flags cliff-watch units before billing so the committee can decide consciously.</p>
+        </div>
+        <div class="card">
+          <h3 class="panel-title">Exempt heads — excluded from the base</h3>
+          <p style="font-size:13px"><b>Property tax</b> and <b>water at actuals</b> (pure reimbursements collected on behalf of the member) are excluded from the ₹7,500 computation and the GST base. The head-wise split in <b>Collections</b> is what makes this automatic.</p>
+          <div class="crosslink" style="margin-top:10px">⛓ GST lines auto-apply on June invoices in <b>Collections</b>; ₹1.9L flows into the GSTR-1 draft and the Tally export in <b>Finance</b>.</div>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="card" style="border-color:var(--warning)">
+          <h3 class="panel-title">⚖️ Litigation-aware configuration</h3>
+          <p style="font-size:13px"><b>Madras HC (Greenwood, 2021)</b> quashed the entire-amount basis — held GST applies only to the excess over ₹7,500. The ruling is <b>stayed on appeal</b>; the official CBIC position is applied by default.</p>
+          <div class="field" style="margin-top:12px">
+            <label>GST computation basis</label>
+            <select onchange="toast(this.value.indexOf('Excess')===0 ? 'Excess-only basis selected — EXPERIMENTAL: contrary to current CBIC position, requires written CA sign-off before billing' : 'Official position applied — 18% on entire amount when above ₹7,500')">
+              <option>Official position — 18% on entire amount (default)</option>
+              <option>Excess-only basis — ⚠ experimental (Madras HC, stayed)</option>
+            </select>
+          </div>
+          <p class="muted" style="margin-top:6px">If the appeal settles the law, one config change re-bases future invoices — no code, no migration. Every change is audit-logged.</p>
+        </div>
+        <div class="ai-panel">
+          <b>🤖 Compliance Agent · 89% confidence</b>
+          <p style="font-size:13px;margin-top:6px">6 cliff-watch units sit within ₹500 of ₹7,500. The proposed FY rate revision (+4%) would push <b>4 of them over the cliff</b>, adding ~₹1,380/mo each in GST. Suggest modelling the revision at +3.2% to keep them exempt.</p>
+          <p class="muted" style="margin-top:6px">Why: per-unit CAM vs the ₹7,500 threshold, projected with the draft rate revision.</p>
+          <button class="btn sm primary" style="margin-top:10px" onclick="toast('Rate-revision scenario (+3.2%) modelled — 0 new taxable units, comparison sheet shared with committee on WhatsApp')">Model +3.2% scenario</button>
+        </div>
+        <div class="card">
+          <h3 class="panel-title">Filing calendar</h3>
+          <div class="list-row"><span class="badge medium">GSTR-1</span><div style="flex:1">June outward supplies</div><span class="muted">due 11 Jul</span></div>
+          <div class="list-row"><span class="badge open">GSTR-3B</span><div style="flex:1">June summary + payment</div><span class="muted">due 20 Jul</span></div>
+          <p class="muted" style="margin-top:8px">Reminders 7/3/1 days before, to Kavita Rao + accounts on WhatsApp.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </main>
+</div>
+
+<script src="brij.js"></script>
+</body>
+</html>

@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brij — Resident</title>
+<link rel="stylesheet" href="brij.css">
+</head>
+<body>
+<div class="proto-bar">
+  <a class="proto-logo" href="index.html">brij<span>.</span></a>
+  <div class="proto-tag">Prototype v0.4 · Resident — Rohan Mehta, Unit 304</div>
+  <div class="role-links">
+    <a href="resident.html" class="active">Resident</a>
+    <a href="fm.html">FM Manager</a>
+    <a href="builder.html">Builder</a>
+    <a href="vendor.html">Vendor</a>
+    <a href="guard.html">Guard</a>
+  </div>
+</div>
+
+<div class="phone-wrap">
+<div class="phone">
+  <div class="notch"></div>
+  <div class="statusrow"><span>9:41</span><span>📶 ⚡ 78%</span></div>
+
+  <!-- ============ 1. HOME ============ -->
+  <div id="m-home" class="m-screen active">
+    <div class="m-header">
+      <div style="flex:1">
+        <h2>Good morning, Rohan 👋</h2>
+        <div class="muted">Unit 304 · VD Commercial, Vesu · Wed 10 Jun 2026</div>
+      </div>
+      <button class="m-back" onclick="toast('2 unread — water shutdown notice · gatepass shared')">🔔</button>
+    </div>
+
+    <div class="intro-bar"><span class="ib-ico">🏠</span><div>Everything urgent is on this screen. <b>Three taps or less</b> to anything.</div></div>
+
+    <!-- quick actions: the 4 real daily jobs -->
+    <div class="cat-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:14px">
+      <div class="cat-tile" onclick="mGo('complaint-new','services')"><span class="ico">📝</span>Raise complaint</div>
+      <div class="cat-tile" onclick="mGo('visitor-new','visitors')"><span class="ico">👤</span>Pre-approve visitor</div>
+      <div class="cat-tile" onclick="mGo('pay','pay')"><span class="ico">₹</span>Pay dues</div>
+      <div class="cat-tile" onclick="mGo('sos','more')"><span class="ico">🆘</span>SOS</div>
+    </div>
+
+    <div class="stack">
+      <!-- dues -->
+      <div class="m-card" onclick="mGo('pay','pay')" style="cursor:pointer">
+        <div class="row between">
+          <div>
+            <div class="muted">June maintenance · INV-0626-304</div>
+            <div style="font-family:var(--display);font-size:24px;font-weight:800;color:var(--ink-900)">₹12,500</div>
+            <div class="muted">Due 15 Jun · CAM + water + sinking fund</div>
+          </div>
+          <button class="btn primary sm" onclick="event.stopPropagation();mGo('pay','pay')">Pay now</button>
+        </div>
+      </div>
+
+      <!-- live complaint -->
+      <div class="m-card" onclick="mGo('complaint-detail','services')" style="cursor:pointer">
+        <div class="row between">
+          <strong style="color:var(--ink-900)">T-1042 · AC not cooling</strong>
+          <span class="badge live">LIVE</span>
+        </div>
+        <div class="muted" style="margin:4px 0 8px">Ramesh K. (HVAC) on site since 11:40 AM · SLA today 6:00 PM</div>
+        <div class="prog warn"><div style="width:70%"></div></div>
+        <div class="muted" style="margin-top:6px">Tap for live timeline →</div>
+      </div>
+
+      <!-- visitor expected -->
+      <div class="m-card" onclick="mGo('visitors','visitors')" style="cursor:pointer">
+        <div class="row between">
+          <div>
+            <strong style="color:var(--ink-900)">🚚 Visitor expected ~2:30 PM</strong>
+            <div class="muted">Suresh Kumar · Courier · gatepass 482917 shared with Gate 1</div>
+          </div>
+          <span class="badge assigned">Pre-approved</span>
+        </div>
+      </div>
+
+      <!-- parcel waiting (v0.3) -->
+      <div class="m-card" onclick="mGo('parcels','more')" style="cursor:pointer">
+        <div class="row between">
+          <div>
+            <strong style="color:var(--ink-900)">📦 Parcel at gate — BlueDart</strong>
+            <div class="muted">Received 1:42 PM by Vijay Singh · collect with OTP 4417</div>
+          </div>
+          <span class="badge pending">Waiting</span>
+        </div>
+      </div>
+
+      <!-- parking strip (v0.3) -->
+      <div class="m-card" onclick="mGo('parking','more')" style="cursor:pointer">
+        <div class="row between">
+          <div class="muted">🅿️ Visitor slot <strong style="color:var(--ink-900)">V-12</strong> assigned to today's courier (pass 482917) · my slots <strong style="color:var(--ink-900)">B1-42 · B1-43</strong></div>
+          <span>→</span>
+        </div>
+      </div>
+
+      <!-- amenity booking -->
+      <div class="m-card" onclick="mGo('amenities','more')" style="cursor:pointer">
+        <div class="row between">
+          <div>
+            <strong style="color:var(--ink-900)">🏋️ Gym · tonight 7:00–8:00 PM</strong>
+            <div class="muted">Slot confirmed · Level 14 fitness deck</div>
+          </div>
+          <span class="badge done">Booked</span>
+        </div>
+      </div>
+
+      <!-- announcements -->
+      <div class="m-card">
+        <div class="panel-title" style="font-size:14px">📣 Announcements</div>
+        <div class="alert-row" onclick="mGo('community','more')" style="cursor:pointer">
+          <span class="alert-dot" style="background:var(--warning)"></span>
+          <div><strong>Water shutdown — Thu 12 Jun, 11 AM–2 PM.</strong> Pump-room valve replacement. Tanks refilled by 2:30 PM.</div>
+        </div>
+        <div class="alert-row" onclick="mGo('community','more')" style="cursor:pointer">
+          <span class="alert-dot" style="background:var(--success)"></span>
+          <div><strong>Lift 2 back in service</strong> after door-sensor fix. AMC inspection done.</div>
+        </div>
+        <button class="btn ghost sm" onclick="mGo('community','more')">All notices →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 2. COMPLAINTS LIST ============ -->
+  <div id="m-complaints" class="m-screen">
+    <div class="m-header">
+      <h2>My complaints</h2>
+      <span class="badge progress">1 live</span>
+    </div>
+    <div class="intro-bar"><span class="ib-ico">🛠</span><div>Every problem you have raised, with a <b>live status and a deadline</b> the FM is held to. Tap any card for the full story.</div></div>
+    <div class="filter-chips" style="margin-bottom:14px">
+      <span class="chip on" onclick="toggleChip(this)">All</span>
+      <span class="chip" onclick="toggleChip(this)">Open</span>
+      <span class="chip" onclick="toggleChip(this)">In progress</span>
+      <span class="chip" onclick="toggleChip(this)">Resolved</span>
+    </div>
+    <div class="stack">
+      <div class="m-card" onclick="mGo('complaint-detail','services')" style="cursor:pointer">
+        <div class="row between">
+          <strong style="color:var(--ink-900)">T-1042 · AC not cooling — Unit 304</strong>
+          <span class="badge progress">In progress</span>
+        </div>
+        <div class="muted" style="margin-top:4px">HVAC · High · Ramesh K. on site 11:40 AM · SLA today 6 PM</div>
+      </div>
+      <div class="m-card" onclick="toast('T-1038 detail — electrician Imran scheduled tomorrow 9 AM')" style="cursor:pointer">
+        <div class="row between">
+          <strong style="color:var(--ink-900)">T-1038 · Corridor light flickering — 3rd floor</strong>
+          <span class="badge assigned">Assigned</span>
+        </div>
+        <div class="muted" style="margin-top:4px">Electrical · Low · in-house (Imran) · raised 8 Jun</div>
+      </div>
+      <div class="m-card" onclick="toast('T-1011 closed 28 May — pantry tap washer replaced by AquaServ')" style="cursor:pointer">
+        <div class="row between">
+          <strong style="color:var(--ink-900)">T-1011 · Pantry tap dripping — Unit 304</strong>
+          <span class="badge resolved">Resolved</span>
+        </div>
+        <div class="muted" style="margin-top:4px">Plumbing · closed 28 May · you rated <span style="color:var(--warning)">★★★★★</span></div>
+      </div>
+    </div>
+    <button class="fab" onclick="mGo('complaint-new','services')">＋</button>
+  </div>
+
+  <!-- ============ 3. NEW COMPLAINT ============ -->
+  <div id="m-complaint-new" class="m-screen">
+    <div class="m-header">
+      <button class="m-back" onclick="mGo('complaints','services')">←</button>
+      <h2>New complaint</h2>
+    </div>
+    <div class="intro-bar"><span class="ib-ico">📝</span><div>Tell us what is wrong — <b>search it, tap a common one, or browse</b>. Brij sets the team, priority and SLA for you.</div></div>
+    <div class="field">
+      <label>What is the problem?</label>
+      <input placeholder="Search your problem… e.g. tap leaking">
+      <div class="muted" style="margin-top:6px">Can't find it? Just describe it below — AI files it under the right team.</div>
+    </div>
+    <div class="field">
+      <label>Most common in your building</label>
+      <div class="cat-grid" style="grid-template-columns:repeat(4,1fr)">
+        <div class="cat-tile" onclick="toast('Category set: Plumbing → Low water pressure · priority + SLA auto-applied')"><span class="ico">🚿</span>Low water pressure</div>
+        <div class="cat-tile" onclick="toast('Category set: AC → Not cooling · priority + SLA auto-applied')"><span class="ico">❄️</span>AC not cooling</div>
+        <div class="cat-tile" onclick="toast('Category set: Lift → Breakdown / issue · priority + SLA auto-applied')"><span class="ico">🛗</span>Lift issue</div>
+        <div class="cat-tile" onclick="toast('Category set: Housekeeping → Common-area cleaning · priority + SLA auto-applied')"><span class="ico">🧹</span>Housekeeping</div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Or browse every problem we handle</label>
+
+      <details class="collapse" open>
+        <summary>🚿 Plumbing &amp; water <span class="count-pill">9</span></summary>
+        <div class="c-body">
+          <div class="check-row" onclick="toast('Category set: Plumbing → Tap leak · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Tap leaking / dripping</div></div>
+          <div class="check-row" onclick="toast('Category set: Plumbing → Pipe leak / seepage · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Pipe leak / wall seepage<small>Photo helps — AI checks if a neighbouring unit is the source</small></div></div>
+          <div class="check-row" onclick="toast('Category set: Plumbing → Drain blockage · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Drain / sink blockage</div></div>
+          <div class="check-row" onclick="toast('Category set: Plumbing → Low water pressure · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Low water pressure<small>4 recent reports on floors 6–8 — booster pump P-04 under watch</small></div></div>
+          <div class="check-row" onclick="toast('Category set: Plumbing → Geyser not heating · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Geyser not heating</div></div>
+          <div class="check-row" onclick="toast('Category set: Plumbing → Flush problem · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Flush not working / running</div></div>
+          <div class="check-row" onclick="toast('Category set: Plumbing → Water timing / no supply · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">No water supply / timing issue</div></div>
+          <div class="check-row" onclick="toast('Category set: Plumbing → Water quality / colour · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Water quality / colour / smell</div></div>
+          <div class="check-row" onclick="toast('Category set: Plumbing → Tanker request · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Request a water tanker</div></div>
+        </div>
+      </details>
+
+      <details class="collapse">
+        <summary>💡 Electrical <span class="count-pill">7</span></summary>
+        <div class="c-body">
+          <div class="check-row" onclick="toast('Category set: Electrical → No power in unit · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">No power in my unit<small>Building has power? Marked HIGH automatically</small></div></div>
+          <div class="check-row" onclick="toast('Category set: Electrical → MCB trips repeatedly · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">MCB trips repeatedly</div></div>
+          <div class="check-row" onclick="toast('Category set: Electrical → Switch / socket fault · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Switch / socket not working</div></div>
+          <div class="check-row" onclick="toast('Category set: Electrical → Fan issue · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Fan not working / wobbling</div></div>
+          <div class="check-row" onclick="toast('Category set: Electrical → Light fixture · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Light fixture / flickering</div></div>
+          <div class="check-row" onclick="toast('Category set: Electrical → Inverter / backup · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Inverter / power backup issue</div></div>
+          <div class="check-row" onclick="toast('Category set: Electrical → Meter issue · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Electricity meter issue</div></div>
+        </div>
+      </details>
+
+      <details class="collapse">
+        <summary>❄️ AC &amp; ventilation <span class="count-pill">5</span></summary>
+        <div class="c-body">
+          <div class="check-row" onclick="toast('Category set: AC → Not cooling · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">AC not cooling<small>Units 301–312 run on AHU-02 — live ticket T-1042 may be related</small></div></div>
+          <div class="check-row" onclick="toast('Category set: AC → Water dripping · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Water dripping from AC</div></div>
+          <div class="check-row" onclick="toast('Category set: AC → Unusual noise · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">AC making noise</div></div>
+          <div class="check-row" onclick="toast('Category set: AC → Gas leak smell · marked HIGH · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Gas leak smell near AC<small>Auto-marked High priority</small></div></div>
+          <div class="check-row" onclick="toast('Category set: AC → Exhaust fan · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Exhaust fan not working</div></div>
+        </div>
+      </details>
+
+      <details class="collapse">
+        <summary>🛗 Lift <span class="count-pill">4</span></summary>
+        <div class="c-body">
+          <div class="check-row" onclick="toast('Someone stuck inside? Use SOS → Lift stuck. Otherwise: Category set: Lift → Breakdown · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Lift stuck / breakdown<small>Someone inside right now? Use SOS instead — guard alerted in 5 sec</small></div></div>
+          <div class="check-row" onclick="toast('Category set: Lift → Unusual noise · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Unusual noise / jerk while moving</div></div>
+          <div class="check-row" onclick="toast('Category set: Lift → Door not closing · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Door not closing properly</div></div>
+          <div class="check-row" onclick="toast('Category set: Lift → Long wait times · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Long wait / one lift always off</div></div>
+        </div>
+      </details>
+
+      <details class="collapse">
+        <summary>🧹 Housekeeping &amp; waste <span class="count-pill">4</span></summary>
+        <div class="c-body">
+          <div class="check-row" onclick="toast('Category set: Housekeeping → Common-area cleaning · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Common area not cleaned</div></div>
+          <div class="check-row" onclick="toast('Category set: Housekeeping → Garbage not collected · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Garbage not collected</div></div>
+          <div class="check-row" onclick="toast('Category set: Housekeeping → Pest control · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Pest control needed</div></div>
+          <div class="check-row" onclick="toast('Category set: Housekeeping → Smell in corridor · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Bad smell in corridor / lobby</div></div>
+        </div>
+      </details>
+
+      <details class="collapse">
+        <summary>🧱 Civil &amp; carpentry <span class="count-pill">5</span></summary>
+        <div class="c-body">
+          <div class="check-row" onclick="toast('Category set: Civil → Wall crack · priority + SLA auto-applied · DLP check: building under defect liability till Jan 2027')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Wall crack<small>Building is under DLP till Jan 2027 — may route to builder at zero cost</small></div></div>
+          <div class="check-row" onclick="toast('Category set: Civil → Tile crack / hollow · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Tile cracked / sounds hollow</div></div>
+          <div class="check-row" onclick="toast('Category set: Carpentry → Door / window alignment · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Door / window not closing right</div></div>
+          <div class="check-row" onclick="toast('Category set: Carpentry → Lock repair · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Lock repair / key stuck</div></div>
+          <div class="check-row" onclick="toast('Category set: Civil → Paint / dampness · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Paint peeling / damp patch</div></div>
+        </div>
+      </details>
+
+      <details class="collapse">
+        <summary>🛡 Security &amp; parking <span class="count-pill">5</span></summary>
+        <div class="c-body">
+          <div class="check-row" onclick="toast('Category set: Security → Unknown person · marked HIGH · guard + FM notified')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Unknown person on my floor<small>Goes to guard + FM instantly, not a queue</small></div></div>
+          <div class="check-row" onclick="toast('Category set: Security → Guard issue · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Guard behaviour / gate issue</div></div>
+          <div class="check-row" onclick="toast('Category set: Security → CCTV not working · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">CCTV not working</div></div>
+          <div class="check-row" onclick="toast('Category set: Parking → Wrong parking · photo goes to guard for tow-tag')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Someone parked in my slot<small>Snap the plate — guard gets it with the slot number</small></div></div>
+          <div class="check-row" onclick="toast('Category set: Parking → Visitor-slot dispute · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Visitor-slot dispute</div></div>
+        </div>
+      </details>
+
+      <details class="collapse">
+        <summary>🏋️ Common amenities <span class="count-pill">4</span></summary>
+        <div class="c-body">
+          <div class="check-row" onclick="toast('Category set: Amenities → Gym equipment · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Gym equipment broken</div></div>
+          <div class="check-row" onclick="toast('Category set: Amenities → Pool issue · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Pool — water / cleanliness</div></div>
+          <div class="check-row" onclick="toast('Category set: Amenities → Clubhouse booking issue · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Clubhouse booking problem</div></div>
+          <div class="check-row" onclick="toast('Category set: Amenities → Garden / landscaping · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Garden / landscaping issue</div></div>
+        </div>
+      </details>
+
+      <details class="collapse">
+        <summary>🌐 Connectivity &amp; utilities <span class="count-pill">3</span></summary>
+        <div class="c-body">
+          <div class="check-row" onclick="toast('Category set: Utilities → Internet / DTH provider access · gate + shaft access arranged')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Internet / DTH technician needs access<small>Brij issues the gate pass + shaft key in one go</small></div></div>
+          <div class="check-row" onclick="toast('Category set: Utilities → Gas pipeline · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Piped gas issue</div></div>
+          <div class="check-row" onclick="toast('Category set: Utilities → Intercom not working · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Intercom not working</div></div>
+        </div>
+      </details>
+
+      <details class="collapse">
+        <summary>₹ Billing &amp; society <span class="count-pill">4</span></summary>
+        <div class="c-body">
+          <div class="check-row" onclick="toast('Category set: Billing → Invoice query · routed to FM accounts desk')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Invoice query / wrong charge</div></div>
+          <div class="check-row" onclick="toast('Category set: Billing → Payment not reflecting · ledger check queued')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Paid but not reflecting</div></div>
+          <div class="check-row" onclick="toast('Category set: Society → Document request · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Document request (NOC, letter)</div></div>
+          <div class="check-row" onclick="toast('Category set: Society → Noise / nuisance complaint · priority + SLA auto-applied')" style="cursor:pointer"><span class="cbox"></span><div class="c-label">Noise / nuisance complaint</div></div>
+        </div>
+      </details>
+    </div>
+    <div class="field">
+      <label>Title</label>
+      <input value="AC airflow weak in cabin area">
+    </div>
+    <div class="field">
+      <label>Description</label>
+      <textarea rows="3">Cabin AC vent airflow has dropped since this morning; conference side is fine. Possibly related to ongoing AHU work?</textarea>
+    </div>
+    <div class="field">
+      <label>Unit</label>
+      <select><option>Unit 304 — VD Commercial (my unit)</option><option>Common area — 3rd floor</option></select>
+    </div>
+    <div class="field">
+      <label>Photos (optional, helps AI route faster)</label>
+      <div class="upload-zone" onclick="toast('Camera opened — photo attached (demo)')">📷 Tap to add photos or a 15-sec video</div>
+    </div>
+    <div class="ai-panel" style="margin-bottom:14px">
+      <strong>🤖 Brij AI</strong> will auto-categorise, set priority and route to the right team — typically in &lt;5 seconds. <span class="muted">Last ticket: 92% confidence.</span>
+    </div>
+    <button class="btn primary block" onclick="toast('Ticket T-1043 raised · AI routed: HVAC · Medium · in-house team — 89% confidence');mGo('complaints','services')">Submit complaint</button>
+  </div>
+
+  <!-- ============ 4. COMPLAINT DETAIL T-1042 ============ -->
+  <div id="m-complaint-detail" class="m-screen">
+    <div class="m-header">
+      <button class="m-back" onclick="mGo('complaints','services')">←</button>
+      <h2>T-1042</h2>
+      <span class="badge progress">In progress</span>
+    </div>
+    <div class="m-card" style="margin-bottom:12px">
+      <strong style="color:var(--ink-900)">AC not cooling — Unit 304</strong>
+      <div class="muted" style="margin:2px 0 6px">Raised 9 Jun 2026, 9:12 AM via app · HVAC · <span class="badge high">High</span></div>
+      <div class="stepper">
+        <div class="step done"><div class="bar"></div>Open</div>
+        <div class="step done"><div class="bar"></div>Assigned</div>
+        <div class="step done"><div class="bar"></div>In progress</div>
+        <div class="step"><div class="bar"></div>Resolved</div>
+      </div>
+    </div>
+    <div class="m-card" style="margin-bottom:12px">
+      <div class="row between">
+        <div>
+          <div class="muted">SLA commitment</div>
+          <strong style="color:var(--ink-900)">Resolve by today, 6:00 PM</strong>
+        </div>
+        <span class="badge medium">At risk</span>
+      </div>
+      <div class="prog warn" style="margin-top:8px"><div style="width:70%"></div></div>
+    </div>
+    <div class="m-card" style="margin-bottom:12px">
+      <div class="panel-title" style="font-size:14px">Live timeline</div>
+      <ul class="timeline">
+        <li>
+          <div class="t-title">Technician on site <span class="badge live">LIVE</span></div>
+          <div class="t-meta">Today 11:40 AM · Ramesh K. checked in via QR at AHU-02 plant room</div>
+        </li>
+        <li>
+          <div class="t-title">Assigned to Ramesh K. (in-house HVAC)</div>
+          <div class="t-meta">9 Jun 9:35 AM · by Kavita Rao, FM Manager</div>
+        </li>
+        <li>
+          <div class="t-title">AI categorised <span class="badge ai">AI · 92%</span></div>
+          <div class="t-meta">9 Jun 9:13 AM · HVAC · High · linked asset AHU-02 (serves units 301–312)</div>
+        </li>
+        <li>
+          <div class="t-title">Raised by you via app · 2 photos</div>
+          <div class="t-meta">9 Jun 9:12 AM</div>
+          <div class="row" style="margin-top:6px">
+            <span class="photo-stub" onclick="toast('Photo 1 — cabin thermostat reading 29°C')">🖼</span>
+            <span class="photo-stub" onclick="toast('Photo 2 — supply vent, no airflow')">🖼</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="crosslink" onclick="toast('Same asset record across modules — FM Ops → Assets → AHU-02')" style="cursor:pointer;margin-bottom:12px">
+      ⛓ Linked asset <strong>AHU-02</strong> (Daikin, 3rd-floor plant room). Its history includes DLP snag <strong>SNG-218</strong> — fixed by builder's subcon, ₹18,000 recovered. Same record in FM Ops &amp; Builder modules.
+    </div>
+    <div class="m-card" style="margin-bottom:12px">
+      <div class="muted">⭐ When resolved, you'll be asked to rate the fix. Not satisfied? You can <strong>reopen within 72 hours</strong> — it goes straight back to the same technician with priority bump.</div>
+    </div>
+    <div class="row">
+      <button class="btn secondary sm" onclick="mGo('helpdesk','more')">💬 Chat with FM desk</button>
+      <button class="btn ghost sm" onclick="toast('Escalated to Kavita Rao (FM Manager) — she is notified on WhatsApp')">Escalate</button>
+    </div>
+  </div>
+
+  <!-- ============ 5. VISITORS HUB ============ -->
+  <div id="m-visitors" class="m-screen">
+    <div class="m-header">
+      <h2>Visitors</h2>
+      <button class="btn primary sm" onclick="mGo('visitor-new','visitors')">＋ Pre-approve</button>
+    </div>
+    <div class="intro-bar"><span class="ib-ico">👥</span><div>Approve guests, deliveries and cabs <b>before they reach the gate</b> — no intercom calls, and you get a ping the moment they arrive.</div></div>
+    <div class="tabbar">
+      <button class="active" onclick="setTab(this,'v-today')">Today</button>
+      <button onclick="setTab(this,'v-upcoming')">Upcoming</button>
+      <button onclick="setTab(this,'v-history')">History</button>
+    </div>
+    <div id="v-today" class="tabpane active">
+      <div class="gatepass">
+        <div style="font-size:12px;opacity:.8">GATE PASS · VD COMMERCIAL</div>
+        <strong>Suresh Kumar · Courier</strong>
+        <div class="code">4 8 2 9 1 7</div>
+        <div class="qr-stub"></div>
+        <div style="font-size:12px;opacity:.85">Expected ~2:30 PM · valid till 8:00 PM today · host Unit 304</div>
+      </div>
+      <button class="btn wa block" style="margin-top:12px" onclick="toast('Gatepass 482917 shared on WhatsApp with Suresh Kumar')">Share pass on WhatsApp</button>
+      <div class="muted" style="margin-top:10px;text-align:center">Guard at Gate 1 scans QR or types the 6-digit code — you get an arrival ping instantly.</div>
+    </div>
+    <div id="v-upcoming" class="tabpane">
+      <div class="empty-state">
+        <span class="ico">📭</span>
+        <strong>No upcoming visitors</strong>
+        <div class="muted" style="margin-top:4px">Pre-approve a guest, delivery or cab and the gate waves them in — no intercom call.</div>
+        <button class="btn primary sm" style="margin-top:12px" onclick="mGo('visitor-new','visitors')">Pre-approve a visitor</button>
+      </div>
+    </div>
+    <div id="v-history" class="tabpane">
+      <div class="stack">
+        <div class="m-card" onclick="toast('Entry log — verified by Vijay Singh, Gate 1')" style="cursor:pointer">
+          <div class="row between"><strong style="color:var(--ink-900)">📦 Zomato delivery</strong><span class="badge done">Completed</span></div>
+          <div class="muted">9 Jun · arrived 1:05 PM · departed 1:09 PM · Gate 1</div>
+        </div>
+        <div class="m-card" onclick="toast('Entry log — guest pass, photo on file (DPDP retention 30 days)')" style="cursor:pointer">
+          <div class="row between"><strong style="color:var(--ink-900)">👤 Anita Mehta · Guest</strong><span class="badge done">Completed</span></div>
+          <div class="muted">8 Jun · arrived 6:48 PM · departed 9:30 PM</div>
+        </div>
+        <div class="m-card" onclick="toast('Cab entry — vehicle GJ-05-TC-9921 logged by ANPR camera')" style="cursor:pointer">
+          <div class="row between"><strong style="color:var(--ink-900)">🚕 Ola cab · pickup</strong><span class="badge done">Completed</span></div>
+          <div class="muted">7 Jun · arrived 8:12 AM · departed 8:16 AM</div>
+        </div>
+        <div class="m-card" onclick="toast('Visitor was turned away — you marked Deny on the gate request')" style="cursor:pointer">
+          <div class="row between"><strong style="color:var(--ink-900)">👤 Unknown sales visitor</strong><span class="badge overdue">Denied</span></div>
+          <div class="muted">5 Jun · denied at gate 11:20 AM · no entry</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 6. NEW VISITOR ============ -->
+  <div id="m-visitor-new" class="m-screen">
+    <div class="m-header">
+      <button class="m-back" onclick="mGo('visitors','visitors')">←</button>
+      <h2>Pre-approve visitor</h2>
+    </div>
+    <div class="field">
+      <label>Visitor type</label>
+      <div class="cat-grid">
+        <div class="cat-tile on" onclick="pickCat(this)"><span class="ico">👤</span>Guest</div>
+        <div class="cat-tile" onclick="pickCat(this)"><span class="ico">📦</span>Delivery</div>
+        <div class="cat-tile" onclick="pickCat(this)"><span class="ico">🚕</span>Cab</div>
+        <div class="cat-tile" onclick="pickCat(this)"><span class="ico">🔁</span>Daily help</div>
+        <div class="cat-tile" onclick="pickCat(this)"><span class="ico">🎉</span>Group / Party</div>
+      </div>
+    </div>
+    <div class="field"><label>Name</label><input placeholder="Visitor name" value="Mehul Shah"></div>
+    <div class="field"><label>Phone (pass goes here on WhatsApp)</label><input value="+91 99XXX 44218"></div>
+    <div class="row" style="align-items:flex-start">
+      <div class="field" style="flex:1"><label>Expected date</label><input value="11 Jun 2026"></div>
+      <div class="field" style="flex:1"><label>Time</label><input value="11:00 AM"></div>
+    </div>
+    <div class="field"><label>Vehicle no. (optional, for ANPR fast lane)</label><input placeholder="GJ-05-XX-0000"></div>
+    <div class="field">
+      <label>Recurring (for daily help / frequent visitors)</label>
+      <div class="filter-chips">
+        <span class="chip" onclick="toggleChip(this);toast('Repeats Mon–Sat for 30 days — single reusable pass')">Repeat Mon–Sat × 30 days</span>
+      </div>
+    </div>
+    <button class="btn primary block" onclick="toast('Pass 581204 created · shared on WhatsApp');mGo('visitors','visitors')">Create gate pass</button>
+    <div class="muted" style="margin-top:10px;text-align:center">Pass auto-expires if unused. Guard app verifies in &lt;3 sec.</div>
+  </div>
+
+  <!-- ============ 7. PAY ============ -->
+  <div id="m-pay" class="m-screen">
+    <div class="m-header">
+      <h2>Payments</h2>
+      <span class="badge pending">₹12,500 due</span>
+    </div>
+    <div class="intro-bar"><span class="ib-ico">₹</span><div>Pay maintenance in <b>one tap</b>, download receipts, and see every rupee on your unit ledger. Autopay means never a late fee.</div></div>
+    <div class="m-card" style="margin-bottom:12px">
+      <div class="row between">
+        <strong style="color:var(--ink-900)">INV-0626-304 · June 2026</strong>
+        <span class="badge pending">Due 15 Jun</span>
+      </div>
+      <div class="divider" style="margin:10px 0"></div>
+      <div class="list-row" style="padding:6px 0"><span style="flex:1">CAM charges</span><strong>₹9,800</strong></div>
+      <div class="list-row" style="padding:6px 0"><span style="flex:1">Water charges</span><strong>₹1,200</strong></div>
+      <div class="list-row" style="padding:6px 0"><span style="flex:1">Sinking fund</span><strong>₹500</strong></div>
+      <div class="list-row" style="padding:6px 0"><span style="flex:1">GST</span><strong>₹1,000</strong></div>
+      <div class="list-row" style="padding:8px 0;border-top:1px solid var(--border)"><span style="flex:1;font-weight:700;color:var(--ink-900)">Total</span><strong style="font-size:17px;color:var(--ink-900)">₹12,500</strong></div>
+      <button class="btn primary block" style="margin-top:10px" onclick="toast('Opening Razorpay — UPI / card / netbanking · receipt lands on WhatsApp')">Pay ₹12,500 via Razorpay</button>
+      <button class="btn ghost block sm" style="margin-top:6px" onclick="toast('Invoice PDF downloading — GST-compliant, UrbanServe Facilities Pvt Ltd')">↓ Download invoice PDF</button>
+    </div>
+    <div class="m-card" onclick="mGo('autopay','pay')" style="cursor:pointer;margin-bottom:12px;background:var(--teal-50);border-color:var(--teal-500)">
+      <div class="row between">
+        <div>
+          <strong style="color:var(--teal-700)">⚡ Set up UPI autopay</strong>
+          <div class="muted">Never miss a due date — mandate capped at ₹15,000/month</div>
+        </div>
+        <span style="font-size:18px">→</span>
+      </div>
+    </div>
+    <div class="row between" style="margin-bottom:8px">
+      <div class="panel-title" style="margin:0;font-size:14px">Receipts</div>
+      <a href="#" onclick="mGo('ledger','pay');return false" style="font-size:12px;font-weight:700">Full ledger →</a>
+    </div>
+    <div class="stack">
+      <div class="m-card" onclick="toast('Receipt RCP-0512-304 downloading — paid via UPI (rohan@okhdfc)')" style="cursor:pointer">
+        <div class="row between"><div><strong style="color:var(--ink-900)">May 2026</strong><div class="muted">Paid 12 May · UPI</div></div><div class="row"><span class="badge paid">₹12,500</span><span>↓</span></div></div>
+      </div>
+      <div class="m-card" onclick="toast('Receipt RCP-0414-304 downloading')" style="cursor:pointer">
+        <div class="row between"><div><strong style="color:var(--ink-900)">April 2026</strong><div class="muted">Paid 14 Apr · UPI</div></div><div class="row"><span class="badge paid">₹12,500</span><span>↓</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 8. LEDGER ============ -->
+  <div id="m-ledger" class="m-screen">
+    <div class="m-header">
+      <button class="m-back" onclick="mGo('pay','pay')">←</button>
+      <h2>Unit 304 ledger</h2>
+    </div>
+    <div class="m-card" style="margin-bottom:12px">
+      <div class="row between">
+        <div><div class="muted">Security deposit held</div><strong style="color:var(--ink-900)">₹50,000</strong></div>
+        <div style="text-align:right"><div class="muted">Current outstanding</div><strong style="color:var(--warning)">₹12,500</strong></div>
+      </div>
+    </div>
+    <div class="m-card" style="margin-bottom:12px;border-color:var(--danger);background:var(--danger-50)">
+      <div class="row between">
+        <div>
+          <strong style="color:var(--danger)">⚠ Payment failed — 8 Jun</strong>
+          <div class="muted">UPI attempt ₹12,500 declined (bank timeout). No money debited.</div>
+        </div>
+        <button class="btn danger sm" onclick="toast('Retrying via Razorpay — choose UPI app')">Retry</button>
+      </div>
+    </div>
+    <table class="dt" style="font-size:12px;margin-bottom:12px">
+      <tr><th>Date</th><th>Item</th><th style="text-align:right">Amount</th><th style="text-align:right">Balance</th></tr>
+      <tr><td>1 Feb</td><td>Opening balance (handover)</td><td style="text-align:right">—</td><td style="text-align:right">₹0</td></tr>
+      <tr><td>1 Feb</td><td>Feb invoice</td><td style="text-align:right">+₹12,500</td><td style="text-align:right">₹12,500</td></tr>
+      <tr><td>9 Feb</td><td>Payment · UPI</td><td style="text-align:right;color:var(--success)">−₹12,500</td><td style="text-align:right">₹0</td></tr>
+      <tr><td>1 Mar</td><td>Mar invoice</td><td style="text-align:right">+₹12,500</td><td style="text-align:right">₹12,500</td></tr>
+      <tr><td>11 Mar</td><td>Payment · UPI</td><td style="text-align:right;color:var(--success)">−₹12,500</td><td style="text-align:right">₹0</td></tr>
+      <tr><td>1 Apr</td><td>Apr invoice</td><td style="text-align:right">+₹12,500</td><td style="text-align:right">₹12,500</td></tr>
+      <tr><td>16 Apr</td><td>Late fee (paid after due)</td><td style="text-align:right;color:var(--danger)">+₹250</td><td style="text-align:right">₹12,750</td></tr>
+      <tr class="clickable" onclick="toast('Waiver approved by Kavita Rao — first-time grace policy')"><td>16 Apr</td><td>Late fee waived · first-time grace ⓘ</td><td style="text-align:right;color:var(--success)">−₹250</td><td style="text-align:right">₹12,500</td></tr>
+      <tr><td>14 Apr*</td><td>Payment · UPI <span class="muted">(*posted 16 Apr)</span></td><td style="text-align:right;color:var(--success)">−₹12,500</td><td style="text-align:right">₹0</td></tr>
+      <tr><td>1 May</td><td>May invoice</td><td style="text-align:right">+₹12,500</td><td style="text-align:right">₹12,500</td></tr>
+      <tr><td>12 May</td><td>Payment · UPI</td><td style="text-align:right;color:var(--success)">−₹12,500</td><td style="text-align:right">₹0</td></tr>
+      <tr><td>1 Jun</td><td>Jun invoice INV-0626-304</td><td style="text-align:right">+₹12,500</td><td style="text-align:right">₹12,500</td></tr>
+      <tr><td>8 Jun</td><td>UPI attempt — <span class="badge breach">failed</span></td><td style="text-align:right">₹0</td><td style="text-align:right;font-weight:700">₹12,500</td></tr>
+    </table>
+    <button class="btn secondary block" onclick="toast('Statement Feb–Jun 2026 PDF downloading · also sent on WhatsApp')">↓ Download statement (PDF)</button>
+    <div class="muted" style="margin-top:10px">Late fee: ₹250 after due date, auto-applied; FM can waive once per FY. All entries are double-entry, audit-logged.</div>
+  </div>
+
+  <!-- ============ 9. AUTOPAY ============ -->
+  <div id="m-autopay" class="m-screen">
+    <div class="m-header">
+      <button class="m-back" onclick="mGo('pay','pay')">←</button>
+      <h2>UPI autopay</h2>
+    </div>
+    <div class="m-card" style="margin-bottom:12px">
+      <dl class="kv" style="grid-template-columns:120px 1fr">
+        <dt>Mandate cap</dt><dd>₹15,000 / month</dd>
+        <dt>Frequency</dt><dd>Monthly, on due date (15th)</dd>
+        <dt>Debits from</dt><dd>rohan@okhdfc (UPI)</dd>
+        <dt>Powered by</dt><dd>Razorpay recurring mandate (RBI e-mandate)</dd>
+        <dt>Cancel</dt><dd>Anytime, from this screen or your UPI app</dd>
+      </dl>
+    </div>
+    <div class="m-card" style="margin-bottom:12px">
+      <div class="panel-title" style="font-size:14px">Why autopay</div>
+      <div class="alert-row"><span class="alert-dot" style="background:var(--success)"></span><div>Never a late fee — invoice debits only after you get a 24-h preview on WhatsApp.</div></div>
+      <div class="alert-row"><span class="alert-dot" style="background:var(--success)"></span><div>If the invoice is disputed, the debit auto-holds until FM resolves it.</div></div>
+      <div class="alert-row"><span class="alert-dot" style="background:var(--success)"></span><div>Cap of ₹15,000 means a wrong invoice can never over-debit you.</div></div>
+    </div>
+    <button class="btn primary block" onclick="toast('Mandate request sent to your UPI app — approve there to activate')">Activate autopay</button>
+    <div class="muted" style="margin-top:10px;text-align:center">68 of 120 units in VD Commercial are already on autopay.</div>
+  </div>
+
+  <!-- ============ 10. AMENITIES ============ -->
+  <div id="m-amenities" class="m-screen">
+    <div class="m-header">
+      <button class="m-back" onclick="mGo('more','more')">←</button>
+      <h2>Amenities</h2>
+    </div>
+    <div class="stack">
+      <div class="m-card" onclick="toast('Gym is walk-in + slot based · your 7–8 PM slot tonight is confirmed')" style="cursor:pointer">
+        <div class="row between"><strong style="color:var(--ink-900)">🏋️ Gym — Level 14 fitness deck</strong><span class="badge done">Booked tonight</span></div>
+        <div class="muted" style="margin-top:4px">Free · 6 AM–10 PM · 4 of 12 slots free today · trainer Tue/Thu</div>
+      </div>
+      <div class="m-card" onclick="mGo('amenity-book','more')" style="cursor:pointer">
+        <div class="row between"><strong style="color:var(--ink-900)">🗣 Conference Room 2 — 3rd floor</strong><span class="badge assigned">3 slots free today</span></div>
+        <div class="muted" style="margin-top:4px">₹500/hr · seats 10 · screen + VC setup · billed to your invoice</div>
+        <button class="btn primary sm" style="margin-top:8px" onclick="event.stopPropagation();mGo('amenity-book','more')">Book a slot</button>
+      </div>
+      <div class="m-card" onclick="toast('Rooftop lounge — next free evening Sat 13 Jun · ₹2,000 + refundable cleaning deposit ₹1,000')" style="cursor:pointer">
+        <div class="row between"><strong style="color:var(--ink-900)">🌆 Rooftop lounge</strong><span class="badge medium">Sat available</span></div>
+        <div class="muted" style="margin-top:4px">₹2,000/evening · max 25 guests · booked Fri (private event)</div>
+      </div>
+      <div class="m-card" onclick="toast('Bay V-4 reserved for 2 hours — code sent to gate')" style="cursor:pointer">
+        <div class="row between"><strong style="color:var(--ink-900)">🅿️ Visitor parking — Basement 1</strong><span class="badge resolved">2 of 6 bays free</span></div>
+        <div class="muted" style="margin-top:4px">Free for 2 hrs, ₹50/hr after · tap to reserve a bay now</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 11. AMENITY BOOKING ============ -->
+  <div id="m-amenity-book" class="m-screen">
+    <div class="m-header">
+      <button class="m-back" onclick="mGo('amenities','more')">←</button>
+      <h2>Conference Room 2</h2>
+    </div>
+    <div class="m-card" style="margin-bottom:12px">
+      <div class="muted">₹500/hr · seats 10 · 75″ screen, VC bar, whiteboard · charge added to your monthly invoice</div>
+    </div>
+    <div class="field">
+      <label>Date</label>
+      <div class="filter-chips">
+        <span class="chip on" onclick="toggleChip(this)">Today 10 Jun</span>
+        <span class="chip" onclick="toggleChip(this)">Thu 11</span>
+        <span class="chip" onclick="toggleChip(this)">Fri 12</span>
+        <span class="chip" onclick="toggleChip(this)">Mon 15</span>
+      </div>
+    </div>
+    <div class="field">
+      <label>Slot (today)</label>
+      <div class="filter-chips">
+        <span class="chip" style="opacity:.4;text-decoration:line-through">10–11 AM</span>
+        <span class="chip" style="opacity:.4;text-decoration:line-through">11–12</span>
+        <span class="chip on" onclick="toggleChip(this)">2–3 PM</span>
+        <span class="chip" onclick="toggleChip(this)">3–4 PM</span>
+        <span class="chip" onclick="toggleChip(this)">4–5 PM</span>
+      </div>
+    </div>
+    <button class="btn primary block" onclick="toast('Booked — Conference Room 2, today 2–3 PM · ₹500 added to INV-0626-304 · door code on WhatsApp')">Confirm booking · ₹500</button>
+    <div class="divider"></div>
+    <div class="panel-title" style="font-size:14px">My bookings</div>
+    <div class="stack">
+      <div class="m-card" onclick="toast('Booking AMN-1187 — cancel free till 6 PM today')" style="cursor:pointer">
+        <div class="row between"><div><strong style="color:var(--ink-900)">🏋️ Gym</strong><div class="muted">Tonight 7:00–8:00 PM · Level 14</div></div><span class="badge done">Confirmed</span></div>
+      </div>
+      <div class="m-card" onclick="toast('Booking AMN-1162 — completed 4 Jun · ₹1,000 paid same day via UPI')" style="cursor:pointer">
+        <div class="row between"><div><strong style="color:var(--ink-900)">🗣 Conference Room 2</strong><div class="muted">4 Jun · 10 AM–12 PM · ₹1,000 paid</div></div><span class="badge paid">Past</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 12. STAFF ============ -->
+  <div id="m-staff" class="m-screen">
+    <div class="m-header">
+      <button class="m-back" onclick="mGo('more','more')">←</button>
+      <h2>My staff</h2>
+      <button class="btn primary sm" onclick="toast('Add staff — gate pass + face capture on first entry (consent via OTP)')">＋ Add</button>
+    </div>
+    <div class="stack" style="margin-bottom:14px">
+      <div class="m-card">
+        <div class="row between">
+          <div>
+            <strong style="color:var(--ink-900)">Ravi · Office boy</strong>
+            <div class="muted">Daily Mon–Sat · entered <strong>9:02 AM today</strong> · Gate 1</div>
+          </div>
+          <span class="badge resolved">IN</span>
+        </div>
+        <div class="row between" style="margin-top:8px">
+          <span class="muted">Notify gate on entry/exit</span>
+          <span class="chip on" onclick="toggleChip(this);toast('Gate notifications toggled for Ravi')">WhatsApp ping</span>
+        </div>
+      </div>
+      <div class="m-card">
+        <div class="row between">
+          <div>
+            <strong style="color:var(--ink-900)">Sunita · Cleaner</strong>
+            <div class="muted">Weekly Tue &amp; Fri · last visit 9 Jun, 4:10–6:05 PM</div>
+          </div>
+          <span class="badge neutral">Not in</span>
+        </div>
+        <div class="row between" style="margin-top:8px">
+          <span class="muted">Notify gate on entry/exit</span>
+          <span class="chip" onclick="toggleChip(this);toast('Gate notifications toggled for Sunita')">WhatsApp ping</span>
+        </div>
+      </div>
+    </div>
+    <div class="m-card">
+      <div class="panel-title" style="font-size:14px">Ravi — attendance, June</div>
+      <div class="cal" style="grid-template-columns:repeat(7,1fr)">
+        <div class="cal-h">M</div><div class="cal-h">T</div><div class="cal-h">W</div><div class="cal-h">T</div><div class="cal-h">F</div><div class="cal-h">S</div><div class="cal-h">S</div>
+        <div class="cal-d" style="min-height:42px"><span class="dnum">1</span><span class="cal-pill g">9:01</span></div>
+        <div class="cal-d" style="min-height:42px"><span class="dnum">2</span><span class="cal-pill g">8:58</span></div>
+        <div class="cal-d" style="min-height:42px"><span class="dnum">3</span><span class="cal-pill g">9:04</span></div>
+        <div class="cal-d" style="min-height:42px"><span class="dnum">4</span><span class="cal-pill g">9:00</span></div>
+        <div class="cal-d" style="min-height:42px"><span class="dnum">5</span><span class="cal-pill d">absent</span></div>
+        <div class="cal-d" style="min-height:42px"><span class="dnum">6</span><span class="cal-pill g">9:07</span></div>
+        <div class="cal-d dim" style="min-height:42px"><span class="dnum">7</span></div>
+        <div class="cal-d" style="min-height:42px"><span class="dnum">8</span><span class="cal-pill g">9:03</span></div>
+        <div class="cal-d" style="min-height:42px"><span class="dnum">9</span><span class="cal-pill g">8:55</span></div>
+        <div class="cal-d today" style="min-height:42px"><span class="dnum">10</span><span class="cal-pill g">9:02</span></div>
+        <div class="cal-d dim" style="min-height:42px"><span class="dnum">11</span></div>
+        <div class="cal-d dim" style="min-height:42px"><span class="dnum">12</span></div>
+        <div class="cal-d dim" style="min-height:42px"><span class="dnum">13</span></div>
+        <div class="cal-d dim" style="min-height:42px"><span class="dnum">14</span></div>
+      </div>
+      <div class="muted" style="margin-top:8px">Attendance is auto-marked from gate entry — no manual register. 8/9 days present.</div>
+    </div>
+  </div>
+
+  <!-- ============ 13. HELPDESK CHAT ============ -->
+  <div id="m-helpdesk" class="m-screen" style="padding-bottom:130px">
+    <div class="m-header">
+      <button class="m-back" onclick="mGo('home','home')">←</button>
+      <div style="flex:1">
+        <h2>FM Helpdesk</h2>
+        <div class="muted">Lakshmi · Front desk · <span style="color:var(--success)">● online</span></div>
+      </div>
+    </div>
+    <div class="chat">
+      <div class="bubble me">Hi — is the water shutdown tomorrow or Thursday? Need to plan the office pantry.
+        <div class="b-meta">10:02 AM ✓✓</div>
+      </div>
+      <div class="bubble them"><strong>Lakshmi (Front desk):</strong> Good morning Rohan! It's <strong>Thursday 12 Jun, 11 AM–2 PM</strong> — pump-room valve replacement. Overhead tanks refill by ~2:30 PM, so taps stay live till about 11:45.
+        <div class="b-meta">10:04 AM</div>
+      </div>
+      <div class="bubble them" onclick="mGo('complaint-detail','services')" style="cursor:pointer;border-color:var(--teal-500)">
+        <span class="badge ai">Brij bot</span> Update on your ticket <strong>T-1042 (AC not cooling)</strong>: Ramesh K. is on site since 11:40 AM. SLA today 6 PM. <span style="color:var(--teal-500);font-weight:700">Tap to open →</span>
+        <div class="b-meta">11:41 AM · auto</div>
+      </div>
+      <div class="bubble me">Great, thanks. Will the conference room AC be affected?
+        <div class="b-meta">11:45 AM ✓✓</div>
+      </div>
+      <div class="bubble them"><strong>Lakshmi:</strong> No — AHU work is isolated to the 301–312 line. Conference Room 2 runs on AHU-03. 👍
+        <div class="b-meta">11:47 AM</div>
+      </div>
+    </div>
+    <div class="chat-input">
+      <input placeholder="Message the FM desk…">
+      <button class="btn primary sm" onclick="toast('Sent · Lakshmi typically replies in under 2 min (9 AM–7 PM)')">➤</button>
+    </div>
+  </div>
+
+  <!-- ============ 14. COMMUNITY ============ -->
+  <div id="m-community" class="m-screen">
+    <div class="m-header">
+      <button class="m-back" onclick="mGo('more','more')">←</button>
+      <h2>Community</h2>
+    </div>
+    <div class="stack">
+      <div class="m-card">
+        <div class="row between"><strong style="color:var(--ink-900)">🗳 Poll · AGM date</strong><span class="badge live">Live</span></div>
+        <div class="muted" style="margin:4px 0 10px">Pick a Saturday — closes 13 Jun · 74 of 120 units voted</div>
+        <div class="row between" style="margin-bottom:4px"><span>Sat 21 Jun</span><strong>62%</strong></div>
+        <div class="prog" style="margin-bottom:8px"><div style="width:62%"></div></div>
+        <div class="row between" style="margin-bottom:4px"><span>Sat 28 Jun</span><strong>38%</strong></div>
+        <div class="prog" style="margin-bottom:10px"><div style="width:38%"></div></div>
+        <button class="btn secondary sm" onclick="toast('Vote recorded — Sat 21 Jun · one vote per unit')">Vote 21 Jun</button>
+        <button class="btn ghost sm" onclick="toast('Vote recorded — Sat 28 Jun · one vote per unit')">Vote 28 Jun</button>
+      </div>
+      <div class="m-card" onclick="toast('Notice opened — marked read. Read receipts visible to FM only.')" style="cursor:pointer">
+        <div class="row between"><strong style="color:var(--ink-900)">📄 Notice · Water shutdown Thu 12 Jun</strong><span class="badge medium">Action: store water</span></div>
+        <div class="muted" style="margin-top:4px">11 AM–2 PM · pump-room valve replacement · tanks refill by 2:30 PM</div>
+        <div class="muted" style="margin-top:6px">✓✓ Read by <strong>86 of 120 units</strong> · sent via app + WhatsApp</div>
+      </div>
+      <div class="m-card" onclick="toast('Notice — Lift 2 restored 9 Jun, 5:40 PM · Kone AMC visit logged')" style="cursor:pointer">
+        <div class="row between"><strong style="color:var(--ink-900)">📄 Notice · Lift 2 back in service</strong><span class="badge resolved">Resolved</span></div>
+        <div class="muted" style="margin-top:4px">Door-sensor replaced under AMC · read by 64 of 120 units</div>
+      </div>
+      <div class="m-card">
+        <div class="row between"><strong style="color:var(--ink-900)">🧘 Event · Rooftop yoga</strong><span class="badge assigned">Sat 13 Jun · 7 AM</span></div>
+        <div class="muted" style="margin:4px 0 8px">Rooftop lounge · instructor from GreenLeaf wellness · mats provided · 18 going</div>
+        <button class="btn primary sm" onclick="toast('RSVP confirmed — reminder on WhatsApp Sat 6:15 AM')">RSVP — I'm in</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 15. DOCUMENTS ============ -->
+  <div id="m-documents" class="m-screen">
+    <div class="m-header">
+      <button class="m-back" onclick="mGo('more','more')">←</button>
+      <h2>Documents</h2>
+    </div>
+    <div class="stack">
+      <div class="m-card" onclick="toast('Society bylaws.pdf downloading — v2, updated Mar 2026')" style="cursor:pointer">
+        <div class="row between"><div class="row"><span style="font-size:20px">📄</span><div><strong style="color:var(--ink-900)">Society bylaws.pdf</strong><div class="muted">2.1 MB · building-wide</div></div></div><span>↓</span></div>
+      </div>
+      <div class="m-card" onclick="toast('AGM minutes May 2026.pdf downloading')" style="cursor:pointer">
+        <div class="row between"><div class="row"><span style="font-size:20px">📄</span><div><strong style="color:var(--ink-900)">AGM minutes May 2026.pdf</strong><div class="muted">640 KB · building-wide</div></div></div><span>↓</span></div>
+      </div>
+      <div class="m-card" onclick="toast('Fire NOC.pdf downloading — valid till Jan 2027')" style="cursor:pointer">
+        <div class="row between"><div class="row"><span style="font-size:20px">📄</span><div><strong style="color:var(--ink-900)">Fire NOC.pdf</strong><div class="muted">1.3 MB · compliance · valid till Jan 2027</div></div></div><span>↓</span></div>
+      </div>
+      <div class="m-card" onclick="toast('My agreement.pdf — OTP verification required for private docs (DPDP)')" style="cursor:pointer">
+        <div class="row between"><div class="row"><span style="font-size:20px">🔒</span><div><strong style="color:var(--ink-900)">My agreement.pdf</strong><div class="muted">4.8 MB · <span class="badge neutral">Private — Unit 304 only</span></div></div></div><span>↓</span></div>
+      </div>
+    </div>
+    <div class="m-card" style="margin-top:12px">
+      <div class="muted">🛡 <strong>DPDP-compliant access log:</strong> every open/download of your private documents is logged with who, when and why. <a href="#" onclick="toast('Access log — last access: you, 2 Jun, 9:14 PM');return false">View my access log</a></div>
+    </div>
+  </div>
+
+  <!-- ============ 16. SOS ============ -->
+  <div id="m-sos" class="m-screen">
+    <div class="m-header">
+      <button class="m-back" onclick="mGo('home','home')">←</button>
+      <h2>Emergency SOS</h2>
+      <span class="badge medium">Test mode</span>
+    </div>
+    <div class="field">
+      <label>Emergency type</label>
+      <div class="cat-grid" style="grid-template-columns:repeat(2,1fr)">
+        <div class="cat-tile on" onclick="pickCat(this)"><span class="ico">🚑</span>Medical</div>
+        <div class="cat-tile" onclick="pickCat(this)"><span class="ico">🔥</span>Fire</div>
+        <div class="cat-tile" onclick="pickCat(this)"><span class="ico">🛡</span>Security</div>
+        <div class="cat-tile" onclick="pickCat(this)"><span class="ico">🛗</span>Lift stuck</div>
+      </div>
+    </div>
+    <button class="sos-btn" onclick="toast('SOS drill sent to Gate 1 + FM on-duty')">SOS</button>
+    <div class="m-card" style="margin-bottom:12px">
+      <div class="muted">Pressing SOS alerts <strong>Gate 1 guard (Vijay Singh) + FM on-duty + 2 designated neighbours</strong> in <strong>&lt;5 seconds</strong> — app push, WhatsApp and an automated voice call, with your unit number and location.</div>
+    </div>
+    <div class="m-card">
+      <div class="row between">
+        <div class="muted"><strong>Test mode is ON</strong> — alerts are marked as DRILL. Your society runs a monthly drill on the 1st.</div>
+        <span class="chip on" onclick="toggleChip(this);toast('Test mode toggled — live SOS now armed')">Drill</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 17. MORE / PROFILE ============ -->
+  <div id="m-more" class="m-screen">
+    <div class="m-header">
+      <h2>More</h2>
+    </div>
+    <div class="intro-bar"><span class="ib-ico">☰</span><div>Everything else about living here — <b>parking, parcels, staff, documents, voting</b> — one tap deep from this list.</div></div>
+    <div class="m-card" style="margin-bottom:12px">
+      <div class="row">
+        <span class="photo-stub" style="border-radius:50%">🧑</span>
+        <div>
+          <strong style="color:var(--ink-900)">Rohan Mehta</strong>
+          <div class="muted">Unit 304 · VD Commercial · +91 98XXX 12304</div>
+          <div class="muted">Occupant since Feb 2026 · autopay: not set</div>
+        </div>
+      </div>
+    </div>
+    <!-- multi-home switcher (v0.3) -->
+    <div class="m-card" style="margin-bottom:12px">
+      <div class="panel-title" style="font-size:14px">🏠 My homes</div>
+      <div class="list-row" style="padding:8px 0">
+        <div style="flex:1"><strong style="color:var(--ink-900)">VD Commercial — Unit 304</strong><div class="muted">Vesu, Surat · this view</div></div>
+        <span class="badge resolved">Active</span>
+      </div>
+      <div class="list-row" style="padding:8px 0;cursor:pointer" onclick="toast('Switched to Reneev Heights — Flat 1203 · pre-handover view (demo)')">
+        <div style="flex:1">
+          <strong style="color:var(--ink-900)">Reneev Heights — Flat 1203</strong>
+          <div class="muted">Pre-handover · handover progress 12%</div>
+          <div class="prog" style="margin-top:6px"><div style="width:12%"></div></div>
+        </div>
+        <span class="badge pending">Switch →</span>
+      </div>
+      <button class="btn ghost sm" style="margin-top:6px" onclick="toast('Snag walkthrough requested — Flat 1203, Aug window · builder confirms slot on WhatsApp')">Book snag walkthrough (Aug)</button>
+    </div>
+    <div class="crosslink" onclick="window.location='builder.html#snag-detail'" style="cursor:pointer;margin-bottom:12px">
+      ⛓ <strong>My handover snags (2)</strong> — SNG-231 tile crack (cabin area): fix committed <strong>14 Jun</strong> by Shree Flooring Co. This is the Builder module's snag — same record, zero re-entry. <strong>Open in Builder →</strong>
+    </div>
+    <div class="stack">
+      <div class="m-card" onclick="toast('Family & team members — Anita Mehta (co-occupant), Mehul Shah (office manager) · both have app access')" style="cursor:pointer">
+        <div class="row between"><strong style="color:var(--ink-900)">👨‍👩‍👧 Members on this unit (3)</strong><span>→</span></div>
+      </div>
+      <div class="m-card" onclick="mGo('parking','more')" style="cursor:pointer">
+        <div class="row between"><div><strong style="color:var(--ink-900)">🅿️ Parking &amp; vehicles</strong><div class="muted">GJ-05-RX-3041 · slots B1-42, B1-43 · EV charger pending</div></div><span>→</span></div>
+      </div>
+      <div class="m-card" onclick="mGo('parcels','more')" style="cursor:pointer">
+        <div class="row between"><div><strong style="color:var(--ink-900)">📦 Parcels at gate</strong><div class="muted">1 waiting — BlueDart · collect with OTP 4417</div></div><span class="badge pending">1</span></div>
+      </div>
+      <div class="m-card" onclick="mGo('movein','more')" style="cursor:pointer">
+        <div class="row between"><strong style="color:var(--ink-900)">🚚 Move-in / move-out</strong><span>→</span></div>
+      </div>
+      <div class="m-card" onclick="mGo('voting','more')" style="cursor:pointer">
+        <div class="row between"><div><strong style="color:var(--ink-900)">🗳 AGM &amp; voting</strong><div class="muted">AGM 28 Jun · e-voting opens 26 Jun</div></div><span>→</span></div>
+      </div>
+      <div class="m-card" onclick="mGo('meters','more')" style="cursor:pointer">
+        <div class="row between"><div><strong style="color:var(--ink-900)">💧 Prepaid water meter</strong><div class="muted">Balance ₹420 · ≈9 days left</div></div><span class="badge medium">Low</span></div>
+      </div>
+      <div class="m-card" onclick="mGo('intercom','more')" style="cursor:pointer">
+        <div class="row between"><strong style="color:var(--ink-900)">📞 Intercom — masked calls</strong><span>→</span></div>
+      </div>
+      <div class="m-card">
+        <div class="row between">
+          <strong style="color:var(--ink-900)">🌐 Language</strong>
+          <div class="filter-chips">
+            <span class="chip on" onclick="toast('Language: English')">EN</span>
+            <span class="chip" onclick="toast('भाषा बदली — हिंदी (demo)')">HI</span>
+            <span class="chip" onclick="toast('ભાષા બદલાઈ — ગુજરાતી (demo)')">GU</span>
+          </div>
+        </div>
+      </div>
+      <div class="m-card" onclick="mGo('documents','more')" style="cursor:pointer">
+        <div class="row between"><strong style="color:var(--ink-900)">📁 My unit documents</strong><span>→</span></div>
+      </div>
+      <div class="m-card" onclick="mGo('amenities','more')" style="cursor:pointer">
+        <div class="row between"><strong style="color:var(--ink-900)">🏋️ Amenities & bookings</strong><span>→</span></div>
+      </div>
+      <div class="m-card" onclick="mGo('staff','more')" style="cursor:pointer">
+        <div class="row between"><div><strong style="color:var(--ink-900)">🧹 My staff</strong><div class="muted">Ravi in since 9:02 AM</div></div><span>→</span></div>
+      </div>
+      <div class="m-card" onclick="mGo('community','more')" style="cursor:pointer">
+        <div class="row between"><strong style="color:var(--ink-900)">📣 Community & notices</strong><span>→</span></div>
+      </div>
+      <div class="m-card" onclick="mGo('helpdesk','more')" style="cursor:pointer">
+        <div class="row between"><strong style="color:var(--ink-900)">💬 FM helpdesk chat</strong><span>→</span></div>
+      </div>
+      <div class="m-card" onclick="mGo('sos','more')" style="cursor:pointer">
+        <div class="row between"><strong style="color:var(--ink-900)">🆘 SOS & emergency contacts</strong><span>→</span></div>
+      </div>
+      <div class="m-card" onclick="toast('Logged out (demo) — session ends, biometric re-login next time')" style="cursor:pointer">
+        <div class="row between"><strong style="color:var(--danger)">Logout</strong><span>→</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 18. PARKING (v0.3) ============ -->
+  <div id="m-parking" class="m-screen">
+    <div class="m-header">
+      <button class="m-back" onclick="mGo('more','more')">←</button>
+      <h2>Parking</h2>
+    </div>
+    <div class="m-card" style="margin-bottom:12px">
+      <div class="panel-title" style="font-size:14px">My slots — Basement 1</div>
+      <div class="list-row" style="padding:8px 0">
+        <div style="flex:1"><strong style="color:var(--ink-900)">🅿️ B1-42</strong><div class="muted">GJ-05-RX-3041 · ANPR fast lane · RFID sticker on file</div></div>
+        <span class="badge resolved">My vehicle</span>
+      </div>
+      <div class="list-row" style="padding:8px 0">
+        <div style="flex:1"><strong style="color:var(--ink-900)">🅿️ B1-43</strong><div class="muted">Second slot · EV charger installation requested 4 Jun</div></div>
+        <span class="badge pending" onclick="toast('EV charger request — FM checking DB load on B1 feeder · decision by 15 Jun')" style="cursor:pointer">EV charger pending</span>
+      </div>
+    </div>
+    <div class="crosslink" onclick="mGo('visitors','visitors')" style="cursor:pointer;margin-bottom:12px">
+      ⛓ Visitor slot <strong>V-12</strong> auto-assigned to gate pass <strong>482917</strong> (Suresh Kumar, courier, ~2:30 PM today). Guard sees the same slot when he scans the pass. <strong>Open Visitors →</strong>
+    </div>
+    <div class="m-card" style="margin-bottom:12px">
+      <div class="row between">
+        <div><div class="muted">Visitor bays free now — Basement 1</div><strong style="color:var(--ink-900)">2 of 6</strong></div>
+        <button class="btn secondary sm" onclick="toast('Bay V-4 reserved for 2 hours — code shared with Gate 1')">Reserve a bay</button>
+      </div>
+    </div>
+    <button class="btn primary block" onclick="toast('Request sent — additional-slot waitlist position 3 · FM replies in 2 working days')">Request additional slot</button>
+  </div>
+
+  <!-- ============ 19. PARCELS (v0.3) ============ -->
+  <div id="m-parcels" class="m-screen">
+    <div class="m-header">
+      <button class="m-back" onclick="mGo('more','more')">←</button>
+      <h2>Parcels at gate</h2>
+      <span class="badge pending">1 waiting</span>
+    </div>
+    <div class="m-card" style="margin-bottom:12px">
+      <div class="row between">
+        <strong style="color:var(--ink-900)">📦 BlueDart · Unit 304</strong>
+        <span class="badge pending">At gate</span>
+      </div>
+      <div class="muted" style="margin:4px 0 8px">Received today 1:42 PM by <strong>Vijay Singh</strong>, Gate 1 · photo logged at intake</div>
+      <div class="row" style="margin-bottom:10px">
+        <span class="photo-stub" onclick="toast('Parcel photo — BlueDart box, AWB ending 8821, logged at Gate 1')">🖼</span>
+      </div>
+      <div class="gatepass">
+        <div style="font-size:12px;opacity:.8">PARCEL COLLECTION · GATE 1</div>
+        <strong>Collect with OTP</strong>
+        <div class="code">4 4 1 7</div>
+        <div style="font-size:12px;opacity:.85">Any Unit 304 member can collect — guard verifies the OTP, no signatures</div>
+      </div>
+      <button class="btn wa block" style="margin-top:10px" onclick="toast('Reminder re-sent on WhatsApp — OTP 4417 shared with all Unit 304 members')">Notify me again on WhatsApp</button>
+    </div>
+    <div class="panel-title" style="font-size:14px">History</div>
+    <div class="m-card" onclick="toast('Amazon parcel — collected 9 Jun, 6:05 PM by you · OTP verified at gate')" style="cursor:pointer">
+      <div class="row between">
+        <div><strong style="color:var(--ink-900)">📦 Amazon</strong><div class="muted">Collected yesterday, 6:05 PM · OTP verified at gate</div></div>
+        <span class="badge done">Collected</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 20. MOVE-IN / MOVE-OUT (v0.3) ============ -->
+  <div id="m-movein" class="m-screen">
+    <div class="m-header">
+      <button class="m-back" onclick="mGo('more','more')">←</button>
+      <h2>Move-in / move-out</h2>
+    </div>
+    <div class="m-card" style="margin-bottom:12px">
+      <strong style="color:var(--ink-900)">Planning to move out?</strong>
+      <div class="muted" style="margin-top:4px">Brij runs the whole checklist — society NOC, dues clearance, mover gate pass and final meter reading — so your deposit refund is never stuck in paperwork.</div>
+    </div>
+    <div class="m-card" style="margin-bottom:12px">
+      <div class="row between">
+        <strong style="color:var(--ink-900)">How it runs · Unit 511 tenant move-out</strong>
+        <span class="badge progress">30 Jun</span>
+      </div>
+      <div class="divider" style="margin:8px 0"></div>
+      <div class="alert-row"><span class="alert-dot" style="background:var(--success)"></span><div><strong>Society NOC</strong> — approved by managing committee 8 Jun</div></div>
+      <div class="alert-row"><span class="alert-dot" style="background:var(--danger)"></span><div><strong>Dues clearance</strong> — ₹3,400 pending on ledger (blocks refund, see below)</div></div>
+      <div class="alert-row"><span class="alert-dot" style="background:var(--success)"></span><div><strong>Mover gate pass</strong> — issued for 30 Jun, 9 AM–1 PM · service lift reserved</div></div>
+      <div class="alert-row"><span class="alert-dot" style="background:var(--warning)"></span><div><strong>Meter reading photo</strong> — guard app captures it on move-out day</div></div>
+    </div>
+    <div class="m-card" style="margin-bottom:12px;border-color:var(--danger);background:var(--danger-50)">
+      <strong style="color:var(--danger)">⚠ Deposit refund blocked</strong>
+      <div class="muted" style="margin-top:4px">Unit 511 has <strong>₹3,400</strong> dues pending. The security-deposit refund releases automatically the moment the ledger clears — no FM chasing, no disputes at the gate.</div>
+    </div>
+    <button class="btn primary block" onclick="toast('Move-out request started for Unit 304 — checklist created · FM and Gate 1 notified')">Start a move-out request</button>
+    <div class="muted" style="margin-top:10px;text-align:center">Move-in works the same way — NOC, deposit, mover pass and meter baseline in one flow.</div>
+  </div>
+
+  <!-- ============ 21. AGM & VOTING (v0.3) ============ -->
+  <div id="m-voting" class="m-screen">
+    <div class="m-header">
+      <button class="m-back" onclick="mGo('more','more')">←</button>
+      <h2>AGM &amp; voting</h2>
+      <span class="badge live">AGM 28 Jun</span>
+    </div>
+    <div class="m-card" style="margin-bottom:12px">
+      <div class="row between">
+        <div><strong style="color:var(--ink-900)">🗳 e-voting opens 26 Jun</strong><div class="muted">Vote from the app — no proxy forms, no paper ballots</div></div>
+        <span class="badge pending">16 days to go</span>
+      </div>
+    </div>
+    <div class="m-card" style="margin-bottom:12px">
+      <div class="panel-title" style="font-size:14px">Agenda · AGM Sun 28 Jun 2026, 10 AM · rooftop lounge</div>
+      <div class="alert-row"><span class="alert-dot" style="background:var(--teal-500)"></span><div>1. Adoption of FY 2025-26 audited accounts (M/s Desai &amp; Co)</div></div>
+      <div class="alert-row"><span class="alert-dot" style="background:var(--teal-500)"></span><div>2. CAM rate revision proposal — effective Oct 2026</div></div>
+      <div class="alert-row"><span class="alert-dot" style="background:var(--teal-500)"></span><div>3. Election of Honorary Secretary — secret ballot (below)</div></div>
+      <div class="alert-row"><span class="alert-dot" style="background:var(--teal-500)"></span><div>4. Lift 1 &amp; 2 AMC renewal — Kone AMC expires 30 Jun</div></div>
+    </div>
+    <div class="m-card" style="margin-bottom:12px">
+      <div class="panel-title" style="font-size:14px">Secretary election · secret ballot</div>
+      <div class="muted" style="margin-bottom:8px">One vote per unit. Ballots are anonymous — nobody, including FM, can see who voted for whom.</div>
+      <div class="list-row" style="padding:8px 0">
+        <div style="flex:1"><strong style="color:var(--ink-900)">Meera Desai</strong><div class="muted">Unit 1108 · current treasurer</div></div>
+        <button class="btn secondary sm" onclick="toast('Vote recorded · anonymous ballot')">Vote</button>
+      </div>
+      <div class="list-row" style="padding:8px 0">
+        <div style="flex:1"><strong style="color:var(--ink-900)">Arjun Khanna</strong><div class="muted">Unit 502 · committee member since 2026</div></div>
+        <button class="btn secondary sm" onclick="toast('Vote recorded · anonymous ballot')">Vote</button>
+      </div>
+      <div class="list-row" style="padding:8px 0">
+        <div style="flex:1"><strong style="color:var(--ink-900)">Priya Nair</strong><div class="muted">Unit 909 · first-time candidate</div></div>
+        <button class="btn secondary sm" onclick="toast('Vote recorded · anonymous ballot')">Vote</button>
+      </div>
+    </div>
+    <div class="m-card">
+      <div class="row between" style="margin-bottom:6px">
+        <strong style="color:var(--ink-900)">Quorum tracker</strong>
+        <span class="badge medium">41 / 120 units</span>
+      </div>
+      <div class="prog warn"><div style="width:34%"></div></div>
+      <div class="muted" style="margin-top:6px">Quorum needs 61 units (50% + 1). Reminders auto-go on WhatsApp at 20, 7 and 1 day before the AGM.</div>
+    </div>
+  </div>
+
+  <!-- ============ 22. PREPAID METER (v0.3) ============ -->
+  <div id="m-meters" class="m-screen">
+    <div class="m-header">
+      <button class="m-back" onclick="mGo('more','more')">←</button>
+      <h2>Prepaid water meter</h2>
+      <span class="badge neutral">WeGot</span>
+    </div>
+    <div class="m-card" style="margin-bottom:12px">
+      <div class="muted">Unit 304 · meter WG-304-A · live reading every 15 min</div>
+      <div style="font-family:var(--display);font-size:28px;font-weight:800;color:var(--ink-900);margin:4px 0">₹420</div>
+      <div class="prog warn" style="margin-bottom:6px"><div style="width:28%"></div></div>
+      <div class="muted">≈ <strong>9 days</strong> left at current usage · valve auto-restricts at ₹0, never a surprise bill</div>
+      <div class="row" style="margin-top:10px">
+        <button class="btn primary sm" style="flex:1" onclick="toast('Recharge ₹500 via UPI — meter credits in under a minute · receipt on WhatsApp')">Recharge ₹500</button>
+        <button class="btn secondary sm" style="flex:1" onclick="toast('Recharge ₹1,000 via UPI — meter credits in under a minute · receipt on WhatsApp')">Recharge ₹1,000</button>
+      </div>
+    </div>
+    <div class="m-card" style="margin-bottom:12px">
+      <div class="row between" style="margin-bottom:6px">
+        <strong style="color:var(--ink-900)">Last month · May 2026</strong>
+        <span class="badge resolved">14.2 KL</span>
+      </div>
+      <div class="spark"><i style="height:10px"></i><i style="height:14px"></i><i style="height:12px"></i><i style="height:18px"></i><i style="height:9px"></i><i style="height:15px"></i><i style="height:20px"></i><i style="height:13px"></i><i style="height:11px"></i><i style="height:16px"></i><i style="height:22px"></i><i style="height:14px"></i></div>
+      <div class="muted" style="margin-top:6px">Daily draw, last 12 days · spike on 30 May (pantry deep-clean). Building average: 16.8 KL/unit.</div>
+    </div>
+    <div class="m-card">
+      <div class="muted">⚡ <strong>Low-balance nudge:</strong> a WhatsApp alert goes at ₹200 with a one-tap recharge link. Auto-recharge from your UPI mandate — <span class="badge neutral">Coming · Phase 2</span></div>
+    </div>
+  </div>
+
+  <!-- ============ 23. INTERCOM (v0.3) ============ -->
+  <div id="m-intercom" class="m-screen">
+    <div class="m-header">
+      <button class="m-back" onclick="mGo('more','more')">←</button>
+      <h2>Intercom</h2>
+      <span class="badge resolved">Masked</span>
+    </div>
+    <div class="cat-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:12px">
+      <div class="cat-tile" onclick="toast('Calling Gate 1 (Vijay Singh) via masked bridge — numbers hidden both ways')"><span class="ico">🛡</span>Gate 1</div>
+      <div class="cat-tile" onclick="toast('Calling FM desk (Lakshmi) via masked bridge — numbers hidden both ways')"><span class="ico">💬</span>FM desk</div>
+      <div class="cat-tile" onclick="toast('Calling driver of expected cab via masked bridge — numbers hidden both ways')"><span class="ico">🚕</span>Driver</div>
+    </div>
+    <div class="m-card" style="margin-bottom:12px">
+      <div class="muted">🔒 <strong>Numbers hidden both ways.</strong> Calls bridge through a masked Brij number — the guard never sees your phone number and you never see his. <strong>No data at the gate?</strong> The IVR line 0261-4XX-1100 routes to the same masked bridge.</div>
+    </div>
+    <div class="panel-title" style="font-size:14px">Recent calls</div>
+    <div class="stack">
+      <div class="m-card" onclick="toast('Call log — Gate 1, today 1:43 PM, 40 sec · parcel intake confirmation')" style="cursor:pointer">
+        <div class="row between"><div><strong style="color:var(--ink-900)">🛡 Gate 1 · incoming</strong><div class="muted">Today 1:43 PM · 40 sec · parcel at gate</div></div><span class="badge done">Answered</span></div>
+      </div>
+      <div class="m-card" onclick="toast('Call log — FM desk, 9 Jun 10:01 AM, 1 min 20 sec · water shutdown query')" style="cursor:pointer">
+        <div class="row between"><div><strong style="color:var(--ink-900)">💬 FM desk · outgoing</strong><div class="muted">9 Jun 10:01 AM · 1 min 20 sec</div></div><span class="badge done">Answered</span></div>
+      </div>
+      <div class="m-card" onclick="toast('Missed call — Gate 1, 9 Jun 2:31 PM · you approved the visitor from the push notification instead')" style="cursor:pointer">
+        <div class="row between"><div><strong style="color:var(--ink-900)">🛡 Gate 1 · incoming</strong><div class="muted">9 Jun 2:31 PM · visitor approval</div></div><span class="badge overdue">Missed</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ BOTTOM TABS ============ -->
+  <div class="bottom-tabs">
+    <button id="tab-home" class="active" onclick="mGo('home','home')"><span class="ico">🏠</span>Home</button>
+    <button id="tab-services" onclick="mGo('complaints','services')"><span class="ico">🛠</span>Services</button>
+    <button id="tab-visitors" onclick="mGo('visitors','visitors')"><span class="ico">👥</span>Visitors</button>
+    <button id="tab-pay" onclick="mGo('pay','pay')"><span class="ico">₹</span>Pay</button>
+    <button id="tab-more" onclick="mGo('more','more')"><span class="ico">☰</span>More</button>
+  </div>
+</div>
+
+<!-- ============ ANNOTATION PANEL ============ -->
+<div class="annot">
+  <span class="layer-chip">Resident App · Mobile</span>
+  <h4>What this module is</h4>
+  <ul>
+    <li><strong>One app for the occupant:</strong> complaints with live SLA, gate passes, payments + ledger, amenities, staff attendance, community, documents, SOS.</li>
+    <li>Everything is the <strong>same record</strong> the FM, Builder, Vendor and Guard screens see — no re-entry, no WhatsApp-group chaos.</li>
+    <li>Persona: Rohan Mehta, Unit 304, VD Commercial (Vesu, Surat).</li>
+  </ul>
+  <h4>3 best things to click</h4>
+  <ul>
+    <li><strong>T-1042 card on Home</strong> → live timeline with AI triage (92%), technician check-in, and the ⛓ AHU-02 / SNG-218 crosslink into FM &amp; Builder.</li>
+    <li><strong>Visitors → Today</strong> → gate pass 482917 with QR + WhatsApp share; then "Pre-approve" to create pass 581204.</li>
+    <li><strong>Pay → Full ledger</strong> → running statement with a failed-UPI retry row and a waived late fee — collections logic builders ask about.</li>
+  </ul>
+  <h4>Phase notes</h4>
+  <ul>
+    <li><strong>Phase 1:</strong> ships as a PWA — no app-store install; gate pass, notices and receipts also flow over <strong>WhatsApp-first</strong> notifications.</li>
+    <li><strong>Phase 1:</strong> Razorpay UPI + e-mandate autopay; DPDP-compliant document access logs.</li>
+    <li><strong>Phase 2:</strong> IoT tie-ins (lift status, water/energy meters on Home) — teased, not built here.</li>
+  </ul>
+  <h4>Post-research additions</h4>
+  <ul>
+    <li>Competitive teardown (MyGate, ADDA, NoBrokerHood) flagged 7 <strong>table-stakes gaps</strong> — pilot societies expect these on day one, so they are all here, reachable from <strong>More</strong>:</li>
+    <li><strong>Parking</strong> — slots B1-42/43, EV charger request, visitor slot V-12 ⛓-linked to gate pass 482917.</li>
+    <li><strong>Parcels at gate</strong> — guard-logged photo intake + OTP 4417 collection (kills the "where is my courier" call).</li>
+    <li><strong>Move-in/out</strong> — NOC + mover pass + meter photo; dues of ₹3,400 blocking a deposit refund is the edge state.</li>
+    <li><strong>AGM &amp; e-voting</strong> — agenda, secret-ballot Secretary election, quorum tracker 41/120.</li>
+    <li><strong>Prepaid water meter</strong> (WeGot) — ₹420 balance, one-tap recharge.</li>
+    <li><strong>Masked intercom</strong> — gate/FM/driver calls, numbers hidden both ways, IVR fallback.</li>
+    <li><strong>Multi-home switcher</strong> — Flat 1203, Reneev Heights (pre-handover, 12% progress) sells the builder→FM thread to multi-property owners.</li>
+    <li>Parcel + parking also surface as compact cards on Home.</li>
+  </ul>
+  <h4>v0.4 — depth without overwhelm</h4>
+  <ul>
+    <li><strong>Exhaustive problem taxonomy</strong> on New Complaint — <strong>50 everyday problems across 10 categories</strong> (plumbing, electrical, AC, lift, housekeeping, civil, security/parking, amenities, connectivity, billing) folded into <strong>collapsed accordions</strong>. Simple surface, deep catalogue: search box + 4 most-common tiles up top; tap any leaf and category, priority and SLA are set automatically.</li>
+    <li>DLP-aware items (wall crack routes to builder at zero cost), safety escalations (lift-stuck → SOS), and anomaly hints (floors 6–8 water pressure) are baked into the leaf rows.</li>
+    <li><strong>Intro-bars</strong> on Home, Complaints, Visitors, Pay and More — one plain-language line each so a first-time resident never wonders where to start. Home quick-actions now read as the 4 real daily jobs: Raise complaint · Pre-approve visitor · Pay dues · SOS.</li>
+  </ul>
+</div>
+</div>
+
+<script src="brij.js"></script>
+</body>
+</html>

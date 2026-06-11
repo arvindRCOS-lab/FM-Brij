@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brij — Builder</title>
+<link rel="stylesheet" href="brij.css">
+</head>
+<body data-prefix="builder">
+<div class="proto-bar">
+  <a class="proto-logo" href="index.html">brij<span>.</span></a>
+  <div class="proto-tag">Prototype v0.4 · Builder — Snagging &amp; Handover</div>
+  <div class="role-links">
+    <a href="resident.html">Resident</a>
+    <a href="fm.html">FM Manager</a>
+    <a href="builder.html" class="active">Builder</a>
+    <a href="vendor.html">Vendor</a>
+    <a href="guard.html">Guard</a>
+  </div>
+</div>
+
+<div class="shell">
+  <nav class="sidebar ink">
+    <div class="s-brand">brij<span style="color:#7FCFCB">.</span></div>
+    <div class="s-building">Reneev Developers · Builder PM<br>Aditya Reneev</div>
+    <button id="builder-nav-portfolio" class="active" onclick="dGo('builder','portfolio','portfolio')">🏗 Portfolio</button>
+    <div class="s-section">VD Commercial · DLP</div>
+    <button id="builder-nav-handover" onclick="dGo('builder','handover','handover')">📋 Handover</button>
+    <button id="builder-nav-vault" onclick="dGo('builder','vault','vault')">📁 O&amp;M Vault</button>
+    <button id="builder-nav-rwa" onclick="dGo('builder','rwa','rwa')">🏛 RWA Handover</button>
+    <button id="builder-nav-snags" onclick="dGo('builder','snags','snags')">🔧 Snags</button>
+    <button id="builder-nav-floorplan" onclick="dGo('builder','floorplan','floorplan')">📍 Floor plan</button>
+    <button id="builder-nav-walkthrough" onclick="dGo('builder','walkthrough','walkthrough')">🚶 Walkthrough mode</button>
+    <button id="builder-nav-possession" onclick="dGo('builder','possession','possession')">🔑 Possession kit</button>
+    <div class="s-section">Reneev Heights · Pre-handover</div>
+    <button id="builder-nav-stagegate" onclick="dGo('builder','stagegate','stagegate')">🚧 Stage-gate QA</button>
+    <div class="s-section">Accountability</div>
+    <button id="builder-nav-subcons" onclick="dGo('builder','subcons','subcons')">👷 Subcontractors</button>
+    <button id="builder-nav-recovery" onclick="dGo('builder','recovery','recovery')">₹ DLP Recovery</button>
+    <button id="builder-nav-analytics" onclick="dGo('builder','analytics','analytics')">📈 Analytics</button>
+    <div class="s-section">Coming · Phase 2</div>
+    <button id="builder-nav-dlp-bot" onclick="dGo('builder','dlp-bot','dlp-bot')">💬 WhatsApp DLP bot</button>
+    <div class="s-foot">Project: VD Commercial<br>DLP ends Jan 2027</div>
+  </nav>
+
+  <main class="d-main">
+
+  <!-- ============ 1. PORTFOLIO ============ -->
+  <div id="builder-portfolio" class="d-screen active">
+    <div class="d-head">
+      <div>
+        <span class="eyebrow">Builder · Portfolio</span>
+        <h1>Portfolio</h1>
+        <div class="sub">Reneev Developers · 3 projects · Wed 10 Jun 2026</div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" onclick="dGo('builder','analytics','analytics')">Cross-project analytics</button>
+        <button class="btn primary" onclick="toast('New project onboarding wizard — Phase 2')">+ Add project</button>
+      </div>
+    </div>
+
+    <div class="intro-bar"><span class="ib-ico">🏗</span><div>Your three projects at a glance — open snags, recovery money and handover progress. Start with <b>VD Commercial</b>, the project in its defect-liability year.</div></div>
+
+    <div class="three-col">
+      <div class="card">
+        <div class="row between">
+          <h3 style="font-size:17px">VD Commercial</h3>
+          <span class="badge open">In DLP</span>
+        </div>
+        <div class="muted" style="margin:2px 0 14px">Vesu, Surat · 120 units · 14 floors + 2 basements · Handover Jan 2026 · DLP ends Jan 2027</div>
+        <div class="stack" style="gap:10px">
+          <div>
+            <div class="row between" style="font-size:12px"><span>Handover checklist</span><b>78% (47/60)</b></div>
+            <div class="prog"><div style="width:78%"></div></div>
+          </div>
+          <div class="row between" style="font-size:13px"><span>Open snags</span><span><b>14</b> · <span class="badge disputed">3 disputed</span></span></div>
+          <div class="row between" style="font-size:13px"><span>Recovery pipeline</span><b>₹4.6L</b></div>
+          <div class="row between" style="font-size:13px"><span>O&amp;M vault</span><a href="javascript:void(0)" onclick="dGo('builder','vault','vault')" style="font-weight:600">30/34 documents →</a></div>
+        </div>
+        <div class="divider"></div>
+        <div class="row">
+          <button class="btn primary sm" onclick="dGo('builder','snags','snags')">Snag register</button>
+          <button class="btn secondary sm" onclick="dGo('builder','handover','handover')">Handover checklist</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="row between">
+          <h3 style="font-size:17px">Reneev Heights</h3>
+          <span class="badge pending">Pre-handover</span>
+        </div>
+        <div class="muted" style="margin:2px 0 14px">Residential · 240 units · 2 towers · Handover starts Aug 2026</div>
+        <div class="stack" style="gap:10px">
+          <div>
+            <div class="row between" style="font-size:12px"><span>Pre-handover checklist</span><b>12%</b></div>
+            <div class="prog warn"><div style="width:12%"></div></div>
+          </div>
+          <div class="row between" style="font-size:13px"><span>OC status</span><span class="badge progress">OC applied</span></div>
+          <div class="row between" style="font-size:13px"><span>Stage-gate QA</span><a href="javascript:void(0)" onclick="dGo('builder','stagegate','stagegate')" style="font-weight:600"><span class="badge live">Live</span> Tower A · waterproofing →</a></div>
+          <div class="row between" style="font-size:13px"><span>Walkthrough slots</span><span class="muted">Opens Jul 2026</span></div>
+        </div>
+        <div class="divider"></div>
+        <div class="row">
+          <button class="btn secondary sm" onclick="toast('Reneev Heights pre-handover plan opened — 240 unit walkthroughs to schedule from Aug')">Pre-handover plan</button>
+          <button class="btn ghost sm" onclick="dGo('builder','subcons','subcons')">Tender with data</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="row between">
+          <h3 style="font-size:17px">Aspen Medicity</h3>
+          <span class="badge neutral">Onboarding</span>
+        </div>
+        <div class="muted" style="margin:2px 0 14px">Hospital · Asset register &amp; statutory docs being digitised</div>
+        <div class="empty-state" style="padding:24px 12px">
+          <span class="ico">🏥</span>
+          No snag or handover data yet.<br>Asset QR-tagging starts 18 Jun 2026.
+          <div style="margin-top:12px"><button class="btn ghost sm" onclick="toast('Onboarding checklist shared with Aspen site team on WhatsApp')">View onboarding plan</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="crosslink" style="margin-top:20px">⛓ Every snag closed here becomes permanent asset history in the <b>FM module</b> — e.g. SNG-218 (AHU-02 condensate drain) already shows on AHU-02's service record at UrbanServe. Your DLP data outlives the DLP.</div>
+    <div class="muted" style="margin-top:10px;font-size:12px">Positioning note: others claim handover continuity — Brij is the only <b>AI-native</b> handover thread <b>with money attached</b>: OTP-verified sign-off, DLP recovery ledger, marketplace payouts, Indian statutory engine. We win on execution, not exclusivity.</div>
+  </div>
+
+  <!-- ============ 2. HANDOVER ============ -->
+  <div id="builder-handover" class="d-screen">
+    <div class="d-head">
+      <div>
+        <span class="eyebrow">Builder · Handover</span>
+        <h1>Handover checklist — VD Commercial</h1>
+        <div class="sub">60-item master checklist · statutory + asset docs + unit handover + common areas</div>
+      </div>
+      <div class="actions">
+        <button class="btn wa" onclick="toast('Handover status summary sent to buyer association group on WhatsApp')">WhatsApp status to association</button>
+        <button class="btn primary" onclick="toast('Handover pack PDF generated — 47 completed items with evidence, queued for buyer association')">Export PDF for buyer association</button>
+      </div>
+    </div>
+
+    <div class="intro-bar"><span class="ib-ico">📋</span><div>The master checklist that becomes the signed handover pack. Clear the <b>13 open items</b> before the AGM on 15 Jul — every tick is timestamped with evidence.</div></div>
+
+    <div class="card" style="margin-bottom:20px">
+      <div class="row between" style="margin-bottom:8px">
+        <b>Overall completion</b>
+        <span style="font-family:var(--display);font-weight:800;font-size:22px;color:var(--ink-900)">78% <span class="muted" style="font-size:13px;font-weight:500">47 of 60 items</span></span>
+      </div>
+      <div class="prog"><div style="width:78%"></div></div>
+      <div class="muted" style="margin-top:8px">12 pending · 1 rejected · Target: full handover sign-off before AGM, 15 Jul 2026</div>
+    </div>
+
+    <div class="two-col">
+      <div class="stack" style="gap:16px">
+        <div class="card">
+          <div class="row between"><h3 class="panel-title" style="margin-bottom:0">Statutory</h3><span class="badge assigned">10/12</span></div>
+          <div class="list-row">
+            <span class="badge done">Done</span>
+            <div style="flex:1"><b>Occupancy Certificate (OC)</b><div class="muted">SMC final OC received 28 Dec 2025 · evidence attached</div></div>
+            <button class="btn ghost sm" onclick="toast('OC certificate PDF opened — SMC/OC/2025/8841')">View evidence</button>
+          </div>
+          <div class="list-row">
+            <span class="badge done">Done</span>
+            <div style="flex:1"><b>Fire NOC</b><div class="muted">Gujarat Fire Services · valid till Dec 2030</div></div>
+            <button class="btn ghost sm" onclick="toast('Fire NOC certificate opened')">View evidence</button>
+          </div>
+          <div class="list-row">
+            <span class="badge pending">Pending</span>
+            <div style="flex:1"><b>Lift license transfer (Lift 1 &amp; 2, Kone)</b><div class="muted">Application filed · lift inspector visit awaited — follow up with PWD lift inspectorate</div></div>
+            <button class="btn secondary sm" onclick="toast('Reminder logged — liaison team to call lift inspectorate today')">Nudge liaison</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="row between"><h3 class="panel-title" style="margin-bottom:0">Asset documentation</h3><span class="badge assigned">14/16</span></div>
+          <div class="list-row">
+            <span class="badge done">Done</span>
+            <div style="flex:1"><b>186 assets QR-tagged with make/model/warranty</b><div class="muted">AHUs, DG, transformer, pumps, lifts, STP — feeds FM register directly</div></div>
+            <button class="btn ghost sm" onclick="toast('Asset register opened — 186 assets, QR series BRJ-A-0001 to 0186')">Open register</button>
+          </div>
+          <div class="list-row">
+            <span class="badge done">Done</span>
+            <div style="flex:1"><b>DG &amp; transformer test certificates</b><div class="muted">Cummins 500kVA load test + CEIG transformer charging approval</div></div>
+            <button class="btn ghost sm" onclick="toast('DG / transformer certificates opened')">View evidence</button>
+          </div>
+          <div class="list-row">
+            <span class="badge breach">Rejected</span>
+            <div style="flex:1"><b>STP commissioning report (Thermax 50KLD)</b><div class="muted" style="color:var(--danger)">Rejected by FM reviewer — missing inlet/outlet flow readings. Resubmit with 72-hr flow log.</div></div>
+            <button class="btn danger sm" onclick="toast('Resubmission request sent to Thermax commissioning engineer — 72-hr flow log required')">Resubmit</button>
+          </div>
+          <div class="crosslink" style="margin-top:12px">⛓ QR-tagged assets flow straight into the <b>FM module</b> asset register — UrbanServe started PPM schedules on day 1 with zero re-entry.</div>
+        </div>
+
+        <div class="card">
+          <div class="row between"><h3 class="panel-title" style="margin-bottom:0">Unit handover</h3><span class="badge assigned">18/24</span></div>
+          <div class="list-row">
+            <span class="badge progress">112/120</span>
+            <div style="flex:1"><b>Unit walkthroughs with customer sign-off</b><div class="muted">8 pending — customers not yet scheduled</div>
+              <div class="prog" style="margin-top:6px"><div style="width:93%"></div></div>
+            </div>
+            <button class="btn wa sm" onclick="toast('WhatsApp auto-reminder sent to 8 pending customers with booking link')">Auto-remind 8 pending</button>
+          </div>
+          <div class="list-row">
+            <span class="badge done">Done</span>
+            <div style="flex:1"><b>Key + access-card handover log</b><div class="muted">112 units · OTP-verified receipt each</div></div>
+            <button class="btn ghost sm" onclick="toast('Key handover log opened — 112 OTP-verified entries')">View log</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="row between"><h3 class="panel-title" style="margin-bottom:0">Common areas</h3><span class="badge assigned">5/8</span></div>
+          <div class="list-row">
+            <span class="badge pending">Pending</span>
+            <div style="flex:1"><b>Lobby snag-free sign-off</b><div class="muted">SNG-228 (false ceiling panel) blocks sign-off — assign subcon first</div></div>
+            <button class="btn secondary sm" onclick="dGo('builder','snags','snags')">Open lobby snag</button>
+          </div>
+          <div class="list-row">
+            <span class="badge done">Done</span>
+            <div style="flex:1"><b>Basement parking line-marking &amp; signage</b><div class="muted">Verified 2 Jun 2026</div></div>
+            <button class="btn ghost sm" onclick="toast('Sign-off record opened with photos')">View</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack" style="gap:16px">
+        <div class="card">
+          <h3 class="panel-title">Why this checklist matters</h3>
+          <p style="font-size:13px;margin-bottom:10px">Once 60/60 with evidence, the handover pack goes to the buyer association as a signed, immutable record — the single document that prevents "you never gave us the OC copy" disputes 3 years later.</p>
+          <dl class="kv">
+            <dt>Evidence files</dt><dd>312 attached</dd>
+            <dt>Rejected items</dt><dd style="color:var(--danger)">1 (STP report)</dd>
+            <dt>Audit log</dt><dd>Every tick timestamped</dd>
+          </dl>
+        </div>
+        <div class="ai-panel">
+          <b>🤖 AI completion forecast — 86% confidence</b>
+          <p style="font-size:13px;margin:8px 0">At current pace you reach 60/60 by <b>4 Jul 2026</b> — 11 days before the AGM. Lift license transfer is the critical path (govt dependency).</p>
+          <div class="muted">Why: 13 items closed in last 30 days; lift inspectorate median turnaround in Surat is 18 days.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 2b. O&M HANDOVER VAULT (v0.4 — exhaustive doc checklist) ============ -->
+  <div id="builder-vault" class="d-screen">
+    <div class="d-head">
+      <div>
+        <span class="eyebrow">Builder · O&amp;M Vault</span>
+        <h1>O&amp;M Handover Vault — VD Commercial</h1>
+        <div class="sub">34-document structured package · the building's operating manual, versioned with evidence</div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" onclick="dGo('builder','rwa','rwa')">🏛 RWA document checklist</button>
+        <button class="btn primary" onclick="toast('O&amp;M package exported — 30 complete documents, 312 files, indexed PDF + ZIP queued for FM &amp; association')">Export O&amp;M package</button>
+      </div>
+    </div>
+
+    <div class="intro-bar"><span class="ib-ico">📁</span><div>Every certificate, drawing and contract the building needs to run — checked off <b>before</b> handover day. Open a group to see each document; ✓ accepted, ✗ rejected by reviewer, empty box = still pending.</div></div>
+
+    <div class="card" style="margin-bottom:20px">
+      <div class="row between" style="margin-bottom:8px">
+        <b>Package completeness</b>
+        <span style="font-family:var(--display);font-weight:800;font-size:22px;color:var(--ink-900)">30/34 <span class="muted" style="font-size:13px;font-weight:500">documents complete</span></span>
+      </div>
+      <div class="prog warn"><div style="width:88%"></div></div>
+      <div class="muted" style="margin-top:8px">4 open — 2 pending · 1 rejected · 1 partial (as-builts) · vault locks on handover day, append-only after</div>
+    </div>
+
+    <div class="two-col">
+      <div class="stack" style="gap:10px">
+
+        <details class="collapse">
+          <summary>🏛 Statutory approvals <span class="count-pill warn">7 docs · 1 open</span></summary>
+          <div class="c-body">
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Occupancy Certificate (OC)</b><small>SMC final OC · SMC/OC/2025/8841 · received 28 Dec 2025</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Building Use (BU) permission / Completion Certificate</b><small>Surat Municipal Corporation · issued with final OC</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Approved (sanctioned) building plans</b><small>SMC-stamped set · 14 floors + 2 basements · rev D</small></div></div>
+            <div class="check-row"><span class="cbox"></span><div class="c-label"><b>As-built drawings — 10 of 14 floors</b><small style="color:var(--warning)">Floors 11–14 not yet submitted by architect — covers terrace plant deck · chase before handover day</small></div><button class="btn secondary sm" onclick="toast('Reminder sent to architect — floors 11–14 as-builts due before handover day')">Chase</button></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Structural stability certificate</b><small>Structural engineer of record · 22 Dec 2025</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>RERA completion &amp; closure filings</b><small>GujRERA · project completion declared Q4 FY25 · QPR archive attached</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Property-tax assessment</b><small>SMC assessment order · unit-wise apportionment schedule attached</small></div></div>
+          </div>
+        </details>
+
+        <details class="collapse">
+          <summary>🚒 Fire &amp; life safety <span class="count-pill good">3 docs · all clear</span></summary>
+          <div class="c-body">
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Fire NOC</b><small>Gujarat Fire Services · valid till Dec 2030 · renewal flagged to FM compliance calendar</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Fire-fighting layout drawings</b><small>Sprinkler + hydrant + alarm zoning · as-installed set</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Hydrant flow &amp; pressure test log</b><small>All risers ≥ 3.5 kg/cm² at terrace hydrant · witnessed by fire officer</small></div></div>
+          </div>
+        </details>
+
+        <details class="collapse">
+          <summary>⚙️ MEP test certificates <span class="count-pill warn">8 docs · 1 open</span></summary>
+          <div class="c-body">
+            <div class="check-row"><span class="cbox"></span><div class="c-label"><b>Lift license (Lift 1 &amp; 2, Kone)</b><small style="color:var(--warning)">PWD lift inspectorate · application filed, inspector visit awaited — critical path</small></div><button class="btn secondary sm" onclick="dGo('builder','handover','handover')">Track</button></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Lift Form B + third-party load test certificates</b><small>Both lifts passed Dec 2025 · test weights logged</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>DG set CEIG approval (Cummins 500kVA)</b><small>Chief Electrical Inspector to Govt · install + load test</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>DG emission compliance (CPCB norms)</b><small>CPCB IV+ stack-emission test report · annual retest due Dec 2026</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Transformer test report</b><small>Oil BDV + IR values + ratio test · OEM-witnessed</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Electrical CEIG charge permission</b><small>HT/LT charging approval · CEIG-stamped SLD set (6 sheets) attached</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Earthing &amp; lightning-protection test report</b><small>All pits &lt; 1Ω · annual retest due Dec 2026 — flagged to FM</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>HVAC TAB report</b><small>Testing-adjusting-balancing per AHU zone · incl. AHU-02, units 301–312</small></div></div>
+          </div>
+        </details>
+
+        <details class="collapse" open>
+          <summary>💧 Environmental &amp; water <span class="count-pill bad">7 docs · 1 rejected · 1 open</span></summary>
+          <div class="c-body">
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>GPCB consent to operate (STP &amp; DG)</b><small>Gujarat Pollution Control Board · valid till Mar 2031</small></div></div>
+            <div class="check-row"><span class="cbox snag">✗</span><div class="c-label"><b>STP commissioning report (Thermax 50KLD)</b><small style="color:var(--danger)">REJECTED by FM reviewer (Kavita Rao) — missing inlet/outlet flow readings · resubmit with 72-hr flow log · blocks RWA sign-off of STP plant</small></div><button class="btn danger sm" onclick="toast('Resubmission request sent to Thermax commissioning engineer — 72-hr flow log required')">Resubmit</button></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Borewell NOC (CGWA)</b><small>Central Ground Water Authority · abstraction limit 45 KLD · valid till 2028</small></div></div>
+            <div class="check-row"><span class="cbox"></span><div class="c-label"><b>Municipal water connection</b><small style="color:var(--warning)">SMC completion letter awaited — liaison following up this week</small></div><button class="btn secondary sm" onclick="toast('Reminder logged — liaison team to collect SMC completion letter')">Nudge</button></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Drainage connection approval</b><small>SMC drainage dept · connection certificate + invert-level drawing</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Rainwater-harvesting compliance</b><small>4 recharge pits per GDCR · completion photos + percolation test</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Solar net-metering approval</b><small>DGVCL · 40 kWp rooftop · meter sealed Feb 2026 · 11% offset live</small></div></div>
+          </div>
+        </details>
+
+        <details class="collapse">
+          <summary>📜 Warranties, manuals &amp; contracts <span class="count-pill good">6 docs · all clear</span></summary>
+          <div class="c-body">
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Asset warranties — 186 assets</b><small>Make / model / serial / warranty end per asset · QR series BRJ-A-0001–0186 · earliest expiry AHU-02 Mar 2027</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>AMC contracts handover</b><small style="color:var(--warning)">Lifts (Kone) AMC expires 30 Jun — alert live in FM · DG + STP AMCs attached</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>OEM O&amp;M manuals</b><small>Daikin AHUs, Cummins DG, Grundfos pumps, Kone lifts, Thermax STP · 23 documents</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Plumbing &amp; drainage schematics</b><small>Risers, valve charts, booster pump zoning (incl. P-04, floors 6–8)</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Paint &amp; finishes schedule</b><small>Shade codes, tile batches (incl. lot SF-2025-118 — cross-referenced to 3 crack snags), grout specs</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Keys matrix</b><small>Master-key hierarchy · 312 keys mapped to doors · handover log per unit</small></div></div>
+          </div>
+        </details>
+
+        <details class="collapse">
+          <summary>🏦 Society &amp; financial <span class="count-pill good">3 docs · all clear</span></summary>
+          <div class="c-body">
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Society registration certificate</b><small>VD Commercial Owners Association · registered Apr 2026 (RERA timeline ✓)</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Corpus + maintenance account audited statements</b><small>₹1.2Cr corpus schedule + ₹8.7L maintenance a/c · ₹24L audit query tracked in Society handover</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Insurance policies</b><small>CAR policy closed → building &amp; asset insurance transferred to association on handover day</small></div></div>
+          </div>
+        </details>
+
+      </div>
+
+      <div class="stack" style="gap:16px">
+        <div class="card">
+          <h3 class="panel-title">Why a structured vault</h3>
+          <p style="font-size:13px;margin-bottom:10px">Most handovers transfer a cupboard of binders. This vault is indexed by document, versioned, and reviewer-gated — the FM operator rejects what's incomplete (see STP report) <b>before</b> handover day, not 3 years later.</p>
+          <dl class="kv">
+            <dt>Files in vault</dt><dd>312</dd>
+            <dt>Reviewer</dt><dd>Kavita Rao (UrbanServe)</dd>
+            <dt>Rejected</dt><dd style="color:var(--danger)">1 (STP report)</dd>
+            <dt>Lock date</dt><dd>Handover day · append-only after</dd>
+          </dl>
+        </div>
+        <div class="ai-panel">
+          <b>🤖 AI gap scan — 89% confidence</b>
+          <p style="font-size:13px;margin:8px 0">The 4 missing as-built floors (11–14) cover the terrace plant deck — the most service-touched area post-handover. Recommend prioritising these over the SMC water letter.</p>
+          <div class="muted">Why: FM ticket density on comparable buildings is 3× higher for terrace-level plant; as-builts are the top-requested vault document by technicians.</div>
+        </div>
+        <div class="crosslink">⛓ Transfers to <b>FM asset register</b> + <b>RWA</b> on handover day — the golden thread. Every warranty, cert and drawing lands against its asset; the association receives the same indexed pack, not a photocopy bundle.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 2c. RWA SOCIETY HANDOVER (v0.3) ============ -->
+  <div id="builder-rwa" class="d-screen">
+    <div class="d-head">
+      <div>
+        <span class="eyebrow">Builder · Society Handover</span>
+        <h1>Society handover — VD Commercial Owners Association</h1>
+        <div class="sub">Builder → RWA: the legally mandated second handover · RERA + Gujarat society rules</div>
+      </div>
+      <div class="actions">
+        <button class="btn wa" onclick="toast('Handover status summary sent to association committee group on WhatsApp')">WhatsApp status to committee</button>
+        <button class="btn primary" onclick="toast('Status-meeting agenda generated for 18 Jun — corpus query, STP plant &amp; clubhouse sign-off, vault checklist')">Prepare 18 Jun meeting pack</button>
+      </div>
+    </div>
+
+    <div class="intro-bar"><span class="ib-ico">🏛</span><div>The second handover — money, common areas and documents passing from you to the owners' association. The <b>₹24L audit query</b> and STP sign-off are what stand between you and a clean transfer.</div></div>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="s-label">Association registered</div><div class="s-value">Apr 2026</div><div class="s-delta up">RERA: within 3 months of majority booking ✓</div></div>
+      <div class="stat-card"><div class="s-label">Corpus transfer</div><div class="s-value">₹1.2Cr</div><div class="s-delta warn">Reconciliation 80% · ₹24L under audit query</div></div>
+      <div class="stat-card"><div class="s-label">Maintenance a/c balance</div><div class="s-value">₹8.7L</div><div class="s-delta up">Audited statement attached ✓</div></div>
+      <div class="stat-card"><div class="s-label">Common areas signed</div><div class="s-value">4/6</div><div class="s-delta warn">30 days of OC rule — 2 groups pending</div></div>
+    </div>
+
+    <div class="two-col">
+      <div class="stack" style="gap:16px">
+        <div class="card">
+          <div class="row between" style="margin-bottom:8px"><h3 class="panel-title" style="margin-bottom:0">Corpus &amp; accounts transfer</h3><span class="badge pending">80% reconciled</span></div>
+          <div class="prog warn" style="margin-bottom:10px"><div style="width:80%"></div></div>
+          <div class="list-row"><span class="badge done">✓</span><div style="flex:1"><b>Corpus fund ₹1.2Cr — schedule shared with association</b><div class="muted">Unit-wise collection schedule + bank statements, FY-wise</div></div><button class="btn ghost sm" onclick="toast('Corpus schedule opened — 120 units, FY 2024–26')">View</button></div>
+          <div class="list-row"><span class="badge breach">Audit query</span><div style="flex:1"><b>₹24L under audit query</b><div class="muted" style="color:var(--danger)">Association auditor questions interest credit FY 2025-26 + 2 pre-OC expense debits. Response due before 18 Jun meeting.</div></div><button class="btn danger sm" onclick="toast('Query response pack opened — bank interest certificates + 2 expense vouchers attached for CA review')">Respond to query</button></div>
+          <div class="list-row"><span class="badge done">✓</span><div style="flex:1"><b>Maintenance account — balance ₹8.7L with audited statement</b><div class="muted">Audited statement attached · transfers with the account on handover day</div></div><button class="btn ghost sm" onclick="toast('Audited maintenance-account statement opened')">View</button></div>
+        </div>
+
+        <div class="card">
+          <div class="row between" style="margin-bottom:8px"><h3 class="panel-title" style="margin-bottom:0">Common-area handover</h3><span class="badge assigned">4 of 6 signed</span></div>
+          <div class="muted" style="margin-bottom:10px">Rule: common areas hand over to the association within <b>30 days of OC</b>. Each group signs with photo evidence + asset list.</div>
+          <div class="list-row"><span class="badge done">Signed ✓</span><div style="flex:1"><b>Lobby</b><div class="muted">Signed 12 May · 14 assets listed</div></div></div>
+          <div class="list-row"><span class="badge done">Signed ✓</span><div style="flex:1"><b>Lifts</b><div class="muted">Signed 12 May · license transfer noted as pending in vault</div></div></div>
+          <div class="list-row"><span class="badge done">Signed ✓</span><div style="flex:1"><b>Basement parking</b><div class="muted">Signed 26 May · line-marking &amp; signage verified</div></div></div>
+          <div class="list-row"><span class="badge done">Signed ✓</span><div style="flex:1"><b>Terrace</b><div class="muted">Signed 2 Jun · waterproofing warranty cross-referenced</div></div></div>
+          <div class="list-row"><span class="badge pending">Pending</span><div style="flex:1"><b>STP plant</b><div class="muted">Blocked by rejected commissioning report — association won't sign without 72-hr flow log</div></div><button class="btn secondary sm" onclick="dGo('builder','vault','vault')">Open vault item</button></div>
+          <div class="list-row"><span class="badge pending">Pending</span><div style="flex:1"><b>Clubhouse</b><div class="muted">Furniture &amp; AV snag list under rectification · target sign-off 18 Jun meeting</div></div><button class="btn secondary sm" onclick="toast('Clubhouse snag list opened — 4 items, 2 fixed awaiting verification')">Snag list</button></div>
+        </div>
+      </div>
+
+      <div class="stack" style="gap:16px">
+        <div class="card">
+          <h3 class="panel-title">Next status meeting</h3>
+          <dl class="kv">
+            <dt>Date</dt><dd><b>18 Jun 2026</b> · 5:00 PM · clubhouse</dd>
+            <dt>Attendees</dt><dd>Aditya Reneev + association committee (5) + UrbanServe (Kavita Rao)</dd>
+            <dt>Agenda</dt><dd>₹24L corpus query · STP &amp; clubhouse sign-off · vault checklist 30/34</dd>
+          </dl>
+          <div class="divider"></div>
+          <button class="btn secondary sm block" onclick="toast('Calendar invite + agenda sent to all attendees on WhatsApp')">Send invite + agenda</button>
+        </div>
+        <div class="card">
+          <h3 class="panel-title">Document checklist</h3>
+          <p style="font-size:13px;margin-bottom:10px">The association receives the same indexed O&amp;M vault on handover day — 30/34 documents complete, 4 open items tracked there.</p>
+          <button class="btn primary sm block" onclick="dGo('builder','vault','vault')">Open O&amp;M Vault →</button>
+        </div>
+        <div class="ai-panel">
+          <b>🤖 AI handover-risk read — 82% confidence</b>
+          <p style="font-size:13px;margin:8px 0">The ₹24L audit query and STP sign-off share a deadline pressure point: both must clear by the AGM (15 Jul) or the corpus transfer slips a quarter. Resolve the query response before 18 Jun.</p>
+          <div class="muted">Why: association bylaws require corpus acceptance by AGM vote; STP flow log lead time is 72 hrs + reviewer pass.</div>
+        </div>
+        <div class="crosslink">⛓ This second handover moment is served by audit firms today, not software. Brij gives the builder, the association and the FM operator one ledger — corpus, accounts, common-area sign-offs and the document vault in a single auditable thread.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 2d. STAGE-GATE QA (v0.3) ============ -->
+  <div id="builder-stagegate" class="d-screen">
+    <div class="d-head">
+      <div>
+        <span class="eyebrow">Builder · Stage-Gate QA</span>
+        <h1>Stage-gate QA — Reneev Heights</h1>
+        <div class="sub">Pre-handover · catch it at plaster, not at possession · 240 units, 2 towers</div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" onclick="toast('Stage-gate QA summary exported — board pack format')">Export QA summary</button>
+        <button class="btn primary" onclick="toast('New stage inspection scheduled — Tower A waterproofing, L12–L14 terraces, 12 Jun')">+ Schedule inspection</button>
+      </div>
+    </div>
+
+    <div class="intro-bar"><span class="ib-ico">🚧</span><div>Quality gates while Reneev Heights is still under construction — no stage payment until the gate passes. Tower A's waterproofing gate is the one to watch this month.</div></div>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="s-label">Stage inspections done</div><div class="s-value">142</div><div class="s-delta up">Across both towers since RCC</div></div>
+      <div class="stat-card"><div class="s-label">Current-stage pass rate</div><div class="s-value">68%</div><div class="s-delta warn">Tower A · waterproofing — below 85% gate target</div></div>
+      <div class="stat-card"><div class="s-label">Open NCs</div><div class="s-value">38</div><div class="s-delta warn">9 high severity · re-check before gate closes</div></div>
+      <div class="stat-card"><div class="s-label">Gate rule</div><div class="s-value">No NC → next stage</div><div class="s-delta up">Stage payment released only on gate pass</div></div>
+    </div>
+
+    <div class="two-col">
+      <div class="stack" style="gap:16px">
+        <div class="card">
+          <h3 class="panel-title">Tower A — stage pipeline</h3>
+          <div class="stepper">
+            <div class="step done"><div class="bar"></div>RCC</div>
+            <div class="step done"><div class="bar"></div>Blockwork</div>
+            <div class="step done"><div class="bar"></div>Plaster</div>
+            <div class="step"><div class="bar"></div>Waterproofing</div>
+            <div class="step"><div class="bar"></div>MEP</div>
+            <div class="step"><div class="bar"></div>Finishing</div>
+          </div>
+          <div class="list-row"><span class="badge done">Gate passed</span><div style="flex:1"><b>Plaster</b><div class="muted">91% pass rate · 11 NCs closed before gate · passed 22 Apr</div></div></div>
+          <div class="list-row"><span class="badge open">At gate · 68%</span><div style="flex:1"><b>Waterproofing — current stage</b><div class="muted" style="color:var(--warning)">Terraces + wet areas L1–L14 · gate target 85% · flood test per floor before tiling</div>
+            <div class="prog warn" style="margin-top:6px"><div style="width:68%"></div></div></div></div>
+          <div class="list-row"><span class="badge neutral">Next</span><div style="flex:1"><b>MEP first fix</b><div class="muted">Gate opens only when waterproofing NCs clear</div></div></div>
+          <div class="divider"></div>
+          <div class="muted">Tower B: blockwork stage · 88% pass rate · on track.</div>
+        </div>
+
+        <div class="card">
+          <div class="row between" style="margin-bottom:8px"><h3 class="panel-title" style="margin-bottom:0">Open non-conformities — sample</h3><span class="badge open">38 open</span></div>
+          <table class="dt">
+            <tr><th>NC</th><th>Description · Location</th><th>Stage</th><th>Severity</th><th>Status</th></tr>
+            <tr class="clickable" onclick="toast('NC-121 — missing puddle-flange sleeve at shear-wall plumbing crossing · rectify before slab cast above · photo + pour-card attached')">
+              <td><b>NC-121</b></td><td>Sleeve missing at shear-wall plumbing crossing · Tower A, L11</td><td>Waterproofing</td><td><span class="badge critical">High</span></td><td><span class="badge open">Open</span></td>
+            </tr>
+            <tr class="clickable" onclick="toast('NC-118 — membrane upturn 65mm vs 100mm spec at terrace parapet · contractor to redo 40 rm before flood test')">
+              <td><b>NC-118</b></td><td>Membrane upturn 65mm vs 100mm spec · Tower A terrace</td><td>Waterproofing</td><td><span class="badge critical">High</span></td><td><span class="badge assigned">Rework assigned</span></td>
+            </tr>
+            <tr class="clickable" onclick="toast('NC-112 — hollow plaster &gt;10% of tap-test grid · chase and re-plaster 3 panels · re-check booked 13 Jun')">
+              <td><b>NC-112</b></td><td>Plaster hollowness &gt;10% of test grid · Tower A, L9 corridor</td><td>Plaster</td><td><span class="badge medium">Medium</span></td><td><span class="badge progress">Re-check 13 Jun</span></td>
+            </tr>
+            <tr class="clickable" onclick="toast('NC-097 — window sill slope reversed, water drains inward · ground and re-screed · fixed, awaiting verification')">
+              <td><b>NC-097</b></td><td>Window sill slope reversed · Tower A, L6 (4 units)</td><td>Blockwork</td><td><span class="badge medium">Medium</span></td><td><span class="badge pending">Fixed · verify</span></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="stack" style="gap:16px">
+        <div class="card">
+          <h3 class="panel-title">Catch it at plaster, not at possession</h3>
+          <p style="font-size:13px">A defect caught at stage gate costs the subcontractor a redo. The same defect found at the handover walkthrough costs a DLP snag, a recovery dispute, and an angry customer. VD Commercial's 22% waterproofing snag share (see <a href="javascript:void(0)" onclick="dGo('builder','analytics','analytics')">Analytics</a>) is exactly what this gate exists to prevent.</p>
+        </div>
+        <div class="ai-panel">
+          <b>🤖 AI gate forecast — 83% confidence</b>
+          <p style="font-size:13px;margin:8px 0">At current rework pace, Tower A waterproofing clears the 85% gate by <b>26 Jun</b>. The two high-severity NCs (121, 118) are the critical path — both on west-facing elevations, the same monsoon-facing pattern as VD Commercial.</p>
+          <div class="muted">Why: 14 of 17 waterproofing NCs cluster on west elevation; VD's snag heatmap showed the identical correlation.</div>
+        </div>
+        <div class="crosslink">⛓ Stage data seeds the <b>handover snag baseline</b> — every NC still open at finishing pre-loads that unit's walkthrough checklist in the Snags module, and stage pass rates feed subcontractor scorecards before Heights retention terms are set.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 3. SNAGS ============ -->
+  <div id="builder-snags" class="d-screen">
+    <div class="d-head">
+      <div>
+        <span class="eyebrow">Builder · DLP Snags</span>
+        <h1>Snag register — VD Commercial</h1>
+        <div class="sub">Defect Liability Period · Jan 2026 – Jan 2027 · 7 months remaining</div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" onclick="dGo('builder','floorplan','floorplan')">📍 Floor plan view</button>
+        <button class="btn primary" onclick="dGo('builder','walkthrough','walkthrough')">🚶 Walkthrough mode</button>
+      </div>
+    </div>
+
+    <div class="intro-bar"><span class="ib-ico">🔧</span><div>Every defect reported during the liability period — who fixes it, what it costs, who pays. Tap a row for the full story; disputed rows are money on hold.</div></div>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="s-label">Open snags</div><div class="s-value">14</div><div class="s-delta warn">5 raised this month</div></div>
+      <div class="stat-card"><div class="s-label">Disputed</div><div class="s-value">3</div><div class="s-delta down">All 3 with WaterSeal Infra</div></div>
+      <div class="stat-card"><div class="s-label">Recovery pipeline</div><div class="s-value">₹4.6L</div><div class="s-delta up">₹18,000 recovered YTD</div></div>
+      <div class="stat-card"><div class="s-label">Avg fix time</div><div class="s-value">11 days</div><div class="s-delta up">Industry ~21 days</div></div>
+    </div>
+
+    <div class="filter-chips" style="margin-bottom:16px">
+      <span class="chip on" onclick="toggleChip(this);toast('Filter: all sources')">All sources</span>
+      <span class="chip" onclick="toggleChip(this);toast('Filtered: customer-raised snags (walkthrough + WhatsApp)')">Customers</span>
+      <span class="chip" onclick="toggleChip(this);toast('Filtered: our team inspections')">Our team</span>
+      <span class="chip" onclick="toggleChip(this);toast('Filtered: FM escalations from UrbanServe')">FM escalation</span>
+      <span class="chip" onclick="toggleChip(this);toast('Filtered: disputed only — 3 snags, all WaterSeal Infra')">Disputed only</span>
+    </div>
+
+    <table class="dt" style="margin-bottom:20px">
+      <tr><th>Snag</th><th>Description · Location</th><th>Source</th><th>Subcontractor</th><th>Recovery</th><th>Status</th></tr>
+      <tr class="clickable" onclick="dGo('builder','snag-detail','snags')">
+        <td><b>SNG-231</b></td>
+        <td>Cracked vitrified tiles (3), cabin area · Unit 304</td>
+        <td><span class="badge terra">Customer</span></td>
+        <td>Shree Flooring Co.</td>
+        <td>₹9,500</td>
+        <td><span class="badge assigned">Assigned · fix by 14 Jun</span></td>
+      </tr>
+      <tr class="clickable" onclick="toast('SNG-230 detail — seepage stain, WaterSeal Infra disputing scope. See DLP Recovery for arbitration note.')">
+        <td><b>SNG-230</b></td>
+        <td>Seepage stain, ceiling near window · Unit 511</td>
+        <td><span class="badge terra">Customer</span></td>
+        <td>WaterSeal Infra</td>
+        <td>₹35,000</td>
+        <td><span class="badge disputed">Disputed</span></td>
+      </tr>
+      <tr class="clickable" onclick="toast('SNG-229 detail — door frame out of plumb, Patel Woodworks, ₹12,000, fix scheduled')">
+        <td><b>SNG-229</b></td>
+        <td>Main door frame out of plumb · Unit 207</td>
+        <td><span class="badge neutral">Our team</span></td>
+        <td>Patel Woodworks</td>
+        <td>₹12,000</td>
+        <td><span class="badge open">Open</span></td>
+      </tr>
+      <tr class="clickable" onclick="toast('SNG-228 — assign a subcontractor to start the recovery clock')">
+        <td><b>SNG-228</b></td>
+        <td>False ceiling panel sagging · Ground-floor lobby</td>
+        <td><span class="badge neutral">Our team</span></td>
+        <td style="color:var(--danger)">Unassigned</td>
+        <td>—</td>
+        <td><span class="badge open">Open · blocks lobby sign-off</span></td>
+      </tr>
+      <tr class="clickable" onclick="toast('SNG-218 — fixed Mar 2026, ₹18,000 recovered from Aircon Systems. Now part of AHU-02 asset history in FM module.')">
+        <td><b>SNG-218</b></td>
+        <td>AHU-02 condensate drain slope incorrect · 3F plant room</td>
+        <td><span class="badge progress">FM escalation</span></td>
+        <td>Aircon Systems</td>
+        <td>₹18,000</td>
+        <td><span class="badge done">Fixed · accepted ✓</span></td>
+      </tr>
+    </table>
+
+    <div class="two-col">
+      <div class="card">
+        <h3 class="panel-title">Closed &amp; accepted this week</h3>
+        <div class="empty-state" style="padding:28px 16px">
+          <span class="ico">🗂</span>
+          No snags closed this week yet.<br>2 are fixed and awaiting your re-inspection — verify within the 3-day SLA.
+          <div style="margin-top:12px"><button class="btn primary sm" onclick="dGo('builder','reinspect','snags')">Go to re-inspection queue</button></div>
+        </div>
+      </div>
+      <div class="crosslink" style="align-self:start">⛓ FM escalations (like SNG-218) arrive automatically from UrbanServe tickets in the <b>FM module</b> — no email chains. When DLP ends Jan 2027, this register transfers as defect history per asset.</div>
+    </div>
+  </div>
+
+  <!-- ============ 4. FLOOR PLAN ============ -->
+  <div id="builder-floorplan" class="d-screen">
+    <div class="d-head">
+      <button class="back-btn" onclick="dGo('builder','snags','snags')">←</button>
+      <div>
+        <h1>Floor plan — snag pins</h1>
+        <div class="sub">VD Commercial · Floor 3 · tap a pin to open the snag</div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" onclick="toast('Floor plate PDF with pins exported for site engineer')">Export marked-up plan</button>
+      </div>
+    </div>
+
+    <div class="filter-chips" style="margin-bottom:16px">
+      <span class="chip" onclick="toast('Ground floor — 1 open snag (SNG-228, lobby)')">G</span>
+      <span class="chip" onclick="toast('Floor 1 — no open snags')">1</span>
+      <span class="chip" onclick="toast('Floor 2 — 2 open snags (incl. SNG-229, Unit 207)')">2</span>
+      <span class="chip on">3</span>
+      <span class="chip" onclick="toast('Floor 4 — 1 fixed awaiting re-inspection (SNG-224, Unit 412)')">4</span>
+      <span class="chip" onclick="toast('Floor 5 — 1 disputed (SNG-230, Unit 511)')">5</span>
+      <span class="chip" onclick="toast('Floor 6 — no open snags')">6</span>
+      <span class="chip" onclick="toast('Floor 7 — no open snags')">7</span>
+      <span class="chip" onclick="toast('Floor 8 — no open snags')">8</span>
+      <span class="chip" onclick="toast('Floor 9 — 1 open snag')">9</span>
+      <span class="chip" onclick="toast('Floor 10 — no open snags')">10</span>
+      <span class="chip" onclick="toast('Floor 11 — no open snags')">11</span>
+      <span class="chip" onclick="toast('Floor 12 — 1 open snag')">12</span>
+      <span class="chip" onclick="toast('Floor 13 — no open snags')">13</span>
+      <span class="chip" onclick="toast('Floor 14 — terrace waterproofing snag, disputed')">14</span>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="floorplan">
+          <svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+            <rect x="10" y="10" width="780" height="480" fill="#F7F6F2" stroke="#1C1B19" stroke-width="3"/>
+            <!-- top row units 301-304 -->
+            <rect x="40" y="40" width="170" height="160" fill="#FFFFFF" stroke="#1C1B19" stroke-width="1.5"/>
+            <rect x="220" y="40" width="170" height="160" fill="#FFFFFF" stroke="#1C1B19" stroke-width="1.5"/>
+            <rect x="400" y="40" width="170" height="160" fill="#FFFFFF" stroke="#1C1B19" stroke-width="1.5"/>
+            <rect x="580" y="40" width="170" height="160" fill="#FFFFFF" stroke="#1C1B19" stroke-width="1.5"/>
+            <text x="125" y="125" text-anchor="middle" font-size="16" fill="#3A3937" font-weight="bold">301</text>
+            <text x="305" y="125" text-anchor="middle" font-size="16" fill="#3A3937" font-weight="bold">302</text>
+            <text x="485" y="125" text-anchor="middle" font-size="16" fill="#3A3937" font-weight="bold">303</text>
+            <text x="665" y="125" text-anchor="middle" font-size="16" fill="#3A3937" font-weight="bold">304</text>
+            <!-- corridor -->
+            <rect x="40" y="215" width="710" height="70" fill="#FFFFFF" stroke="#1C1B19" stroke-width="1.5" stroke-dasharray="6 4"/>
+            <text x="395" y="255" text-anchor="middle" font-size="13" fill="#6B6A66" letter-spacing="4">CORRIDOR</text>
+            <!-- bottom row -->
+            <rect x="40" y="300" width="130" height="160" fill="#FFFFFF" stroke="#1C1B19" stroke-width="1.5"/>
+            <rect x="180" y="300" width="130" height="160" fill="#FFFFFF" stroke="#1C1B19" stroke-width="1.5"/>
+            <rect x="320" y="300" width="70" height="160" fill="#E6F1F1" stroke="#1C1B19" stroke-width="1.5"/>
+            <rect x="400" y="300" width="110" height="160" fill="#E6F1F1" stroke="#1C1B19" stroke-width="1.5"/>
+            <rect x="520" y="300" width="130" height="160" fill="#FFFFFF" stroke="#1C1B19" stroke-width="1.5"/>
+            <rect x="660" y="300" width="90" height="160" fill="#FFFFFF" stroke="#1C1B19" stroke-width="1.5"/>
+            <text x="105" y="385" text-anchor="middle" font-size="16" fill="#3A3937" font-weight="bold">305</text>
+            <text x="245" y="385" text-anchor="middle" font-size="16" fill="#3A3937" font-weight="bold">306</text>
+            <text x="355" y="378" text-anchor="middle" font-size="11" fill="#3A3937">LIFT</text>
+            <text x="355" y="392" text-anchor="middle" font-size="11" fill="#3A3937">CORE</text>
+            <text x="455" y="378" text-anchor="middle" font-size="11" fill="#3A3937">PLANT</text>
+            <text x="455" y="392" text-anchor="middle" font-size="11" fill="#3A3937">ROOM</text>
+            <text x="585" y="385" text-anchor="middle" font-size="16" fill="#3A3937" font-weight="bold">307</text>
+            <text x="705" y="385" text-anchor="middle" font-size="16" fill="#3A3937" font-weight="bold">308</text>
+            <!-- stair -->
+            <line x1="750" y1="215" x2="790" y2="215" stroke="#1C1B19" stroke-width="1.5"/>
+            <line x1="750" y1="285" x2="790" y2="285" stroke="#1C1B19" stroke-width="1.5"/>
+            <text x="770" y="255" text-anchor="middle" font-size="9" fill="#6B6A66">STAIR</text>
+          </svg>
+          <div class="fp-pin open" style="left:83%;top:25%" onclick="dGo('builder','snag-detail','snags')" title="SNG-231 — Unit 304"><span>231</span></div>
+          <div class="fp-pin fixed" style="left:57%;top:76%" onclick="toast('SNG-218 — AHU-02 condensate drain, fixed &amp; accepted, ₹18,000 recovered from Aircon Systems')" title="SNG-218 — plant room"><span>218</span></div>
+          <div class="fp-pin disputed" style="left:18%;top:50%" onclick="toast('SNG-227 — corridor skirting-edge seepage, WaterSeal Infra disputing root cause. See DLP Recovery.')" title="SNG-227 — corridor"><span>227</span></div>
+        </div>
+        <div class="muted" style="margin-top:10px">In the live app: tap anywhere on the plate to drop a new pin — geotagged site photos auto-attach to the nearest pin.</div>
+      </div>
+
+      <div class="stack" style="gap:16px">
+        <div class="card">
+          <h3 class="panel-title">Legend — Floor 3</h3>
+          <div class="list-row"><span class="fp-pin open" style="position:static;transform:rotate(-45deg)"><span>231</span></span><div><b>Open</b><div class="muted">SNG-231 · Unit 304 · cracked tiles · Shree Flooring</div></div></div>
+          <div class="list-row"><span class="fp-pin disputed" style="position:static;transform:rotate(-45deg)"><span>227</span></span><div><b>Disputed</b><div class="muted">SNG-227 · corridor seepage · WaterSeal Infra</div></div></div>
+          <div class="list-row"><span class="fp-pin fixed" style="position:static;transform:rotate(-45deg)"><span>218</span></span><div><b>Fixed &amp; accepted</b><div class="muted">SNG-218 · plant room · ₹18,000 recovered</div></div></div>
+        </div>
+        <div class="card">
+          <h3 class="panel-title">Floor 3 snapshot</h3>
+          <dl class="kv">
+            <dt>Open</dt><dd>1</dd>
+            <dt>Disputed</dt><dd>1</dd>
+            <dt>Fixed YTD</dt><dd>4</dd>
+            <dt>Units affected</dt><dd>304 + corridor</dd>
+          </dl>
+          <div class="divider"></div>
+          <button class="btn primary sm block" onclick="dGo('builder','walkthrough','walkthrough')">Start walkthrough on this floor</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 5. WALKTHROUGH MODE (v0.4 — exhaustive room-by-room) ============ -->
+  <div id="builder-walkthrough" class="d-screen">
+    <div class="d-head">
+      <button class="back-btn" onclick="dGo('builder','snags','snags')">←</button>
+      <div>
+        <span class="eyebrow">Builder · Unit 304 Walkthrough</span>
+        <h1>Walkthrough mode</h1>
+        <div class="sub">Unit 304 · with customer Rohan Mehta · 14 May 2026 · tablet-guided · 97 checks across 9 rooms</div>
+      </div>
+      <div class="actions">
+        <span class="layer-chip">Guided · works offline</span>
+      </div>
+    </div>
+
+    <div class="intro-bar"><span class="ib-ico">🚶</span><div>Walk each room with the customer. Tap <b>✓ pass</b>, <b>✗ snag</b> (photo auto-prompts), <b>—</b> not applicable. Everything feeds the signed handover record.</div></div>
+
+    <div class="two-col">
+      <div class="stack" style="gap:10px">
+        <div class="card">
+          <h3 class="panel-title">Room-by-room progress</h3>
+          <div class="stepper">
+            <div class="step done"><div class="bar"></div>Entrance</div>
+            <div class="step done"><div class="bar"></div>Living</div>
+            <div class="step done"><div class="bar"></div>Kitchen</div>
+            <div class="step done"><div class="bar"></div>Bed 1</div>
+            <div class="step done"><div class="bar"></div>Bed 2</div>
+            <div class="step done"><div class="bar"></div>Bath 1</div>
+            <div class="step done"><div class="bar"></div>Bath 2</div>
+            <div class="step done"><div class="bar"></div>Balcony</div>
+            <div class="step"><div class="bar"></div>Utility</div>
+          </div>
+          <div class="list-row" style="background:var(--teal-50);border-radius:8px;padding:10px 12px"><div style="flex:1"><b>📷 Scan room tag on entry — last scan BRJ-R-304-TER ✓</b><div class="muted">QR room tags (92% of units tagged) pin every photo and snag to the exact room — no "which bathroom?" calls later</div></div><button class="btn ghost sm" onclick="toast('Room tag rescanned — BRJ-R-304-TER ✓ · all captures in this room auto-located')">Rescan</button></div>
+        </div>
+
+        <details class="collapse">
+          <summary>🚪 Entrance &amp; foyer <span class="count-pill good">10 items · all clear</span></summary>
+          <div class="c-body">
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Main door frame plumb &amp; square<small>Spirit level on both jambs · no packing gaps at frame–wall junction</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Main door swing &amp; closure<small>Opens/closes 5× without scraping · closes flush, uniform gap, no self-swing</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Lockset, latch, safety chain &amp; eyepiece<small>All 3 keys tried · deadbolt throws fully · eyepiece clear</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Hinges tight, no rust or creak<small>Screws seated · stainless hinges per spec</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Doorbell &amp; video-door-phone point live<small>Chime tested · VDP conduit draw-string present</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Foyer flooring — level, no hollow tiles<small>Tap test with coin across grid · grout lines even, no chipped edges</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Skirting flush, corners mitred<small>No adhesive smears or gaps behind skirting</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Walls &amp; ceiling — no hairline cracks, putty even<small>Checked under raking light from torch · paint shade matches schedule</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Switchboard aligned, all points live-tested<small>Socket tester on every socket · plate level and flush</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Foyer fittings per spec<small>Shoe-rack niche dimensions · safety-grille door operation</small></div></div>
+          </div>
+        </details>
+
+        <details class="collapse" open>
+          <summary>🛋 Living / cabin area <span class="count-pill bad">13 items · 1 snag</span></summary>
+          <div class="c-body">
+            <div class="check-row"><span class="cbox snag">✗</span><div class="c-label"><b>Floor tiles — no cracks or chips</b><small style="color:var(--danger)">3 cracked vitrified tiles near cabin desk → logged as SNG-231 · Shree Flooring Co. · ₹9,500 recovery · fix by 14 Jun</small></div><button class="btn ghost sm" onclick="dGo('builder','snag-detail','snags')">Open</button></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Tap test — no hollow-sounding tiles<small>Coin-tap across full grid · hollow &gt;10% of any tile = re-lay</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Floor level &amp; lippage<small>No edge lippage &gt;1mm between tiles · grout lines uniform width</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Skirting flush, no gaps<small>Corners mitred · shade matches floor batch</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Walls — no hairline cracks or dampness stains<small>Especially below window sill and AC sleeve · no seepage marks</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Paint finish &amp; shade match, putty waviness<small>Raking-light check on long wall · shade per finishes schedule</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Ceiling — no cracks, bulkhead finish clean<small>AC bulkhead edges crisp · no roller marks</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Windows — smooth slide, locks, no glass scratches<small>Each shutter run end-to-end · mesh shutter present · locks engage</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Window sealant &amp; sill slope<small>External silicone continuous · sill slopes outward, no water path in</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Every switch &amp; socket live-tested<small>Socket tester shows correct wiring + earthing · switchboards aligned</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">AC point — power, sleeve &amp; drain stub<small>16A point live · copper-pipe sleeve sealed · condensate drain stub present</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Fan point &amp; hook load-tested<small>Hook holds pull test · regulator point live</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">TV / data conduit draw-string present<small>Conduit clear from media wall to distribution box</small></div></div>
+          </div>
+        </details>
+
+        <details class="collapse">
+          <summary>🍳 Kitchen / pantry <span class="count-pill good">12 items · all clear</span></summary>
+          <div class="c-body">
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Counter level, no cracks or stains<small>Granite edge polished · no chips at sink cut-out</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Sink tap operation &amp; aerator flow<small>Hot/cold mix smooth · no drip at spout after close</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Water pressure at tap<small>Full-bore flow ≥ spec · no hammering in line</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Drain flow test — sink empties fully<small>Filled and drained · no gurgle, trap cover seated</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">No leak under sink<small>Ran 2 min, inspected bottle trap &amp; joints dry with tissue test</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Chimney duct provision<small>Duct cut with flap valve · external cowl fitted</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Hob point per spec<small>Gas conduit capped + electric hob point live-tested</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Dado tiles — no chips, counter junction sealed<small>Silicone bead continuous at counter–dado joint</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Cabinet shutters aligned, soft-close<small>All shutters opened/closed · no scratches on laminate</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">RO &amp; geyser points — dedicated 16A sockets<small>Both live-tested with socket tester · inlet stubs capped</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Flooring — no hollow tiles, level<small>Tap test done · no ponding when mopped</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Kitchen circuits labelled at MCB<small>DB legend card matches — hob / RO / geyser / light circuits</small></div></div>
+          </div>
+        </details>
+
+        <details class="collapse">
+          <summary>🛏 Bedroom 1 <span class="count-pill good">10 items · all clear</span></summary>
+          <div class="c-body">
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Flooring — no cracks, hollow tap test clear<small>Full-grid coin tap · grout even</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Skirting flush, corners clean<small>No gaps or adhesive marks</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Walls &amp; ceiling — no cracks or seepage stains<small>Window wall checked closely — adjoining Bath 1 wet wall dry</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Paint shade match &amp; putty finish<small>Raking light · shade per finishes schedule</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Door — frame plumb, smooth swing, lock &amp; stopper<small>Latch + lock keys tried · magnetic stopper fitted</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Windows — operation, locks, mesh, sealant<small>No glass scratches · external sealant continuous</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">All switches &amp; sockets live-tested, 2-way works<small>2-way switching from door + bed side verified</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Fan point + hook, AC point with sleeve &amp; drain<small>Hook pull-tested · AC sleeve sealed</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Earthing check at sockets<small>Tester shows correct polarity + earth on all points</small></div></div>
+            <div class="check-row"><span class="cbox na">—</span><div class="c-label">Loft / wardrobe shutters<small>Bare-shell unit — wardrobes not in builder scope · marked N/A with customer</small></div></div>
+          </div>
+        </details>
+
+        <details class="collapse">
+          <summary>🛏 Bedroom 2 <span class="count-pill good">9 items · all clear</span></summary>
+          <div class="c-body">
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Flooring tap test &amp; level<small>No hollow or cracked tiles · lippage &lt;1mm</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Walls &amp; ceiling — cracks and dampness<small>No hairline cracks · no stains at slab junction</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Paint shade match &amp; putty waviness<small>Raking-light check passed</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Door — plumb, lock, latch, stopper<small>Smooth over 5 cycles · no frame foul</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Window operation, mesh shutter, sealant<small>Locks engage · mesh runs free</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Switches &amp; sockets live-tested, board aligned<small>All points pass socket tester</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Fan point &amp; AC point<small>Hook load test · AC drain stub present</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Wardrobe niche to plan dimensions<small>Measured 2.1m × 0.6m as per drawing</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Skirting &amp; corner finish<small>Flush, shade matched</small></div></div>
+          </div>
+        </details>
+
+        <details class="collapse">
+          <summary>🛁 Bathroom 1 <span class="count-pill good">13 items · all clear</span></summary>
+          <div class="c-body">
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Floor slope to drain — pour test<small>Bucket of water poured at door · fully reaches drain, no ponding</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Tiles — no cracks or hollow, grout sealed<small>Tap test done · epoxy grout in wet area per spec · minor grout shade variation noted as observation, not a DLP defect</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">All taps &amp; mixer — operation and pressure<small>Hot/cold at mixer · no drip after close · full-bore flow</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Shower flow &amp; diverter<small>Diverter switches cleanly · head angle adjustable, no leak at arm</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">WC flush — both modes, no run-on<small>Full + half flush · cistern refills and stops</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">WC firmly seated, sealant bead clean<small>No rocking · floor sealant continuous</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Wash basin — drain flow, no leak at trap<small>Filled and drained · bottle trap dry, fixing bolts tight</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Geyser point — 16A socket + inlet/outlet stubs<small>Live-tested · stubs capped, accessible isolation valve</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Floor trap covers seated<small>Cockroach traps in both traps · grating flush with tile</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Exhaust-fan point &amp; louver<small>Point live · external louver flap free</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Door — no swelling at frame bottom, lock works<small>Water-resistant frame bottom · privacy lock engages</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Mirror, towel rod &amp; accessory fixings tight<small>No wobble · no tile cracks at anchor points</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">No seepage to adjoining bedroom wall<small>Bedroom-1 side of wet wall checked dry — moisture meter reading normal</small></div></div>
+          </div>
+        </details>
+
+        <details class="collapse">
+          <summary>🚿 Bathroom 2 <span class="count-pill good">11 items · all clear</span></summary>
+          <div class="c-body">
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Floor slope to drain — pour test<small>Water reaches drain from all corners · no ponding</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Tiles — tap test, grout lines sealed<small>No hollow or cracked tiles</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Taps &amp; mixer — operation, pressure, no drip<small>All outlets run · aerators clear</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">WC flush operation &amp; seating<small>Both modes · no rock, sealant clean</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Basin drain flow &amp; trap dry<small>No leak under basin after 2-min run</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Drain flow test — floor trap<small>Bucket flush drains without back-up</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Geyser point live + stubs capped<small>16A socket passes tester</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Exhaust point &amp; louver free<small>External flap not painted shut</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Door, frame bottom &amp; privacy lock<small>No swelling · lock engages</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Accessory fixings tight, no anchor cracks<small>Towel rod, hooks, mirror</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">No seepage marks on external face of wet wall<small>Corridor-side wall dry</small></div></div>
+          </div>
+        </details>
+
+        <details class="collapse">
+          <summary>🌤 Balcony <span class="count-pill bad">10 items · 1 snag</span></summary>
+          <div class="c-body">
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Floor slope away from door — pour test<small>Water runs to drain, none toward living area threshold</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Balcony drain — clear flow, grating seated<small>Bucket test drains fully · khurra detail clean</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Railing height ≥ 1.1m, firmly anchored<small>Measured 1.15m · no movement under push test, no sharp edges</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Railing finish — no corrosion or weld burrs<small>Powder coat intact · base plates sealed</small></div></div>
+            <div class="check-row"><span class="cbox snag">✗</span><div class="c-label"><b>Balcony door seal</b><small style="color:var(--danger)">Gasket gap at sill — wind whistle · minor snag, clubbed with SNG-231 fix visit 14 Jun</small></div><button class="btn ghost sm" onclick="toast('Minor snag — balcony door gasket · severity Low · clubbed with Shree Flooring visit 14 Jun')">Open</button></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">External sealant at floor–wall junction<small>Continuous bead · no cracks at parapet junction</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Waterproofing — soffit below dry<small>Photo check of slab soffit from floor below — no damp patch</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Tiles — anti-skid, tap test clear<small>No hollow tiles at drain cut</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Light point + weatherproof switch<small>IP-rated fitting live-tested</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Ceiling — no seepage stains<small>Balcony above checked for drain overflow path</small></div></div>
+          </div>
+        </details>
+
+        <details class="collapse">
+          <summary>🧺 Utility <span class="count-pill good">9 items · all clear</span></summary>
+          <div class="c-body">
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Washing-machine inlet tap &amp; drain point<small>Tap runs full bore · standpipe drain clear</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Floor slope to drain, trap cover seated<small>Pour test passed</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Utility sink — drain flow, no leak<small>Trap dry after 2-min run</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Tiles &amp; dado — no chips or hollow<small>Tap test done</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">16A power point — live + earthing verified<small>Socket tester passed · MCB labelled "utility"</small></div></div>
+            <div class="check-row"><span class="cbox na">—</span><div class="c-label">Piped-gas bank provision<small>Not in unit spec — marked N/A with customer</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Window / louver operation<small>Opens fully · mesh intact</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Walls — no dampness at plumbing wall<small>Shaft-side wall dry</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label">Light point works<small>Fitting live-tested</small></div></div>
+          </div>
+        </details>
+      </div>
+
+      <div class="stack" style="gap:16px">
+        <div class="card">
+          <h3 class="panel-title">Quick snag capture</h3>
+          <div class="upload-zone" style="margin-bottom:12px">📷 Tap to capture photo<br><span class="muted">Geotag + room auto-attached</span></div>
+          <div class="field"><label>Severity</label>
+            <select><option>Medium — fix within 30 days</option><option>High — fix within 7 days</option><option>Low — observation only</option></select>
+          </div>
+          <div class="field"><label>Note</label><textarea rows="2" placeholder="e.g. hollow-sounding tile near balcony door"></textarea></div>
+          <button class="btn primary block" onclick="toast('Snag draft saved — AI suggests trade: civil/flooring · will auto-assign subcon on confirm')">Log snag</button>
+        </div>
+        <div class="card">
+          <h3 class="panel-title">End of walkthrough</h3>
+          <dl class="kv" style="grid-template-columns:120px 1fr">
+            <dt>Items checked</dt><dd>97 across 9 rooms</dd>
+            <dt>Snags</dt><dd>2 — SNG-231 + balcony door seal (minor)</dd>
+            <dt>Observations</dt><dd>1 — Bath 1 grout shade</dd>
+            <dt>Marked N/A</dt><dd>2 — agreed with customer</dd>
+          </dl>
+          <div class="divider"></div>
+          <button class="btn primary block" onclick="dGo('builder','signoff','walkthrough')">Finish → customer sign-off</button>
+        </div>
+        <div class="crosslink">⛓ Every ✓ and ✗ lands in the signed record and the <b>Possession kit</b> — the customer's permanent unit baseline in the FM module.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 6. SIGN-OFF ============ -->
+  <div id="builder-signoff" class="d-screen">
+    <div class="d-head">
+      <button class="back-btn" onclick="dGo('builder','walkthrough','walkthrough')">←</button>
+      <div>
+        <span class="eyebrow">Builder · Unit 304 Sign-off</span>
+        <h1>Customer sign-off — Unit 304</h1>
+        <div class="sub">Rohan Mehta · walkthrough completed 14 May 2026, 12:40 PM</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="stack" style="gap:16px">
+        <div class="card">
+          <h3 class="panel-title">Walkthrough summary</h3>
+          <dl class="kv">
+            <dt>Items checked</dt><dd>97 across 9 rooms</dd>
+            <dt>Snags logged</dt><dd>2 — SNG-231 (cracked tiles, cabin) + 1 minor (balcony door seal)</dd>
+            <dt>Observations</dt><dd>1 — Bathroom 1 grout shade (not a DLP defect)</dd>
+            <dt>Photos attached</dt><dd>11, geotagged</dd>
+          </dl>
+        </div>
+        <div class="card">
+          <h3 class="panel-title">Declaration</h3>
+          <p style="font-size:13px;line-height:21px">I, <b>Rohan Mehta</b> (Unit 304, VD Commercial), confirm the above walkthrough record is accurate. The builder, Reneev Developers, commits to rectifying the 2 logged snags <b>within 30 days under DLP clause 12.3</b> of the sale agreement. My acceptance of the unit <b>does not waive claims for latent defects</b> arising during the Defect Liability Period (until Jan 2027).</p>
+        </div>
+        <div class="card">
+          <h3 class="panel-title">Signature</h3>
+          <div style="border:2px dashed var(--border);border-radius:10px;height:110px;display:flex;align-items:center;justify-content:center;color:var(--ink-500);font-size:13px;background:var(--surface)" onclick="toast('Signature captured — Rohan Mehta')">✍️ Customer signs here</div>
+        </div>
+      </div>
+
+      <div class="stack" style="gap:16px">
+        <div class="card">
+          <h3 class="panel-title">Verify customer</h3>
+          <div class="field"><label>OTP sent to +91 98XXX 12304</label><input placeholder="Enter 6-digit OTP" maxlength="6"></div>
+          <button class="btn secondary block" onclick="toast('OTP verified ✓ — identity confirmed: Rohan Mehta, Unit 304')">Verify OTP</button>
+        </div>
+        <div class="card">
+          <h3 class="panel-title">Lock &amp; share</h3>
+          <p class="muted" style="margin-bottom:12px">Both parties get the signed PDF on WhatsApp. The record is then locked — no edits, only append.</p>
+          <button class="btn wa block" onclick="toast('Signed handover record locked · immutable audit_log entry · PDF sent to Rohan Mehta &amp; Aditya Reneev on WhatsApp')">Lock record + WhatsApp PDF to both</button>
+          <div class="divider"></div>
+          <button class="btn secondary block" onclick="dGo('builder','possession','possession')">Next → Unit possession kit</button>
+        </div>
+        <div class="crosslink">⛓ The signed record + snag list become this unit's baseline in the <b>FM module</b> — any post-DLP complaint is checked against it.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 6b. UNIT POSSESSION KIT (v0.4) ============ -->
+  <div id="builder-possession" class="d-screen">
+    <div class="d-head">
+      <div>
+        <span class="eyebrow">Builder · Possession</span>
+        <h1>Unit possession kit — Unit 304</h1>
+        <div class="sub">Rohan Mehta · VD Commercial · the customer-facing handover moment, end to end</div>
+      </div>
+      <div class="actions">
+        <button class="btn wa" onclick="toast('Possession kit summary sent to Rohan Mehta on WhatsApp — 21/24 complete, 3 items pending')">WhatsApp summary to customer</button>
+        <button class="btn primary" onclick="toast('Possession pack PDF generated — signed possession letter, key log, meter readings, document receipts')">Export possession pack</button>
+      </div>
+    </div>
+
+    <div class="intro-bar"><span class="ib-ico">🔑</span><div>Everything the customer must receive and sign on possession day — one screen, zero paper.</div></div>
+
+    <div class="card" style="margin-bottom:20px">
+      <div class="row between" style="margin-bottom:8px">
+        <b>Possession kit status</b>
+        <span style="font-family:var(--display);font-weight:800;font-size:22px;color:var(--ink-900)">21/24 <span class="muted" style="font-size:13px;font-weight:500">items complete</span></span>
+      </div>
+      <div class="prog"><div style="width:88%"></div></div>
+      <div class="muted" style="margin-top:8px">3 open — 2 utility name transfers + society share certificate · possession taken 14 May 2026</div>
+    </div>
+
+    <div class="two-col">
+      <div class="stack" style="gap:10px">
+
+        <details class="collapse">
+          <summary>📑 Pre-possession <span class="count-pill good">5 items · all clear</span></summary>
+          <div class="c-body">
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Demand letter cleared</b><small>Final demand paid in full · receipt acknowledged 28 Apr 2026</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Sale deed registration + stamp duty</b><small>SRO Surat · stamp duty 4.9% + registration 1% paid · registered deed in customer's records</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Final payment reconciliation</b><small>Zero dues — statement of account shared, no pending debit notes</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Snag walkthrough completed</b><small>97 checks · 2 snags logged (SNG-231 + minor) · signed record</small></div><button class="btn ghost sm" onclick="dGo('builder','walkthrough','walkthrough')">Open</button></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Possession-day slot confirmed</b><small>Welcome call done · 14 May 2026, 11:00 AM · ID proof checklist shared</small></div></div>
+          </div>
+        </details>
+
+        <details class="collapse" open>
+          <summary>🔑 Handover day <span class="count-pill good">6 items · all clear</span></summary>
+          <div class="c-body">
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Keys handed over</b><small>Main door 3 · mailbox 1 · balcony 1 — each logged against keys matrix, receipt signed</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Access cards &amp; parking RFID issued</b><small>2 cards + 2 RFID tags for B1-42 / B1-43</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Possession letter signed</b><small>Both parties · scanned copy in vault + customer WhatsApp</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>OTP sign-off verified</b><small>+91 98XXX 12304 · identity confirmed, record locked</small></div><button class="btn ghost sm" onclick="dGo('builder','signoff','walkthrough')">Open</button></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Meter readings captured</b><small>Electricity 00482 · water 00031 — photos attached, baseline for first bill</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Photos at handover</b><small>6 geotagged photos — unit condition on possession day</small></div></div>
+          </div>
+        </details>
+
+        <details class="collapse">
+          <summary>📂 Documents to customer <span class="count-pill warn">9 items · 3 open</span></summary>
+          <div class="c-body">
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Appliance manuals + warranty cards</b><small>Geyser, hob, chimney, VDP — serials registered to Rohan Mehta</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>DLP warranty booklet</b><small>What's-covered table — structure 5 yr · waterproofing 3 yr · fittings 1 yr · DLP ends Jan 2027</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Society membership / share application</b><small>Submitted to VD Commercial Owners Association with entrance fee</small></div></div>
+            <div class="check-row"><span class="cbox"></span><div class="c-label"><b>Society share certificate</b><small style="color:var(--warning)">Issuance by association pending — expected after 18 Jun committee meeting</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Parking allocation letter</b><small>Slots B1-42 &amp; B1-43 · EV-charger request for B1-42 noted as pending with FM</small></div></div>
+            <div class="check-row"><span class="cbox"></span><div class="c-label"><b>Utility name transfer — electricity (DGVCL)</b><small style="color:var(--warning)">Form signed by customer · submission to DGVCL this week</small></div><button class="btn secondary sm" onclick="toast('Reminder logged — liaison to submit DGVCL name-transfer form by 13 Jun')">Nudge</button></div>
+            <div class="check-row"><span class="cbox"></span><div class="c-label"><b>Utility name transfer — piped gas</b><small style="color:var(--warning)">Application drafted · awaiting customer ID copy</small></div><button class="btn wa sm" onclick="toast('WhatsApp request sent to Rohan Mehta — ID copy for gas name transfer')">Request ID</button></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>RWA welcome kit</b><small>House rules, helpline numbers, amenity booking guide, intercom directory</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Prepaid water meter activated (WeGot)</b><small>Unit 304 meter live · opening recharge done, balance visible in resident app</small></div></div>
+          </div>
+        </details>
+
+        <details class="collapse">
+          <summary>🏠 Post-possession <span class="count-pill good">4 items · all clear</span></summary>
+          <div class="c-body">
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Move-in gate pass issued</b><small>Movers pass + service-lift slot booked via guard app</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>DLP snag-reporting channel active</b><small>WhatsApp number shared — defects log themselves as snags (Phase 2 bot)</small></div><button class="btn ghost sm" onclick="dGo('builder','dlp-bot','dlp-bot')">Open</button></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>30-day courtesy visit scheduled</b><small>12 Jun 2026, 4 PM — site engineer + CRM exec · SNG-231 fix check included</small></div></div>
+            <div class="check-row"><span class="cbox ok">✓</span><div class="c-label"><b>Feedback survey sent</b><small>Possession-day NPS — Rohan rated 9/10, comment on tile snag logged</small></div></div>
+          </div>
+        </details>
+
+      </div>
+
+      <div class="stack" style="gap:16px">
+        <div class="card">
+          <h3 class="panel-title">Possession record</h3>
+          <dl class="kv">
+            <dt>Customer</dt><dd>Rohan Mehta · Unit 304</dd>
+            <dt>Possession date</dt><dd>14 May 2026</dd>
+            <dt>Open items</dt><dd style="color:var(--warning)">3 — tracked above</dd>
+            <dt>Record status</dt><dd>OTP-locked · append-only</dd>
+          </dl>
+          <div class="divider"></div>
+          <button class="btn secondary sm block" onclick="dGo('builder','snag-detail','snags')">Track SNG-231 fix (due 14 Jun) →</button>
+        </div>
+        <div class="ai-panel">
+          <b>🤖 AI completeness check — 91% confidence</b>
+          <p style="font-size:13px;margin:8px 0">Both utility transfers stall on the same step — customer ID copy. One WhatsApp request closes 2 of your 3 open items before the courtesy visit on 12 Jun.</p>
+          <div class="muted">Why: DGVCL + gas applications list the missing-attachment flag; courtesy visit is the natural collection point.</div>
+        </div>
+        <div class="crosslink">⛓ This kit + the signed walkthrough become the unit's permanent baseline in the <b>FM module</b> and the resident's document wallet in the <b>Resident app</b> — no "you never gave me the manual" calls in year 3.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 7. SNAG DETAIL ============ -->
+  <div id="builder-snag-detail" class="d-screen">
+    <div class="d-head">
+      <button class="back-btn" onclick="dGo('builder','snags','snags')">←</button>
+      <div>
+        <h1>SNG-231 — Cracked vitrified tiles (3), cabin area</h1>
+        <div class="sub">Unit 304 · VD Commercial · raised by customer Rohan Mehta during walkthrough</div>
+      </div>
+      <div class="actions">
+        <span class="badge assigned">Assigned · fix committed 14 Jun</span>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="stack" style="gap:16px">
+        <div class="card">
+          <h3 class="panel-title">Evidence — 3 geotagged photos</h3>
+          <div class="row">
+            <div class="photo-stub" onclick="toast('Photo 1 — crack across two tiles near cabin desk · geotag Unit 304')">🖼</div>
+            <div class="photo-stub" onclick="toast('Photo 2 — hairline crack, third tile · geotag Unit 304')">🖼</div>
+            <div class="photo-stub" onclick="toast('Photo 3 — wide shot, cabin floor · geotag Unit 304')">🖼</div>
+          </div>
+          <div class="divider"></div>
+          <dl class="kv">
+            <dt>Trade</dt><dd>Civil → flooring</dd>
+            <dt>DLP status</dt><dd>Within DLP · 7 months left (ends Jan 2027)</dd>
+            <dt>Severity</dt><dd>Medium — 30-day fix window</dd>
+            <dt>Recovery basis</dt><dd>Subcon work order + DLP clause 12.3</dd>
+            <dt>Recovery amount</dt><dd>₹9,500 (replace 3 tiles + labour, matched batch)</dd>
+          </dl>
+        </div>
+
+        <div class="card">
+          <h3 class="panel-title">Lifecycle</h3>
+          <ul class="timeline">
+            <li><div class="t-title">Raised by customer during walkthrough</div><div class="t-meta">14 May 2026 · Rohan Mehta · 3 geotagged photos · signed walkthrough record</div></li>
+            <li><div class="t-title">Assigned to Shree Flooring Co. · ₹9,500 recovery raised</div><div class="t-meta">16 May 2026 · auto-matched from flooring work-order scope · subcon acknowledged on WhatsApp</div></li>
+            <li><div class="t-title">Fix committed</div><div class="t-meta">By 14 Jun 2026 · materials (matched tile batch) confirmed in stock</div></li>
+            <li class="future"><div class="t-title">Customer accepts fix via WhatsApp</div><div class="t-meta">Photo proof sent to Rohan Mehta → one-tap accept closes snag &amp; confirms recovery</div></li>
+          </ul>
+        </div>
+
+        <div class="crosslink">⛓ If this tile defect recurs after Jan 2027, the <b>FM module</b> holds this record as evidence — recurrence within 24 months strengthens a latent-defect claim against Shree Flooring.</div>
+      </div>
+
+      <div class="stack" style="gap:16px">
+        <div class="card">
+          <h3 class="panel-title">Responsibility</h3>
+          <div class="row" style="margin-bottom:12px">
+            <span class="score-ring mid">71</span>
+            <div>
+              <b>Shree Flooring Co.</b>
+              <div class="muted">Flooring subcontractor · score 71/100</div>
+              <a href="javascript:void(0)" onclick="dGo('builder','subcons','subcons')" style="font-size:12px">View full scorecard →</a>
+            </div>
+          </div>
+          <dl class="kv" style="grid-template-columns:130px 1fr">
+            <dt>YTD snags</dt><dd>9</dd>
+            <dt>YTD recovery</dt><dd>₹84,000 owed</dd>
+            <dt>Disputes</dt><dd>0</dd>
+            <dt>Contract clause</dt><dd>DLP clause 12.3 — rectify or debit</dd>
+          </dl>
+        </div>
+
+        <div class="card">
+          <h3 class="panel-title">Actions</h3>
+          <div class="stack">
+            <button class="btn primary block" onclick="toast('Marked fixed — moved to re-inspection queue · verify within 3 days')">Mark fixed</button>
+            <button class="btn secondary block" onclick="dGo('builder','reinspect','snags')">Schedule re-inspection</button>
+            <button class="btn ghost block" onclick="toast('Dispute opened — Shree Flooring has 7 days to respond with evidence · moved to disputed queue')">Raise dispute</button>
+          </div>
+        </div>
+
+        <div class="ai-panel">
+          <b>🤖 AI pattern check — 84% confidence</b>
+          <p style="font-size:13px;margin:8px 0">2 more tile-crack snags on floors 3–4 used the same tile batch (lot SF-2025-118). Recommend batch inspection of remaining floor-3 stock before more handovers.</p>
+          <div class="muted">Why: identical batch number on 3 snag records; cracks all within 5 months of laying.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 8. RE-INSPECTION ============ -->
+  <div id="builder-reinspect" class="d-screen">
+    <div class="d-head">
+      <button class="back-btn" onclick="dGo('builder','snags','snags')">←</button>
+      <div>
+        <h1>Re-inspection queue</h1>
+        <div class="sub">Subcon claims "fixed" → you verify on site within 3 days · 2 awaiting</div>
+      </div>
+      <div class="actions"><span class="badge pending">SLA: verify within 3 days</span></div>
+    </div>
+
+    <div class="two-col">
+      <div class="stack" style="gap:16px">
+        <div class="card">
+          <h3 class="panel-title">Awaiting verification (2)</h3>
+          <div class="list-row">
+            <span class="badge progress">Claims fixed</span>
+            <div style="flex:1"><b>SNG-224 — Door alignment · Unit 412</b><div class="muted">Patel Woodworks · claimed fixed 8 Jun · <span style="color:var(--warning)">verify by 11 Jun (1 day left)</span></div></div>
+            <span class="muted">Selected ↓</span>
+          </div>
+          <div class="list-row">
+            <span class="badge progress">Claims fixed</span>
+            <div style="flex:1"><b>SNG-226 — Pantry tap leaking at base · Unit 309</b><div class="muted">Claimed fixed 9 Jun · verify by 12 Jun</div></div>
+            <button class="btn ghost sm" onclick="toast('SNG-226 inspection card opened')">Inspect</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="row between" style="margin-bottom:12px">
+            <h3 class="panel-title" style="margin-bottom:0">Inspection — SNG-224 · Door alignment, Unit 412</h3>
+            <span class="badge neutral">Patel Woodworks</span>
+          </div>
+          <div class="row" style="gap:16px;margin-bottom:14px;flex-wrap:wrap">
+            <div style="text-align:center">
+              <div class="photo-stub" style="width:120px;height:90px" onclick="toast('Before — door fouling frame at top hinge, 14 May 2026')">🖼 Before</div>
+              <div class="muted" style="margin-top:4px">Raised 14 May · gap 9mm</div>
+            </div>
+            <div style="font-size:20px;color:var(--ink-500)">→</div>
+            <div style="text-align:center">
+              <div class="photo-stub" style="width:120px;height:90px" onclick="toast('After — rehung on adjusted hinges, photo by Patel Woodworks 8 Jun 2026')">🖼 After</div>
+              <div class="muted" style="margin-top:4px">Subcon photo 8 Jun</div>
+            </div>
+          </div>
+          <div class="muted" style="margin-bottom:14px">On-site check: open/close 5 times, lock engagement, top + side gap with feeler gauge.</div>
+          <div class="row">
+            <button class="btn primary" onclick="toast('Verified PASS ✓ — WhatsApp acceptance prompt sent to Unit 412 customer · recovery ₹8,000 confirmed against Patel Woodworks')">Verify — pass</button>
+            <button class="btn danger" onclick="toast('Verification FAILED — SNG-224 reopened · re-fix at subcon cost + ₹1,500 penalty per clause 12.4 noted on Patel Woodworks scorecard')">Fail — reopen</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack" style="gap:16px">
+        <div class="card">
+          <h3 class="panel-title">Why the 3-day SLA</h3>
+          <p style="font-size:13px">If you don't verify within 3 days of a "fixed" claim, the snag auto-escalates to you on WhatsApp and the customer is told the fix is unverified. Slow verification is the #1 reason DLP recoveries get disputed later.</p>
+        </div>
+        <div class="card">
+          <h3 class="panel-title">This month</h3>
+          <dl class="kv" style="grid-template-columns:140px 1fr">
+            <dt>Verified pass</dt><dd>6</dd>
+            <dt>Failed → reopened</dt><dd>1 (WaterSeal, SNG-219)</dd>
+            <dt>Avg verify time</dt><dd>1.8 days</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 9. SUBCONTRACTORS ============ -->
+  <div id="builder-subcons" class="d-screen">
+    <div class="d-head">
+      <div>
+        <h1>Subcontractor scorecard</h1>
+        <div class="sub">DLP performance · VD Commercial · score = fix speed + first-time-fix + dispute behaviour</div>
+      </div>
+      <div class="actions">
+        <button class="btn primary" onclick="toast('Scorecard exported as tender annexure PDF — ready for Reneev Heights RFQ')">Export for tender</button>
+      </div>
+    </div>
+
+    <table class="dt" style="margin-bottom:20px">
+      <tr><th>Subcontractor</th><th>Trade</th><th>Score</th><th>Snags YTD</th><th>Disputes</th><th>Recovery owed</th><th>Status</th></tr>
+      <tr class="clickable" onclick="toast('Aircon Systems — 1 snag (SNG-218), fixed in 9 days, accepted, ₹18,000 settled. Clean record.')">
+        <td><b>Aircon Systems</b></td><td>HVAC</td><td><span class="score-ring" style="width:44px;height:44px;font-size:17px">84</span></td><td>1</td><td>0</td><td>₹0</td><td><span class="badge done">Settled ✓</span></td>
+      </tr>
+      <tr class="clickable" onclick="dGo('builder','snag-detail','snags')">
+        <td><b>Shree Flooring Co.</b></td><td>Flooring</td><td><span class="score-ring mid" style="width:44px;height:44px;font-size:17px">71</span></td><td>9</td><td>0</td><td>₹84,000</td><td><span class="badge assigned">Active fixes</span></td>
+      </tr>
+      <tr class="clickable" onclick="toast('Patel Woodworks — 5 snags YTD, 1 awaiting re-inspection (SNG-224), ₹46,000 owed')">
+        <td><b>Patel Woodworks</b></td><td>Doors</td><td><span class="score-ring mid" style="width:44px;height:44px;font-size:17px">68</span></td><td>5</td><td>0</td><td>₹46,000</td><td><span class="badge pending">1 in re-inspection</span></td>
+      </tr>
+      <tr class="clickable" onclick="dGo('builder','recovery','recovery')">
+        <td><b>WaterSeal Infra</b></td><td>Waterproofing</td><td><span class="score-ring low" style="width:44px;height:44px;font-size:17px">52</span></td><td>7</td><td style="color:var(--danger)"><b>3</b></td><td>₹2.1L</td><td><span class="badge disputed">Disputing</span></td>
+      </tr>
+    </table>
+
+    <div class="two-col">
+      <div class="card">
+        <h3 class="panel-title">Why this matters</h3>
+        <p style="font-size:13px;margin-bottom:10px"><b>Reneev Heights tenders open next month.</b> You now tender with data, not memory:</p>
+        <div class="alert-row"><span class="alert-dot" style="background:var(--success)"></span><div><b>Aircon Systems (84)</b> — pre-approve for Heights HVAC package; clean DLP record is a negotiation asset for them and you.</div></div>
+        <div class="alert-row"><span class="alert-dot" style="background:var(--warning)"></span><div><b>Shree (71) / Patel (68)</b> — invite, but write the 3-day re-fix SLA and batch-QC clause into the contract.</div></div>
+        <div class="alert-row"><span class="alert-dot" style="background:var(--danger)"></span><div><b>WaterSeal Infra (52)</b> — 3 disputes, ₹2.1L unrecovered → <b>retender waterproofing or impose 10% retention</b> instead of the standard 5%.</div></div>
+      </div>
+      <div class="stack" style="gap:16px">
+        <div class="card">
+          <h3 class="panel-title">Score inputs</h3>
+          <div class="meter-row"><span style="width:130px;font-size:12px">Fix speed</span><div class="prog" style="flex:1"><div style="width:74%"></div></div><span class="muted">40%</span></div>
+          <div class="meter-row"><span style="width:130px;font-size:12px">First-time fix</span><div class="prog" style="flex:1"><div style="width:68%"></div></div><span class="muted">30%</span></div>
+          <div class="meter-row"><span style="width:130px;font-size:12px">Dispute behaviour</span><div class="prog warn" style="flex:1"><div style="width:55%"></div></div><span class="muted">20%</span></div>
+          <div class="meter-row"><span style="width:130px;font-size:12px">Doc compliance</span><div class="prog" style="flex:1"><div style="width:80%"></div></div><span class="muted">10%</span></div>
+        </div>
+        <div class="crosslink">⛓ Scores also use post-handover ticket data from the <b>FM module</b> — a "fixed" snag that generates FM tickets in 60 days quietly drops the subcon's first-time-fix score.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 10. DLP RECOVERY ============ -->
+  <div id="builder-recovery" class="d-screen">
+    <div class="d-head">
+      <div>
+        <h1>DLP recovery ledger</h1>
+        <div class="sub">VD Commercial · recover rectification cost from responsible subcontractors</div>
+      </div>
+      <div class="actions">
+        <button class="btn primary" onclick="toast('Debit notes generated for 3 subcons — ₹1.42L total · sent for your e-sign, then WhatsApp + email to subcons')">Generate debit notes</button>
+      </div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="s-label">Pipeline</div><div class="s-value">₹4.6L</div><div class="s-delta warn">Across 14 open snags</div></div>
+      <div class="stat-card"><div class="s-label">Recovered YTD</div><div class="s-value">₹18,000</div><div class="s-delta up">Aircon Systems · settled</div></div>
+      <div class="stat-card"><div class="s-label">Disputed</div><div class="s-value">₹2.1L</div><div class="s-delta down">WaterSeal Infra · 3 disputes</div></div>
+      <div class="stat-card"><div class="s-label">Retention held</div><div class="s-value">₹12L</div><div class="s-delta up">Against DLP · releasable Jan 2027</div></div>
+    </div>
+
+    <table class="dt" style="margin-bottom:20px">
+      <tr><th>Subcontractor</th><th>Claimed</th><th>Accepted</th><th>Disputed</th><th>Recovered</th><th>Status</th></tr>
+      <tr class="clickable" onclick="toast('Aircon Systems ledger — SNG-218 ₹18,000 claimed, accepted, adjusted against May RA bill. Settled.')">
+        <td><b>Aircon Systems</b></td><td>₹18,000</td><td>₹18,000</td><td>—</td><td><b>₹18,000 ✓</b></td><td><span class="badge done">Settled</span></td>
+      </tr>
+      <tr class="clickable" onclick="toast('Shree Flooring ledger — 9 snags incl. SNG-231 (₹9,500) · ₹52,000 accepted, balance pending acknowledgement')">
+        <td><b>Shree Flooring Co.</b></td><td>₹84,000</td><td>₹52,000</td><td>—</td><td>₹0</td><td><span class="badge assigned">Acknowledged</span></td>
+      </tr>
+      <tr class="clickable" onclick="toast('Patel Woodworks ledger — ₹46,000 claimed incl. SNG-224 &amp; SNG-229 · awaiting re-inspection results')">
+        <td><b>Patel Woodworks</b></td><td>₹46,000</td><td>₹31,000</td><td>—</td><td>₹0</td><td><span class="badge pending">Pending verify</span></td>
+      </tr>
+      <tr class="clickable" onclick="toast('WaterSeal Infra ledger — disputes root cause on SNG-230, SNG-227 +1 · arbitration notice drafted under contract clause 18')">
+        <td><b>WaterSeal Infra</b></td><td>₹2.1L</td><td>₹0</td><td style="color:var(--danger)"><b>₹2.1L</b></td><td>₹0</td><td><span class="badge disputed">Disputed · arbitration</span></td>
+      </tr>
+      <tr class="clickable" onclick="toast('Misc civil &amp; MEP subcons (6) — ₹1.2L across smaller snags')">
+        <td><b>Other subcons (6)</b></td><td>₹1.2L</td><td>₹74,000</td><td>—</td><td>₹0</td><td><span class="badge open">Open</span></td>
+      </tr>
+    </table>
+
+    <div class="two-col">
+      <div class="card">
+        <h3 class="panel-title">WaterSeal Infra — dispute note</h3>
+        <p style="font-size:13px;margin-bottom:10px">WaterSeal disputes root cause on all 3 seepage snags (incl. <b>SNG-230, ₹35,000</b>), claiming civil-structure cracks, not membrane failure. Independent waterproofing consultant report commissioned 4 Jun. If unresolved by 30 Jun → invoke <b>arbitration under contract clause 18</b>; meanwhile their ₹3.2L retention stays frozen.</p>
+        <div class="row">
+          <button class="btn secondary sm" onclick="toast('Consultant report due 16 Jun — reminder set')">Track consultant report</button>
+          <button class="btn ghost sm" onclick="toast('Arbitration notice draft opened — pre-filled with 3 snag records + photo evidence')">Draft arbitration notice</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3 class="panel-title">Monthly recovery trend</h3>
+        <div class="row" style="align-items:flex-end;gap:18px">
+          <div class="spark" style="height:60px">
+            <i style="height:8px"></i><i style="height:14px"></i><i style="height:30px"></i><i style="height:22px"></i><i style="height:38px"></i><i style="height:52px"></i>
+          </div>
+          <div class="muted">Jan → Jun 2026<br>Claims raised monthly (₹). Recovery is usually adjusted against RA bills or retention release.</div>
+        </div>
+        <div class="divider"></div>
+        <div class="muted">Retention held: <b>₹12L</b> across all subcons, releasable Jan 2027 net of accepted recoveries.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 11. ANALYTICS ============ -->
+  <div id="builder-analytics" class="d-screen">
+    <div class="d-head">
+      <div>
+        <h1>Quality analytics</h1>
+        <div class="sub">Cross-project benchmarks · what your DLP data teaches the next project</div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" onclick="toast('Quality report PDF exported — board pack format')">Export report</button>
+      </div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="s-label">Snags / 100 units — VD</div><div class="s-value">29</div><div class="s-delta up">Industry premium-commercial avg: 45</div></div>
+      <div class="stat-card"><div class="s-label">Cost of poor quality</div><div class="s-value">₹3,833</div><div class="s-delta warn">per unit (₹4.6L ÷ 120 units)</div></div>
+      <div class="stat-card"><div class="s-label">Avg fix time</div><div class="s-value">11 days</div><div class="s-delta up">vs 21-day industry norm</div></div>
+      <div class="stat-card"><div class="s-label">Recovery rate</div><div class="s-value">54%</div><div class="s-delta warn">accepted ÷ claimed · disputes drag this</div></div>
+    </div>
+
+    <div class="two-col">
+      <div class="stack" style="gap:16px">
+        <div class="card">
+          <h3 class="panel-title">Top defect categories — VD Commercial</h3>
+          <div class="meter-row"><span style="width:140px;font-size:13px">Flooring</span><div class="prog" style="flex:1"><div style="width:28%"></div></div><b style="width:42px;text-align:right">28%</b></div>
+          <div class="meter-row"><span style="width:140px;font-size:13px">Waterproofing</span><div class="prog warn" style="flex:1"><div style="width:22%"></div></div><b style="width:42px;text-align:right">22%</b></div>
+          <div class="meter-row"><span style="width:140px;font-size:13px">Doors &amp; windows</span><div class="prog" style="flex:1"><div style="width:18%"></div></div><b style="width:42px;text-align:right">18%</b></div>
+          <div class="meter-row"><span style="width:140px;font-size:13px">Electrical</span><div class="prog" style="flex:1"><div style="width:12%"></div></div><b style="width:42px;text-align:right">12%</b></div>
+          <div class="meter-row"><span style="width:140px;font-size:13px">HVAC</span><div class="prog" style="flex:1"><div style="width:9%"></div></div><b style="width:42px;text-align:right">9%</b></div>
+          <div class="meter-row"><span style="width:140px;font-size:13px">Others</span><div class="prog" style="flex:1"><div style="width:11%"></div></div><b style="width:42px;text-align:right">11%</b></div>
+        </div>
+        <div class="card">
+          <h3 class="panel-title">Repeat-offender flags</h3>
+          <div class="alert-row"><span class="alert-dot" style="background:var(--danger)"></span><div><b>WaterSeal Infra</b> — 3 disputes, 0% acceptance, also flagged on 2 earlier Reneev projects (legacy records). <a href="javascript:void(0)" onclick="dGo('builder','subcons','subcons')">Scorecard →</a></div></div>
+          <div class="alert-row"><span class="alert-dot" style="background:var(--warning)"></span><div><b>Tile batch SF-2025-118 (Shree Flooring)</b> — 3 crack snags from one batch; specify batch QC sampling in Heights tender.</div></div>
+          <div class="alert-row"><span class="alert-dot" style="background:var(--success)"></span><div><b>Aircon Systems</b> — single snag, fast fix, settled. Pre-approve.</div></div>
+        </div>
+      </div>
+
+      <div class="stack" style="gap:16px">
+        <div class="ai-panel">
+          <b>🤖 AI spec recommendation — 81% confidence</b>
+          <p style="font-size:13px;margin:8px 0">Waterproofing snags cluster on west-facing window junctions (5 of 7). For Reneev Heights, specify a secondary sill-sealant detail and a flood test per floor before tiling — modelled to cut waterproofing snags ~40%.</p>
+          <div class="muted">Why: geotagged snag positions correlate with monsoon-facing elevation; same pattern in 2 peer projects on the Brij network.</div>
+        </div>
+        <div class="card">
+          <h3 class="panel-title">Feeds the next project</h3>
+          <p style="font-size:13px">These benchmarks auto-attach to the <b>Reneev Heights</b> tender pack: defect-category history sets QC hold points, subcon scores set the bidder list, and cost-of-poor-quality justifies retention terms. Quality data compounds across projects.</p>
+          <button class="btn secondary sm" onclick="toast('Benchmark annexure attached to Reneev Heights tender pack')">Attach to Heights tender</button>
+        </div>
+        <div class="crosslink">⛓ Post-DLP, the <b>FM module</b> keeps reporting defect recurrence — your 24-month quality picture, not just 12.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 12. WHATSAPP DLP BOT ============ -->
+  <div id="builder-dlp-bot" class="d-screen">
+    <div class="d-head">
+      <div>
+        <h1>WhatsApp DLP bot</h1>
+        <div class="sub">Customers report defects on the building's WhatsApp number — snags log themselves</div>
+      </div>
+      <div class="actions"><span class="layer-chip">Coming · Phase 2</span></div>
+    </div>
+
+    <div class="two-col">
+      <div class="card" style="max-width:520px">
+        <div class="muted" style="margin-bottom:10px">VD Commercial · +91 91XXX 00120 (Brij WhatsApp Business)</div>
+        <div class="chat">
+          <div class="bubble them">🖼 [photo — cracked tile]<br>tile crack in my office, please fix<div class="b-meta">Rohan-ish customer · 11:02 AM</div></div>
+          <div class="bubble me">Got it — I can log this as a DLP snag for Reneev Developers. Which unit, and where exactly in the unit?<div class="b-meta">Brij bot · 11:02 AM</div></div>
+          <div class="bubble them">Unit 304, cabin area near the desk<div class="b-meta">11:03 AM</div></div>
+          <div class="bubble me">✅ <b>SNG-233 logged</b> — "Tile crack, cabin area — Unit 304". Photo attached, builder notified. Expected response within 48 hrs; you'll get updates here. Reply STATUS anytime.<div class="b-meta">Brij bot · 11:03 AM</div></div>
+        </div>
+      </div>
+      <div class="stack" style="gap:16px">
+        <div class="card">
+          <h3 class="panel-title">What the bot does</h3>
+          <div class="alert-row"><span class="alert-dot" style="background:var(--teal-500)"></span><div>Creates a draft snag from any photo + message; AI tags trade and severity.</div></div>
+          <div class="alert-row"><span class="alert-dot" style="background:var(--teal-500)"></span><div>Asks only what's missing (unit, location) — no app install for customers.</div></div>
+          <div class="alert-row"><span class="alert-dot" style="background:var(--teal-500)"></span><div>Dedupes against open snags before creating (would have caught SNG-231 re-reports).</div></div>
+          <div class="alert-row"><span class="alert-dot" style="background:var(--teal-500)"></span><div>Sends fix-proof photos back for one-tap customer acceptance.</div></div>
+        </div>
+        <div class="card">
+          <h3 class="panel-title">Pilot interest</h3>
+          <p style="font-size:13px;margin-bottom:10px">Phase 2 — targeted before Reneev Heights handover (Aug 2026), where 240 residential customers make WhatsApp-first reporting essential.</p>
+          <button class="btn primary sm" onclick="toast('Noted — Aditya flagged WhatsApp DLP bot for the Reneev Heights pilot')">Flag for Heights pilot</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </main>
+</div>
+
+<script src="brij.js"></script>
+</body>
+</html>

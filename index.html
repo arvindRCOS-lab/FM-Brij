@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brij — Prototype v0.4</title>
+<link rel="stylesheet" href="brij.css">
+<style>
+  /* index-only refinements — token colors only, no shadows on cream */
+  .hero{max-width:1060px;margin:0 auto;padding:76px 24px 8px;text-align:center}
+  .hero .eyebrow{font-size:11.5px;letter-spacing:2.2px;margin-bottom:14px}
+  .hero h1{font-family:var(--display);font-weight:800;font-size:54px;line-height:58px;letter-spacing:-1.8px;margin-bottom:20px}
+  .hero p{max-width:600px;margin:0 auto;color:var(--ink-500);font-size:16px;line-height:26px}
+  .sect{max-width:1060px;margin:0 auto;padding:56px 24px 0}
+  .sect-head{text-align:center;margin-bottom:26px}
+  .sect-head h2{font-size:30px;letter-spacing:-.8px;margin-top:4px}
+  .sect-head .muted{font-size:13px;margin-top:6px}
+  .personas{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:980px){.personas{grid-template-columns:1fr}.hero h1{font-size:38px;line-height:42px}}
+  .p-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:26px 24px 22px;text-decoration:none;color:var(--ink-700);display:block;transition:border-color .15s,transform .15s}
+  .p-card:hover{border-color:var(--teal-500);transform:translateY(-3px)}
+  .p-card .ico{font-size:28px}
+  .p-card h3{font-size:19px;letter-spacing:-.3px;margin:10px 0 2px}
+  .p-card .who{font-size:11.5px;color:var(--teal-500);font-weight:700;margin-bottom:10px}
+  .p-card .say{font-size:14px;line-height:21px;color:var(--ink-700);margin-bottom:12px}
+  .hl{display:inline-block;font-size:11.5px;font-weight:500;color:var(--teal-700);background:var(--teal-50);border-radius:var(--r-pill);padding:3px 11px;margin:0 4px 6px 0}
+  .demo-wrap{max-width:760px;margin:0 auto}
+  .demo-step b{display:block;font-family:var(--display);font-size:15px;color:var(--ink-900);letter-spacing:-.2px}
+  .demo-step .muted{margin-top:2px;line-height:18px}
+  .moat{max-width:860px;margin:48px auto 0;padding:0 24px;text-align:center;font-size:13px;line-height:22px;color:var(--ink-500)}
+  .moat b{color:var(--teal-700)}
+  .foot{text-align:center;font-size:12px;color:var(--ink-500);padding:36px 24px 56px}
+</style>
+</head>
+<body>
+<div class="proto-bar">
+  <a class="proto-logo" href="index.html">brij<span>.</span></a>
+  <div class="proto-tag">Prototype v0.4 · clickable, no backend</div>
+  <div class="role-links">
+    <a href="resident.html">Resident</a>
+    <a href="fm.html">FM Manager</a>
+    <a href="builder.html">Builder</a>
+    <a href="vendor.html">Vendor</a>
+    <a href="guard.html">Guard</a>
+  </div>
+</div>
+
+<div class="hero">
+  <span class="eyebrow">Building Operating System · Prototype v0.4</span>
+  <h1>One building. One thread.<br>From handover day to every day.</h1>
+  <p>Brij carries a building's data across the moment everyone else loses it — handover. Snags become asset history; complaints become evidence; every payment has a trail.</p>
+</div>
+
+<div class="sect">
+  <div class="sect-head">
+    <span class="eyebrow">Six roles · one demo world</span>
+    <h2>Choose your seat</h2>
+    <div class="muted">Same building everywhere: VD Commercial, Vesu, Surat — 120 units, 186 assets, one connected story.</div>
+  </div>
+  <div class="personas">
+    <a class="p-card" href="resident.html">
+      <span class="ico">🏠</span>
+      <h3>Resident</h3>
+      <div class="who">Rohan Mehta · Unit 304</div>
+      <div class="say">"I live or work here — I want problems fixed and bills easy."</div>
+      <span class="hl">Live ticket timeline</span><span class="hl">Gate passes &amp; parcels</span><span class="hl">Dues &amp; autopay</span>
+    </a>
+    <a class="p-card" href="fm.html">
+      <span class="ico">🛠️</span>
+      <h3>FM Manager</h3>
+      <div class="who">Kavita Rao · UrbanServe Facilities</div>
+      <div class="say">"I run the building day-to-day."</div>
+      <span class="hl">AI-routed tickets</span><span class="hl">186 assets &amp; PPM</span><span class="hl">Brij Agents</span>
+    </a>
+    <a class="p-card" href="fm-business.html">
+      <span class="ico">📈</span>
+      <h3>FM Business</h3>
+      <div class="who">Kavita Rao · same login, money lens</div>
+      <div class="say">"I watch the money — collections, budgets, compliance."</div>
+      <span class="hl">Collections &amp; defaulters</span><span class="hl">GST cliff &amp; TDS</span><span class="hl">Tally export</span>
+    </a>
+    <a class="p-card" href="builder.html">
+      <span class="ico">🏗️</span>
+      <h3>Builder</h3>
+      <div class="who">Aditya Reneev · Reneev Developers</div>
+      <div class="say">"I built it and stand behind it for 5 years."</div>
+      <span class="hl">OTP sign-off</span><span class="hl">DLP recovery ₹4.6L</span><span class="hl">Subcon scorecards</span>
+    </a>
+    <a class="p-card" href="vendor.html">
+      <span class="ico">🔧</span>
+      <h3>Vendor <span class="badge terra">Phase 2</span></h3>
+      <div class="who">Sanjay Patil · AquaServ Solutions</div>
+      <div class="say">"Jobs come to me — I quote, fix, and get paid Friday."</div>
+      <span class="hl">Quote in-app</span><span class="hl">Photo-proof jobs</span><span class="hl">Razorpay payouts</span>
+    </a>
+    <a class="p-card" href="guard.html">
+      <span class="ico">🛡️</span>
+      <h3>Guard <span class="badge terra">Phase 2</span></h3>
+      <div class="who">Vijay Singh · Gate 1</div>
+      <div class="say">"I decide who gets in — in under 10 seconds."</div>
+      <span class="hl">Scan QR / 6-digit pass</span><span class="hl">WhatsApp walk-ins</span><span class="hl">Staff in/out</span>
+    </a>
+  </div>
+</div>
+
+<div class="sect">
+  <div class="demo-wrap">
+    <div class="card" style="padding:28px 30px">
+      <span class="eyebrow">Follow one story across every role</span>
+      <h3 class="panel-title" style="font-size:22px;letter-spacing:-.5px;margin-bottom:6px">The 60-second guided demo</h3>
+      <div class="muted" style="margin-bottom:10px">Each step opens the exact screen — click through in order.</div>
+      <div class="demo-steps">
+        <a class="demo-step" href="resident.html#complaint-detail">
+          <span class="num"></span>
+          <div><b>A resident's AC fails — watch the live ticket</b>
+            <div class="muted">Rohan Mehta, Unit 304, raises T-1042 with photos · technician on site by 11:40 AM.</div></div>
+        </a>
+        <a class="demo-step" href="fm.html#ticket-detail">
+          <span class="num"></span>
+          <div><b>The FM queue catches it — AI routed, 92%</b>
+            <div class="muted">Dispatch Agent tags HVAC · High, links asset AHU-02, assigns Ramesh K.</div></div>
+        </a>
+        <a class="demo-step" href="fm.html#asset-detail">
+          <span class="num"></span>
+          <div><b>The asset remembers its DLP snag</b>
+            <div class="muted">AHU-02's history carries SNG-218 from builder days — ₹18,000 already recovered.</div></div>
+        </a>
+        <a class="demo-step" href="builder.html#snag-detail">
+          <span class="num"></span>
+          <div><b>The builder bills the subcontractor ₹9,500</b>
+            <div class="muted">Cracked tiles in Unit 304 (SNG-231) → Shree Flooring Co. pays for the fix.</div></div>
+        </a>
+        <a class="demo-step" href="builder.html#walkthrough">
+          <span class="num"></span>
+          <div><b>Walk a unit with the buyer — 90-point checklist, OTP sign-off</b>
+            <div class="muted">Room by room, snags pinned with photos; the customer signs off with an OTP.</div></div>
+        </a>
+        <a class="demo-step" href="guard.html#scan-result">
+          <span class="num"></span>
+          <div><b>The courier's pass scans at Gate 1</b>
+            <div class="muted">Pass 482917 verifies Suresh Kumar in seconds — Rohan is notified on WhatsApp.</div></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="moat">
+  Others claim continuity — <b>Brij executes it</b>: OTP sign-off · DLP recovery ledger · marketplace payouts · GST/TDS/Tally built in.
+</div>
+
+<div class="foot">Prototype v0.4 · clickable demo data · VD Commercial, Surat</div>
+
+<script src="brij.js"></script>
+</body>
+</html>

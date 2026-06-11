@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brij — FM Manager</title>
+<link rel="stylesheet" href="brij.css">
+</head>
+<body data-prefix="fm">
+<div class="proto-bar">
+  <a class="proto-logo" href="index.html">brij<span>.</span></a>
+  <div class="proto-tag">Prototype v0.4 · FM Manager</div>
+  <div class="role-links">
+    <a href="resident.html">Resident</a>
+    <a href="fm.html" class="active">FM Manager</a>
+    <a href="builder.html">Builder</a>
+    <a href="vendor.html">Vendor</a>
+    <a href="guard.html">Guard</a>
+  </div>
+</div>
+
+<div class="shell">
+<nav class="sidebar">
+  <div class="s-brand">brij<span style="color:#7FCFCB">.</span></div>
+  <div class="s-building">VD Commercial · FM Manager — Kavita Rao</div>
+  <button id="fm-nav-dash" class="active" onclick="dGo('fm','dash','dash')">📊 Dashboard</button>
+  <div class="s-section">Daily operations</div>
+  <button id="fm-nav-tickets" onclick="dGo('fm','tickets','tickets')">🎫 Tickets</button>
+  <button id="fm-nav-assets" onclick="dGo('fm','assets','assets')">🏗 Assets</button>
+  <button id="fm-nav-ppm" onclick="dGo('fm','ppm','ppm')">🗓 PPM Calendar</button>
+  <button id="fm-nav-checklist" onclick="dGo('fm','checklist','checklist')">✅ Checklists</button>
+  <button id="fm-nav-ptw" onclick="dGo('fm','ptw','ptw')">🔥 Permits</button>
+  <button id="fm-nav-inventory" onclick="dGo('fm','inventory','inventory')">📦 Inventory</button>
+  <button id="fm-nav-meters" onclick="dGo('fm','meters','meters')">⚡ Meters</button>
+  <div class="s-section">Money</div>
+  <a class="s-link" href="fm-business.html#collections">🧾 Collections</a>
+  <a class="s-link" href="fm-business.html#gst">📑 GST engine</a>
+  <a class="s-link" href="fm-business.html#finance">₹ Finance &amp; audit</a>
+  <a class="s-link" href="fm-business.html#vendors">🤝 Vendors</a>
+  <div class="s-section">People &amp; site</div>
+  <a class="s-link" href="fm-business.html#workforce">👷 Workforce</a>
+  <a class="s-link" href="fm-business.html#taskboard">🗂 Task board</a>
+  <button id="fm-nav-gate" onclick="dGo('fm','gate','gate')">🚧 Gate &amp; visitors</button>
+  <button id="fm-nav-announce" onclick="dGo('fm','announce','announce')">📣 Announcements</button>
+  <div class="s-section">Intelligence</div>
+  <button id="fm-nav-agents" onclick="dGo('fm','agents','agents')">🤖 Brij Agents</button>
+  <a class="s-link" href="fm-business.html#benchmark">📈 Benchmarks</a>
+  <a class="s-link" href="fm-business.html#energy">🔌 Energy &amp; IoT</a>
+  <a class="s-link" href="fm-business.html#esg">🌿 ESG</a>
+  <a class="s-link" href="fm-business.html#compliance">🛡 Compliance</a>
+  <div class="s-section">Setup</div>
+  <a class="s-link" href="fm-business.html#settings">⚙️ SLA &amp; escalation</a>
+  <div class="s-foot">Building: <b style="color:#fff">VD Commercial ▾</b><br>also Reneev Heights · Aspen Medicity</div>
+</nav>
+
+<main class="d-main">
+
+<!-- ============================================================ 1. DASHBOARD -->
+<div id="fm-dash" class="d-screen active">
+  <div class="d-head">
+    <div>
+      <span class="eyebrow">FM · Dashboard</span>
+      <h1>Command Center</h1>
+      <div class="sub">VD Commercial · Wed 10 Jun 2026 · 2:05 PM IST · 186 assets · 120 units</div>
+    </div>
+    <div class="actions">
+      <button class="btn secondary sm" onclick="toast('Daily ops report (PDF) queued — will be on WhatsApp in ~1 min')">📄 Daily report</button>
+      <button class="btn primary sm" onclick="dGo('fm','tickets','tickets')">+ New ticket</button>
+    </div>
+  </div>
+
+  <div class="intro-bar"><span class="ib-ico">💡</span><div>Start here every morning: <b>red items are SLA risks</b>, the rest can wait. Everything you run — operations, money, people — lives in the one sidebar on the left.</div></div>
+
+  <div class="stat-grid">
+    <div class="stat-card"><div class="s-label">Open tickets</div><div class="s-value">24</div><div class="s-delta warn">3 unassigned · 1 BMS auto-created</div></div>
+    <div class="stat-card"><div class="s-label">SLA breaches (June)</div><div class="s-value">3</div><div class="s-delta down">1 active now — T-1041</div></div>
+    <div class="stat-card"><div class="s-label">Collections · June</div><div class="s-value">₹8.4L</div><div class="s-delta">of ₹11.2L billed · 75%</div>
+      <div class="prog warn" style="margin-top:8px"><div style="width:75%"></div></div></div>
+    <div class="stat-card"><div class="s-label">PPM due (14 days)</div><div class="s-value">7</div><div class="s-delta warn">1 overdue · DG-01 today</div></div>
+    <div class="stat-card"><div class="s-label">Staff on duty</div><div class="s-value">12/14</div><div class="s-delta">2 on leave (HK)</div></div>
+  </div>
+
+  <div class="card" style="margin-bottom:20px;padding:14px 18px">
+    <div class="row between" style="flex-wrap:wrap;gap:8px">
+      <h3 class="panel-title" style="margin-bottom:0">₹ Money at a glance</h3>
+      <span class="muted">the money side lives in this same sidebar — under “Money”</span>
+    </div>
+    <div class="three-col" style="margin-top:12px">
+      <div class="row" style="gap:10px;align-items:center">
+        <span style="font-size:18px">🧾</span>
+        <div style="flex:1"><b>Collections 75%</b><br><span class="muted">₹8.4L of ₹11.2L billed · June</span></div>
+        <a class="btn ghost sm" href="fm-business.html#collections">Open</a>
+      </div>
+      <div class="row" style="gap:10px;align-items:center">
+        <span style="font-size:18px">⏰</span>
+        <div style="flex:1"><b>Overdue ₹1.1L</b><br><span class="muted">9 units · worst Unit 702, 26 days</span></div>
+        <a class="btn ghost sm" href="fm-business.html#collections">Chase</a>
+      </div>
+      <div class="row" style="gap:10px;align-items:center">
+        <span style="font-size:18px">🤝</span>
+        <div style="flex:1"><b>Payouts due ₹2.3L</b><br><span class="muted">vendor settlement batch · Fri 12 Jun</span></div>
+        <a class="btn ghost sm" href="fm-business.html#vendors">Vendors</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="stack">
+      <div class="card">
+        <div class="row between"><h3 class="panel-title">Needs attention <span class="badge ai">AI prioritised</span></h3><span class="muted">ranked by SLA + asset criticality</span></div>
+        <div class="alert-row" style="cursor:pointer" onclick="dGo('fm','ticket-detail','tickets')">
+          <span class="alert-dot" style="background:var(--danger)"></span>
+          <div><b>T-1042 — AC not cooling, Unit 304</b> · SLA today 6:00 PM — <span style="color:var(--danger);font-weight:700">3h 55m left</span><br>
+          <span class="muted">Ramesh K. on site since 11:40 AM · linked asset AHU-02 · open detail →</span></div>
+        </div>
+        <div class="alert-row" style="cursor:pointer" onclick="dGo('fm','assets','assets')">
+          <span class="alert-dot" style="background:var(--terra)"></span>
+          <div><b>Anomaly A-07 <span class="badge ai">AI</span></b> — 4 water-pressure complaints, floors 6–8, last 48h → suspect <b>Booster Pump P-04</b> (Grundfos, Basement 2).<br>
+          <span class="muted">Suggested: inspect before failure · see asset register → (full history on asset detail)</span></div>
+        </div>
+        <div class="alert-row" style="cursor:pointer" onclick="dGo('fm','assets','assets')">
+          <span class="alert-dot" style="background:var(--danger)"></span>
+          <div><b>STP-01 (Thermax 50KLD) — BROKEN</b> <span class="badge critical">down</span> <span class="badge neutral">IoT: offline alarm · Phase 2</span><br>
+          <span class="muted">Tanker bridging arranged · linked ticket T-1041 (SLA breached 2h, unassigned)</span></div>
+        </div>
+        <div class="alert-row" style="cursor:pointer" onclick="dGo('fm','tickets','tickets')">
+          <span class="alert-dot" style="background:var(--danger)"></span>
+          <div><b>BMS-114 — Chiller-01 high discharge pressure</b> · 4:12 AM <span class="badge ai">BMS→ticket · BACnet/IP</span><br>
+          <span class="muted">Auto-created ticket <b>T-1044</b> (Critical, asset CH-01) · acknowledged by night shift 4:19 AM · open tickets →</span></div>
+        </div>
+        <div class="alert-row">
+          <span class="alert-dot" style="background:var(--warning)"></span>
+          <div><b>AMC expiry — Lift 1 &amp; 2 (Kone)</b> expires 30 Jun 2026.<br>
+          <span class="muted">Renewal quote pending</span> · <a href="#" onclick="event.preventDefault();toast('Renewal reminder sent to Kone account manager · quote follow-up logged')">send reminder</a> · <a href="fm-business.html#vendors">compare vendors ↗</a></div>
+        </div>
+        <div class="alert-row" style="cursor:pointer" onclick="dGo('fm','tickets','tickets')">
+          <span class="alert-dot" style="background:var(--info)"></span>
+          <div><b>2 tickets in needs-review queue</b> — AI confidence below 70% (T-1039 at 54%).<br>
+          <span class="muted">Manual category + priority confirmation needed → tickets queue</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="row between"><h3 class="panel-title">SLA heatmap — breaches by category, last 7 days</h3><span class="muted">cell = breach count</span></div>
+        <div class="stack" style="gap:6px">
+          <div class="row" style="gap:6px"><span class="muted" style="width:92px"></span>
+            <span class="heat h0" style="background:transparent">Thu</span><span class="heat h0" style="background:transparent">Fri</span><span class="heat h0" style="background:transparent">Sat</span><span class="heat h0" style="background:transparent">Sun</span><span class="heat h0" style="background:transparent">Mon</span><span class="heat h0" style="background:transparent">Tue</span><span class="heat h0" style="background:transparent">Wed</span></div>
+          <div class="row" style="gap:6px"><span class="muted" style="width:92px">HVAC</span><span class="heat h0">0</span><span class="heat h1">0</span><span class="heat h0">0</span><span class="heat h0">0</span><span class="heat h1">0</span><span class="heat h2">1</span><span class="heat h2">1</span></div>
+          <div class="row" style="gap:6px"><span class="muted" style="width:92px">Plumbing</span><span class="heat h1">0</span><span class="heat h0">0</span><span class="heat h2">1</span><span class="heat h2">1</span><span class="heat h3">2</span><span class="heat h2">1</span><span class="heat h2">1</span></div>
+          <div class="row" style="gap:6px"><span class="muted" style="width:92px">Electrical</span><span class="heat h0">0</span><span class="heat h0">0</span><span class="heat h0">0</span><span class="heat h1">0</span><span class="heat h0">0</span><span class="heat h0">0</span><span class="heat h0">0</span></div>
+          <div class="row" style="gap:6px"><span class="muted" style="width:92px">STP / Civil</span><span class="heat h0">0</span><span class="heat h0">0</span><span class="heat h0">0</span><span class="heat h0">0</span><span class="heat h2">1</span><span class="heat h3">2</span><span class="heat h3">1</span></div>
+          <div class="row" style="gap:6px"><span class="muted" style="width:92px">Housekeeping</span><span class="heat h0">0</span><span class="heat h1">0</span><span class="heat h0">0</span><span class="heat h0">0</span><span class="heat h0">0</span><span class="heat h1">0</span><span class="heat h0">0</span></div>
+        </div>
+        <div class="muted" style="margin-top:10px">Plumbing cluster floors 6–8 matches anomaly A-07 · STP rows driven by STP-01 breakdown</div>
+      </div>
+    </div>
+
+    <div class="stack">
+      <div class="card">
+        <h3 class="panel-title">Today · Wed 10 Jun</h3>
+        <div class="list-row"><span>🛠</span><div style="flex:1"><b>DG-01 monthly load test</b><br><span class="muted">PPM due today · Cummins 500kVA · checklist #14</span></div><button class="btn primary sm" onclick="dGo('fm','checklist','checklist')">Start</button></div>
+        <div class="list-row"><span>🚶</span><div style="flex:1"><b>Visitor volume: 34 passes</b><br><span class="muted">12 currently inside · courier 482917 expected 2:30 PM</span></div><button class="btn ghost sm" onclick="dGo('fm','gate','gate')">Gate →</button></div>
+        <div class="list-row"><span>📦</span><div style="flex:1"><b>Deliveries peak 2–4 PM</b><br><span class="muted">Lakshmi (front desk) briefed · service lift reserved</span></div></div>
+        <div class="list-row"><span>🧾</span><div style="flex:1"><b>CAM dues follow-up</b><br><span class="muted">9 overdue units · worst Unit 702, ₹13,100, 26 days</span></div><a class="btn ghost sm" href="fm-business.html#finance">Finance ↗</a></div>
+      </div>
+
+      <div class="card">
+        <div class="row between"><h3 class="panel-title">Live · IoT feed</h3><span class="badge neutral">Coming · Phase 2</span></div>
+        <div class="meter-row"><span style="width:120px">DG-01 fuel</span><div class="prog warn" style="flex:1"><div style="width:64%"></div></div><b>64%</b></div>
+        <div class="meter-row"><span style="width:120px">Energy today</span><span class="spark"><i style="height:12px"></i><i style="height:16px"></i><i style="height:10px"></i><i style="height:20px"></i><i style="height:24px"></i><i style="height:18px"></i><i style="height:26px"></i></span><b style="margin-left:auto">412 kWh</b></div>
+        <div class="meter-row"><span style="width:120px">Water today</span><span class="spark"><i style="height:10px"></i><i style="height:12px"></i><i style="height:11px"></i><i style="height:13px"></i><i style="height:12px"></i><i style="height:18px"></i><i style="height:24px"></i></span><b style="margin-left:auto">38 KL</b></div>
+        <div class="meter-row"><span style="width:120px">STP-01</span><span class="badge live">offline alarm</span><span class="muted" style="margin-left:auto">since 8 Jun 11:32 PM</span></div>
+        <div class="muted" style="margin-top:10px">Sensors auto-feed meters &amp; anomalies in Phase 2 — today readings are manual → <a href="#" onclick="event.preventDefault();dGo('fm','meters','meters')">Meters</a></div>
+      </div>
+
+      <div class="card">
+        <div class="row between"><h3 class="panel-title">🤖 Brij Agents</h3><span class="badge ai">3 active</span></div>
+        <div class="list-row"><span>🚦</span><div style="flex:1"><b>Dispatch Agent</b> — routed 18 tickets this week · avg confidence 91%</div></div>
+        <div class="list-row"><span>🛡</span><div style="flex:1"><b>Compliance Agent</b> — watching lift-license renewal (30 Jun)</div></div>
+        <div class="list-row"><span>₹</span><div style="flex:1"><b>Finance Agent</b> — 1 invoice held for review (SparkSafe)</div></div>
+        <button class="btn secondary sm block" style="margin-top:8px" onclick="dGo('fm','agents','agents')">Open agents console →</button>
+      </div>
+
+      <div class="crosslink">⛓ Builder module: this building inherited 186 tagged assets + open DLP snags at handover (Jan 2026). Recovery pipeline visible to builder: ₹4.6L.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ 2. TICKETS -->
+<div id="fm-tickets" class="d-screen">
+  <div class="d-head">
+    <div><span class="eyebrow">FM · Daily operations</span><h1>Tickets</h1><div class="sub">24 open · 3 unassigned · 1 active SLA breach · auto-triaged by AI on intake · 1 auto-created from BMS</div></div>
+    <div class="actions">
+      <button class="btn secondary sm" onclick="toast('CSV export queued — 24 open + 148 closed tickets, June 2026')">⬇ Export</button>
+      <button class="btn primary sm" onclick="toast('Manual ticket form opened — phone/walk-in intake (prototype)')">+ New ticket</button>
+    </div>
+  </div>
+
+  <div class="intro-bar"><span class="ib-ico">💡</span><div>Every complaint lands here, already categorised by AI. Work top-down: <b>unassigned and SLA-risk first</b> — assign or escalate in two clicks.</div></div>
+
+  <div class="row between" style="margin-bottom:14px;flex-wrap:wrap;gap:10px">
+    <div class="filter-chips">
+      <span class="chip on" onclick="toggleChip(this)">All open</span>
+      <span class="chip" onclick="toggleChip(this)">Unassigned (3)</span>
+      <span class="chip" onclick="toggleChip(this)">SLA risk (2)</span>
+      <span class="chip" onclick="toggleChip(this)">Needs review (2)</span>
+      <span class="chip" onclick="toggleChip(this)">HVAC</span>
+      <span class="chip" onclick="toggleChip(this)">Plumbing</span>
+      <span class="chip" onclick="toggleChip(this)">Electrical</span>
+      <span class="chip" onclick="toggleChip(this)">With vendor</span>
+    </div>
+    <div class="row">
+      <span class="muted">2 selected:</span>
+      <button class="btn secondary sm" onclick="toast('2 tickets assigned to Imran (electrician) · WhatsApp job cards sent')">Assign</button>
+      <button class="btn secondary sm" onclick="toast('Escalated to UrbanServe city ops head · SLA clock annotated')">Escalate</button>
+    </div>
+  </div>
+
+  <table class="dt">
+    <tr><th></th><th>ID</th><th>Issue</th><th>Location</th><th>Category</th><th>Priority</th><th>SLA</th><th>Assignee</th><th>Status</th></tr>
+    <tr>
+      <td><input type="checkbox" style="width:auto"></td>
+      <td><b>T-1044</b></td><td>Chiller-01 high discharge pressure <span class="badge ai">auto-created · BMS-114 · BACnet/IP</span></td><td>Plant room · CH-01</td><td>HVAC</td><td><span class="badge critical">Critical</span></td>
+      <td>Today 12:12 PM</td><td>Night shift · acked 4:19 AM</td><td><span class="badge open">open</span></td></tr>
+    <tr class="clickable" onclick="dGo('fm','ticket-detail','tickets')">
+      <td><input type="checkbox" checked style="width:auto" onclick="event.stopPropagation()"></td>
+      <td><b>T-1042</b></td><td>AC not cooling · 2 photos</td><td>Unit 304</td><td>HVAC <span class="badge ai">AI 92%</span></td><td><span class="badge high">High</span></td>
+      <td style="color:var(--danger);font-weight:700">Today 6:00 PM · 3h 55m</td><td>Ramesh K.</td><td><span class="badge progress">in progress</span></td></tr>
+    <tr>
+      <td><input type="checkbox" checked style="width:auto"></td>
+      <td><b>T-1041</b></td><td>Foul smell near STP</td><td>Basement 2</td><td>STP <span class="badge ai">AI 88%</span></td><td><span class="badge critical">Critical</span></td>
+      <td><span class="badge breach">breached 2h</span></td><td style="color:var(--danger)">Unassigned</td>
+      <td><button class="btn primary sm" onclick="toast('T-1041 assigned to Meena (HK sup.) + STP vendor ping · SLA breach already logged to MIS')">Assign now</button></td></tr>
+    <tr>
+      <td><input type="checkbox" style="width:auto"></td>
+      <td><b>T-1040</b></td><td>Low water pressure <span class="muted">· with vendor VJ-388</span></td><td>Unit 702</td><td>Plumbing</td><td><span class="badge medium">Medium</span></td>
+      <td>11 Jun 6:00 PM</td><td>AquaServ Solutions</td><td><span class="badge assigned">vendor accepted · tmrw 10 AM</span></td></tr>
+    <tr>
+      <td><input type="checkbox" style="width:auto"></td>
+      <td><b>T-1039</b></td><td>Strange noise sometimes</td><td>Unit 511</td><td><span class="badge ai">AI 54% — review</span></td><td>—</td>
+      <td>paused</td><td>—</td>
+      <td><button class="btn secondary sm" onclick="toast('Categorised: General → maintenance · Low · SLA clock started (48h) · AI feedback recorded')">Review</button></td></tr>
+    <tr>
+      <td><input type="checkbox" style="width:auto"></td>
+      <td><b>T-1038</b></td><td>Corridor light flickering</td><td>3rd floor</td><td>Electrical</td><td><span class="badge low">Low</span></td>
+      <td>12 Jun 6:00 PM</td><td>Imran (in-house)</td><td><span class="badge assigned">assigned</span></td></tr>
+    <tr>
+      <td><input type="checkbox" style="width:auto"></td>
+      <td><b>T-1037</b></td><td>Basement parking seepage spot</td><td>Basement 1</td><td>Civil <span class="badge ai">AI 81%</span></td><td><span class="badge low">Low</span></td>
+      <td>13 Jun</td><td>Meena (HK)</td><td><span class="badge open">open</span></td></tr>
+    <tr>
+      <td><input type="checkbox" style="width:auto"></td>
+      <td><b>T-1036</b></td><td>Visitor lift door sensor slow</td><td>Lift 2, lobby</td><td>Lifts</td><td><span class="badge medium">Medium</span></td>
+      <td>12 Jun</td><td>Kone (AMC)</td><td><span class="badge open">AMC call logged</span></td></tr>
+  </table>
+  <div class="muted" style="margin-top:10px">Note: T-1040 is already with vendor — billing &amp; payout for VJ-388 run under Money → <a href="fm-business.html#vendors">Vendors ↗</a> · showing 8 of 24 open</div>
+</div>
+
+<!-- ============================================================ 3. TICKET DETAIL -->
+<div id="fm-ticket-detail" class="d-screen">
+  <div class="d-head">
+    <button class="back-btn" onclick="dGo('fm','tickets','tickets')">←</button>
+    <div>
+      <span class="eyebrow">FM · Daily operations</span>
+      <h1>T-1042 — AC not cooling, Unit 304</h1>
+      <div class="sub">Raised by Rohan Mehta · 9 Jun 2026, 9:12 AM · via app · 2 photos · <span class="badge progress">in progress</span> <span class="badge high">High</span></div>
+    </div>
+    <div class="actions">
+      <button class="btn secondary sm" onclick="toast('Note added to T-1042 · Rohan Mehta notified on WhatsApp')">+ Add note</button>
+      <button class="btn secondary sm" onclick="toast('vendor_job spawned → CoolTech HVAC (4.4★) · quote request sent · payment will settle via Razorpay Route escrow on resident sign-off')">Route to vendor</button>
+      <button class="btn danger sm" onclick="toast('Escalated to Kavita Rao + UrbanServe city ops · SLA timer flagged amber→red')">Escalate</button>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="stack">
+      <div class="ai-panel">
+        <div class="row between"><b>🤖 AI triage</b><span class="badge ai">confidence 92%</span></div>
+        <div style="margin:8px 0">Category <b>HVAC</b> · Priority <b>High</b> · Linked asset <a href="#" onclick="event.preventDefault();dGo('fm','asset-detail','assets')"><b>AHU-02</b> →</a></div>
+        <div class="muted">Why: photos show iced vent fins + "not cooling since morning" text; Unit 304 sits in AHU-02's served zone (301–312); similar pattern in 3 historical tickets.</div>
+        <div class="row" style="margin-top:10px">
+          <button class="btn primary sm" onclick="toast('AI triage accepted · routing &amp; SLA unchanged')">Accept</button>
+          <button class="btn ghost sm" onclick="toast('Override panel opened — manual category/priority · AI feedback loop recorded')">Override</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="panel-title">Timeline</h3>
+        <ul class="timeline">
+          <li><div class="t-title">Ticket raised via resident app — 2 photos attached</div><div class="t-meta">9 Jun, 9:12 AM · Rohan Mehta, Unit 304</div></li>
+          <li><div class="t-title">AI triage: HVAC · High · linked AHU-02 · SLA set (resolve by 10 Jun 6:00 PM)</div><div class="t-meta">9 Jun, 9:12 AM · automatic</div></li>
+          <li><div class="t-title">Assigned to Ramesh K. (in-house HVAC technician)</div><div class="t-meta">9 Jun, 9:40 AM · by Kavita Rao</div></li>
+          <li><div class="t-title">Technician on site — initial inspection, gas pressure low</div><div class="t-meta">9 Jun, 11:40 AM · Ramesh K., QR check-in at AHU-02</div></li>
+          <li><div class="t-title">2× AHU filters drawn from stores against this ticket</div><div class="t-meta">10 Jun, 10:55 AM · <a href="#" onclick="event.preventDefault();dGo('fm','inventory','inventory')">inventory log →</a></div></li>
+          <li class="future"><div class="t-title">Resolve &amp; resident sign-off — SLA 6:00 PM today</div><div class="t-meta">3h 55m remaining</div></li>
+        </ul>
+      </div>
+
+      <div class="crosslink">⛓ Builder module — asset history: AHU-02 had DLP snag <b>SNG-218</b> ("condensate drain slope incorrect", Mar 2026) fixed by subcontractor Aircon Systems, <b>₹18,000 recovered</b>. Ramesh can see this without calling anyone. <a href="builder.html#snags" style="color:var(--terra);font-weight:700">View in Builder ↗</a></div>
+    </div>
+
+    <div class="stack">
+      <div class="card">
+        <h3 class="panel-title">Details</h3>
+        <dl class="kv">
+          <dt>SLA</dt><dd style="color:var(--danger);font-weight:700">Today 6:00 PM · 3h 55m left</dd>
+          <dt>Unit / zone</dt><dd>304 · 3rd floor · AHU-02 zone</dd>
+          <dt>Raised by</dt><dd>Rohan Mehta · +91 98XXX 12304</dd>
+          <dt>Channel</dt><dd>Resident app</dd>
+          <dt>Assignee</dt><dd>Ramesh K. (in-house HVAC)</dd>
+          <dt>Asset</dt><dd><a href="#" onclick="event.preventDefault();dGo('fm','asset-detail','assets')">AHU-02 · QR #BRJ-A-0042 →</a></dd>
+          <dt>Photos</dt><dd><span class="photo-stub">🖼</span> <span class="photo-stub">🖼</span></dd>
+        </dl>
+      </div>
+      <div class="card">
+        <div class="row between"><h3 class="panel-title">Work-order costing</h3><span class="badge medium">+21% variance — approval required</span></div>
+        <dl class="kv">
+          <dt>Labour</dt><dd>2h × ₹450 = <b>₹900</b> · Ramesh K.</dd>
+          <dt>AHU filter</dt><dd>₹1,800</dd>
+          <dt>Refrigerant top-up</dt><dd>₹2,400</dd>
+          <dt>Total</dt><dd><b>₹5,100</b></dd>
+          <dt>Benchmark</dt><dd>₹4,200 (HVAC category avg)</dd>
+        </dl>
+        <div class="row" style="margin-top:10px">
+          <button class="btn primary sm" onclick="toast('Work-order cost ₹5,100 approved by Kavita Rao · +21% variance logged to MIS · audit_log entry written')">Approve cost</button>
+        </div>
+        <div class="muted" style="margin-top:8px">Parts auto-deduct from inventory — 2× AHU filters already drawn against this ticket → <a href="#" onclick="event.preventDefault();dGo('fm','inventory','inventory')">inventory log →</a></div>
+      </div>
+      <div class="card">
+        <h3 class="panel-title">Message resident</h3>
+        <button class="btn wa block" onclick="toast('WhatsApp update sent to Rohan Mehta: technician on site, ETA fix 5 PM')">WhatsApp update</button>
+        <div class="muted" style="margin-top:8px">Last read by resident: today 1:48 PM</div>
+      </div>
+      <div class="muted">Annotation: routing to a vendor spawns a vendor_job (see VJ-388 on T-1040); money flows through Money → Finance &amp; audit.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ 4. ASSETS -->
+<div id="fm-assets" class="d-screen">
+  <div class="d-head">
+    <div><span class="eyebrow">FM · Daily operations</span><h1>Asset Register</h1><div class="sub">186 assets · QR-tagged at handover from Builder module · VD Commercial</div></div>
+    <div class="actions">
+      <button class="btn secondary sm" onclick="toast('Bulk CSV import wizard opened — column mapping remembered from last import (Aspen Medicity)')">⬆ Bulk CSV import</button>
+      <button class="btn secondary sm" onclick="toast('QR sheet (A4, 24-up) queued for 186 assets · PDF in downloads')">🖨 Print QR codes</button>
+    </div>
+  </div>
+
+  <div class="intro-bar"><span class="ib-ico">💡</span><div>Every machine in the building, QR-tagged, with its full history since construction. <b>Scanning a QR on site opens the same record</b> a technician sees here.</div></div>
+
+  <div class="filter-chips" style="margin-bottom:14px">
+    <span class="chip on" onclick="toggleChip(this)">All</span>
+    <span class="chip" onclick="toggleChip(this)">HVAC</span>
+    <span class="chip" onclick="toggleChip(this)">Electrical / DG</span>
+    <span class="chip" onclick="toggleChip(this)">Plumbing / Pumps</span>
+    <span class="chip" onclick="toggleChip(this)">Fire &amp; safety</span>
+    <span class="chip" onclick="toggleChip(this)">Lifts</span>
+    <span class="chip" onclick="toggleChip(this)">STP / WTP</span>
+    <span class="chip" onclick="toggleChip(this)">PPM due (7)</span>
+  </div>
+
+  <table class="dt">
+    <tr><th>Tag</th><th>Asset</th><th>Make</th><th>Location</th><th>AMC / Warranty</th><th>Next PPM</th><th>Health</th></tr>
+    <tr class="clickable" onclick="dGo('fm','asset-detail','assets')">
+      <td><b>AHU-02</b></td><td>Air Handling Unit · 12,000 CFM</td><td>Daikin D-AHU Modular</td><td>3rd-floor plant room</td><td>Warranty to Mar 2027</td><td>22 Jun 2026</td>
+      <td><span class="badge open">open ticket T-1042</span></td></tr>
+    <tr>
+      <td><b>LIFT-01</b></td><td>Passenger lift 1 (+ Lift 2)</td><td>Kone</td><td>Core, lobby</td><td><span class="badge medium">AMC expires 30 Jun</span></td><td>1 Jul 2026</td>
+      <td><span class="badge done">ok</span></td></tr>
+    <tr>
+      <td><b>DG-01</b></td><td>Diesel generator 500kVA</td><td>Cummins</td><td>Basement 2, DG yard</td><td>AMC to Jan 2027</td><td><span style="color:var(--warning);font-weight:700">Today — load test</span></td>
+      <td><button class="btn primary sm" onclick="event.stopPropagation();dGo('fm','checklist','checklist')">Start checklist</button></td></tr>
+    <tr>
+      <td><b>P-04</b></td><td>Booster pump, floors 6–8</td><td>Grundfos</td><td>Basement 2, pump room</td><td>Warranty to Jan 2028</td><td>20 Jun 2026</td>
+      <td><span class="badge ai">anomaly A-07</span> <button class="btn secondary sm" onclick="event.stopPropagation();toast('Inspection work order WO-0610 created for P-04 · assigned Ramesh K., tomorrow 9 AM')">Inspect</button></td></tr>
+    <tr>
+      <td><b>FP-01</b></td><td>Fire alarm panel + hydrant system</td><td>Honeywell</td><td>Ground, fire control room</td><td>AMC to Dec 2026</td><td>18 Jun 2026</td>
+      <td><span class="badge done">ok · Form-A current</span></td></tr>
+    <tr>
+      <td><b>STP-01</b></td><td>Sewage treatment plant 50KLD</td><td>Thermax</td><td>Basement 2</td><td>AMC to Oct 2026</td><td>15 Jun 2026</td>
+      <td><span class="badge critical">BROKEN</span> <span class="badge neutral">IoT offline · Ph 2</span></td></tr>
+    <tr>
+      <td><b>WTP-01</b></td><td>Water treatment plant</td><td>Ion Exchange</td><td>Basement 2</td><td>AMC to Oct 2026</td><td>25 Jun 2026</td>
+      <td><span class="badge done">ok</span></td></tr>
+  </table>
+  <div class="muted" style="margin-top:10px">Showing 7 of 186 · every asset carries its Builder-module DLP history forward — no re-survey at handover.</div>
+</div>
+
+<!-- ============================================================ 5. ASSET DETAIL -->
+<div id="fm-asset-detail" class="d-screen">
+  <div class="d-head">
+    <button class="back-btn" onclick="dGo('fm','assets','assets')">←</button>
+    <div>
+      <span class="eyebrow">FM · Daily operations</span>
+      <h1>AHU-02 — Air Handling Unit</h1>
+      <div class="sub">QR #BRJ-A-0042 · 3rd-floor plant room · serves units 301–312 · <span class="badge open">open ticket T-1042</span></div>
+    </div>
+    <div class="actions">
+      <button class="btn secondary sm" onclick="toast('QR label re-print queued (lamination-grade)')">🖨 QR label</button>
+      <button class="btn primary sm" onclick="toast('Ad-hoc work order created on AHU-02 · pick checklist or free-form')">+ Work order</button>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="stack">
+      <div class="card">
+        <h3 class="panel-title">History — single thread since construction</h3>
+        <ul class="timeline">
+          <li><div class="t-title">Ticket T-1042 linked — "AC not cooling, Unit 304"</div><div class="t-meta">9 Jun 2026 · in progress · <a href="#" onclick="event.preventDefault();dGo('fm','ticket-detail','tickets')">open ticket →</a></div></li>
+          <li><div class="t-title">PPM completed — monthly checklist · filters cleaned, belts checked</div><div class="t-meta">22 May 2026 · Ramesh K. · all steps passed</div></li>
+          <li><div class="t-title">PPM completed — monthly checklist</div><div class="t-meta">22 Apr 2026 · Ramesh K.</div></li>
+          <li class="terra"><div class="t-title">SNG-218 — DLP snag: condensate drain slope incorrect <span class="badge terra">inherited from Builder module</span></div><div class="t-meta">Mar 2026 · raised via FM escalation · fixed by Aircon Systems · accepted · ₹18,000 recovered from subcontractor</div></li>
+          <li><div class="t-title">Commissioned, QR-tagged &amp; handed over to UrbanServe</div><div class="t-meta">15 Jan 2026 · Reneev Developers · test reports attached</div></li>
+        </ul>
+      </div>
+      <div class="crosslink">⛓ The moat: this history began in the <b>Builder module</b> — snag SNG-218, its subcontractor (Aircon Systems) and the ₹18,000 recovery carried over at handover with zero re-entry. Technicians see construction-era defects before opening the panel.</div>
+    </div>
+
+    <div class="stack">
+      <div class="card">
+        <h3 class="panel-title">Specifications</h3>
+        <dl class="kv">
+          <dt>Make / model</dt><dd>Daikin D-AHU Modular</dd>
+          <dt>Capacity</dt><dd>12,000 CFM</dd>
+          <dt>Location</dt><dd>3rd-floor plant room</dd>
+          <dt>Serves</dt><dd>Units 301–312</dd>
+          <dt>Installed</dt><dd>Jan 2026</dd>
+          <dt>Warranty</dt><dd>to Mar 2027 (Daikin)</dd>
+          <dt>Book value</dt><dd>₹8.2L</dd>
+          <dt>Criticality</dt><dd><span class="badge high">High</span> — 12 units affected</dd>
+        </dl>
+      </div>
+      <div class="card">
+        <h3 class="panel-title">PPM schedule</h3>
+        <dl class="kv">
+          <dt>Frequency</dt><dd>Monthly</dd>
+          <dt>Last done</dt><dd>22 May 2026 ✓</dd>
+          <dt>Next due</dt><dd>22 Jun 2026 · <a href="#" onclick="event.preventDefault();dGo('fm','ppm','ppm')">on calendar →</a></dd>
+          <dt>Checklist</dt><dd>#08 — AHU monthly (11 steps)</dd>
+        </dl>
+      </div>
+      <div class="card">
+        <h3 class="panel-title">Documents</h3>
+        <div class="list-row"><span>📄</span><div style="flex:1">O&amp;M manual (Daikin)</div><button class="btn ghost sm" onclick="toast('Opening O&amp;M manual PDF · 4.2 MB')">View</button></div>
+        <div class="list-row"><span>📄</span><div style="flex:1">Warranty card · to Mar 2027</div><button class="btn ghost sm" onclick="toast('Opening warranty card scan')">View</button></div>
+        <div class="list-row"><span>📄</span><div style="flex:1">Commissioning report — Jan 2026</div><button class="btn ghost sm" onclick="toast('Opening commissioning report · inherited from Builder module')">View</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ 6. PPM CALENDAR -->
+<div id="fm-ppm" class="d-screen">
+  <div class="d-head">
+    <div><span class="eyebrow">FM · Daily operations</span><h1>PPM Calendar</h1><div class="sub">52-week planned preventive maintenance · 186 assets · auto-generated from asset register</div></div>
+    <div class="actions">
+      <button class="btn secondary sm" onclick="toast('52-week PPM plan exported (XLSX) — auditor format')">⬇ Export plan</button>
+      <button class="btn primary sm" onclick="toast('New PPM rule wizard — pick asset, frequency, checklist')">+ PPM rule</button>
+    </div>
+  </div>
+
+  <div class="intro-bar"><span class="ib-ico">💡</span><div>Planned maintenance for the whole year, one month at a time. <b>Amber = due now, red = overdue</b> — click any pill to assign or open its checklist.</div></div>
+
+  <div class="tabbar">
+    <button class="active" onclick="setTab(this,'fm-ppm-month')">Month</button>
+    <button onclick="setTab(this,'fm-ppm-list')">List · next 14 days</button>
+    <button onclick="setTab(this,'fm-ppm-asset')">By asset</button>
+  </div>
+
+  <div id="fm-ppm-month" class="tabpane active">
+    <div class="row between" style="margin-bottom:12px">
+      <h3 style="font-size:17px">June 2026</h3>
+      <div class="row"><button class="btn ghost sm" onclick="toast('Showing May 2026 (prototype: static month)')">‹ May</button><button class="btn ghost sm" onclick="toast('Showing July 2026 (prototype: static month)')">Jul ›</button></div>
+    </div>
+    <div class="cal">
+      <div class="cal-h">Mon</div><div class="cal-h">Tue</div><div class="cal-h">Wed</div><div class="cal-h">Thu</div><div class="cal-h">Fri</div><div class="cal-h">Sat</div><div class="cal-h">Sun</div>
+      <div class="cal-d"><span class="dnum">1</span></div>
+      <div class="cal-d"><span class="dnum">2</span><span class="cal-pill g" onclick="toast('Water tank chlorination — done 2 Jun ✓ · log in WTP-01 history')">WTP chlorination ✓</span></div>
+      <div class="cal-d"><span class="dnum">3</span></div>
+      <div class="cal-d"><span class="dnum">4</span><span class="cal-pill g" onclick="toast('Fire pump weekly run — done 4 Jun ✓ · Imran')">Fire pump wkly ✓</span></div>
+      <div class="cal-d"><span class="dnum">5</span></div>
+      <div class="cal-d"><span class="dnum">6</span></div>
+      <div class="cal-d"><span class="dnum">7</span></div>
+      <div class="cal-d"><span class="dnum">8</span><span class="cal-pill d" onclick="toast('OVERDUE 2 days — pump room deep-clean · assign below')">Pump room HK ⚠</span></div>
+      <div class="cal-d"><span class="dnum">9</span></div>
+      <div class="cal-d today"><span class="dnum">10 · today</span><span class="cal-pill w" onclick="dGo('fm','checklist','checklist')">DG-01 load test</span></div>
+      <div class="cal-d"><span class="dnum">11</span><span class="cal-pill t" onclick="toast('Fire pump weekly run · Imran · 11 Jun')">Fire pump wkly</span></div>
+      <div class="cal-d"><span class="dnum">12</span></div>
+      <div class="cal-d"><span class="dnum">13</span></div>
+      <div class="cal-d"><span class="dnum">14</span></div>
+      <div class="cal-d"><span class="dnum">15</span><span class="cal-pill d" onclick="toast('STP-01 media replacement — asset currently BROKEN · vendor Thermax AMC call open')">STP-01 media ⚠</span></div>
+      <div class="cal-d"><span class="dnum">16</span></div>
+      <div class="cal-d"><span class="dnum">17</span></div>
+      <div class="cal-d"><span class="dnum">18</span><span class="cal-pill t" onclick="toast('FP-01 fire alarm panel test · 18 Jun · Form-A entry auto-logged on completion')">FP-01 panel test</span></div>
+      <div class="cal-d"><span class="dnum">19</span></div>
+      <div class="cal-d"><span class="dnum">20</span><span class="cal-pill t" onclick="toast('P-04 booster pump PPM · pulled forward? Anomaly A-07 suggests inspecting earlier')">P-04 pump PPM</span></div>
+      <div class="cal-d"><span class="dnum">21</span></div>
+      <div class="cal-d"><span class="dnum">22</span><span class="cal-pill t" onclick="dGo('fm','asset-detail','assets')">AHU-02 monthly</span></div>
+      <div class="cal-d"><span class="dnum">23</span></div>
+      <div class="cal-d"><span class="dnum">24</span></div>
+      <div class="cal-d"><span class="dnum">25</span><span class="cal-pill t" onclick="toast('WTP-01 quarterly service · Ion Exchange AMC visit')">WTP-01 service</span></div>
+      <div class="cal-d"><span class="dnum">26</span></div>
+      <div class="cal-d"><span class="dnum">27</span></div>
+      <div class="cal-d"><span class="dnum">28</span><span class="cal-pill w" onclick="toast('Rooftop OHT cleaning · needs water shutdown announcement → Announcements')">OHT cleaning</span></div>
+      <div class="cal-d"><span class="dnum">29</span></div>
+      <div class="cal-d"><span class="dnum">30</span></div>
+      <div class="cal-d dim"><span class="dnum">1 Jul</span><span class="cal-pill t" onclick="toast('Lift 1 &amp; 2 quarterly service — Kone · blocked until AMC renewed (expires 30 Jun)')">Lifts 1&amp;2 qtrly</span></div>
+      <div class="cal-d dim"><span class="dnum">2</span></div>
+      <div class="cal-d dim"><span class="dnum">3</span></div>
+      <div class="cal-d dim"><span class="dnum">4</span></div>
+      <div class="cal-d dim"><span class="dnum">5</span></div>
+    </div>
+    <div class="muted" style="margin-top:10px"><span class="badge medium">amber</span> due today/soon · <span class="badge critical">red</span> overdue or broken asset · <span class="badge done">green</span> completed</div>
+  </div>
+
+  <div id="fm-ppm-list" class="tabpane">
+    <div class="card" style="margin-bottom:16px;border-color:var(--danger)">
+      <h3 class="panel-title" style="color:var(--danger)">Overdue (1)</h3>
+      <div class="list-row"><span>⚠️</span><div style="flex:1"><b>Pump room deep-clean &amp; housekeeping</b> — was due 8 Jun · <span style="color:var(--danger);font-weight:700">2 days overdue</span><br><span class="muted">Basement 2 · blocked earlier by STP-01 breakdown access</span></div><button class="btn danger sm" onclick="toast('Assigned to Meena (HK sup.) for tomorrow 8 AM · overdue flag stays on MIS report')">Assign</button></div>
+    </div>
+    <div class="card">
+      <h3 class="panel-title">Next 14 days (7 jobs)</h3>
+      <div class="list-row"><span>🗓</span><div style="flex:1"><b>DG-01 monthly load test</b> · today 10 Jun · checklist #14</div><button class="btn primary sm" onclick="dGo('fm','checklist','checklist')">Open checklist</button></div>
+      <div class="list-row"><span>🗓</span><div style="flex:1"><b>Fire pump weekly run</b> · 11 Jun · checklist #03</div><button class="btn secondary sm" onclick="toast('Assigned to Imran · 11 Jun 10 AM · WhatsApp job card sent')">Assign</button></div>
+      <div class="list-row"><span>🗓</span><div style="flex:1"><b>STP-01 media replacement</b> · 15 Jun · <span class="badge critical">asset broken</span></div><button class="btn secondary sm" onclick="toast('Merged with breakdown job — Thermax AMC engineer visit requested 12 Jun')">Assign</button></div>
+      <div class="list-row"><span>🗓</span><div style="flex:1"><b>FP-01 fire alarm panel test</b> · 18 Jun · checklist #06 (Form-A)</div><button class="btn secondary sm" onclick="toast('Assigned to Imran + Honeywell AMC tech · 18 Jun 11 AM')">Assign</button></div>
+      <div class="list-row"><span>🗓</span><div style="flex:1"><b>P-04 booster pump PPM</b> · 20 Jun · <span class="badge ai">A-07: consider pulling forward</span></div><button class="btn secondary sm" onclick="toast('Pulled forward to 12 Jun per anomaly A-07 · Ramesh K. assigned')">Assign</button></div>
+      <div class="list-row"><span>🗓</span><div style="flex:1"><b>AHU-02 monthly PPM</b> · 22 Jun · checklist #08</div><button class="btn secondary sm" onclick="toast('Assigned to Ramesh K. · 22 Jun 9 AM')">Assign</button></div>
+      <div class="list-row"><span>🗓</span><div style="flex:1"><b>WTP-01 quarterly service</b> · 25 Jun · Ion Exchange AMC</div><button class="btn secondary sm" onclick="toast('AMC visit request sent to Ion Exchange · awaiting slot confirmation')">Assign</button></div>
+    </div>
+  </div>
+
+  <div id="fm-ppm-asset" class="tabpane">
+    <table class="dt">
+      <tr><th>Asset</th><th>Frequency</th><th>Last done</th><th>Next due</th><th>Compliance YTD</th></tr>
+      <tr class="clickable" onclick="dGo('fm','asset-detail','assets')"><td><b>AHU-02</b></td><td>Monthly</td><td>22 May ✓</td><td>22 Jun</td><td><div class="prog" style="width:120px"><div style="width:100%"></div></div></td></tr>
+      <tr><td><b>DG-01</b></td><td>Monthly load test</td><td>10 May ✓</td><td style="color:var(--warning);font-weight:700">Today</td><td><div class="prog" style="width:120px"><div style="width:100%"></div></div></td></tr>
+      <tr><td><b>STP-01</b></td><td>Fortnightly</td><td>1 Jun ✓</td><td>15 Jun</td><td><div class="prog bad" style="width:120px"><div style="width:60%"></div></div></td></tr>
+      <tr><td><b>P-04</b></td><td>Monthly</td><td>20 May ✓</td><td>20 Jun</td><td><div class="prog" style="width:120px"><div style="width:100%"></div></div></td></tr>
+      <tr><td><b>LIFT-01 / 02</b></td><td>Quarterly (AMC)</td><td>1 Apr ✓</td><td>1 Jul</td><td><div class="prog warn" style="width:120px"><div style="width:85%"></div></div></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ============================================================ 7. CHECKLIST EXECUTION -->
+<div id="fm-checklist" class="d-screen">
+  <div class="d-head">
+    <button class="back-btn" onclick="dGo('fm','ppm','ppm')">←</button>
+    <div>
+      <span class="eyebrow">FM · Daily operations</span>
+      <h1>Checklist #14 — DG-01 monthly load test</h1>
+      <div class="sub">Cummins 500kVA · Basement 2 DG yard · Ramesh K. · started today 10:04 AM · <span class="badge live">📡 Works offline — syncs when back in range (basement plant rooms)</span></div>
+    </div>
+    <div class="actions"><button class="btn ghost sm" onclick="toast('Paused — progress saved offline, syncs when back in network (basements!)')">⏸ Pause</button></div>
+  </div>
+
+  <div class="intro-bar"><span class="ib-ico">💡</span><div>The technician's step-by-step job card. It <b>works offline in basements</b>, and a failed step raises a corrective ticket automatically.</div></div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="row between" style="margin-bottom:8px"><b>Progress: 4 of 7 steps</b><span class="muted">est. 20 min left</span></div>
+      <div class="prog" style="margin-bottom:20px"><div style="width:57%"></div></div>
+
+      <div class="list-row"><input type="checkbox" checked style="width:auto" onclick="this.checked=true;toast('Step locked — completed steps are immutable on the audit trail')"><div style="flex:1"><b>1 · Scan asset QR to verify</b><br><span class="muted">✓ Scanned 10:04 AM · #BRJ-A-0047 verified = DG-01 · geotag basement 2</span></div><span class="badge done">done</span></div>
+      <div class="list-row"><input type="checkbox" checked style="width:auto" onclick="this.checked=true;toast('Step locked — completed steps are immutable on the audit trail')"><div style="flex:1"><b>2 · Fuel level reading</b><br><span class="muted">Recorded: <b>64%</b> (≈ 380 L) · matches Phase-2 IoT sensor 64%</span></div><span class="badge done">done</span></div>
+      <div class="list-row"><input type="checkbox" checked style="width:auto" onclick="this.checked=true;toast('Step locked — completed steps are immutable on the audit trail')"><div style="flex:1"><b>3 · Load test — run on load 30 min</b><br><span class="muted">Timer 10:12 → 10:42 AM ✓ · load held 78% · no trips</span></div><span class="badge done">done</span></div>
+      <div class="list-row"><input type="checkbox" checked style="width:auto" onclick="this.checked=true;toast('Step locked — completed steps are immutable on the audit trail')"><div style="flex:1"><b>4 · Oil pressure reading</b><br><span class="muted">Recorded: <b>4.2 bar</b> · within 3.5–5.0 band</span></div><span class="badge done">done</span></div>
+      <div class="list-row" style="background:var(--danger-50);border-radius:10px;padding:12px"><span>⚠️</span><div style="flex:1"><b>5 · Coolant level check — EXCEPTION FLAGGED</b><br><span class="muted">Reading below MIN mark · exception auto-creates a corrective ticket</span></div><button class="btn danger sm" onclick="toast('Ticket T-1043 created: “DG-01 coolant low — top-up &amp; leak check” · Medium · linked to this checklist run')">Create T-1043</button></div>
+      <div class="list-row"><input type="checkbox" style="width:auto" onclick="this.checked=false;toast('Add photo first — step needs evidence')"><div style="flex:1"><b>6 · Photo evidence — control panel &amp; hour meter</b><br><div class="upload-zone" style="margin-top:8px;cursor:pointer" onclick="toast('Camera opened — photo will be geotagged + timestamped')">📷 Tap to capture (2 photos required)</div></div></div>
+      <div class="list-row"><input type="checkbox" style="width:auto" onclick="this.checked=false;toast('Complete steps 6 first — sign-off is always the final step')"><div style="flex:1"><b>7 · Technician sign-off</b><br><span class="muted">Ramesh K. · OTP-based signature</span></div><button class="btn primary sm" onclick="toast('Complete pending steps to sign off — 2 remaining')">Sign off</button></div>
+    </div>
+
+    <div class="stack">
+      <div class="card">
+        <h3 class="panel-title">Run details</h3>
+        <dl class="kv">
+          <dt>Asset</dt><dd>DG-01 · Cummins 500kVA</dd>
+          <dt>Type</dt><dd>PPM — monthly load test</dd>
+          <dt>Technician</dt><dd>Ramesh K.</dd>
+          <dt>Started</dt><dd>10 Jun, 10:04 AM</dd>
+          <dt>Exceptions</dt><dd><span class="badge critical">1 — coolant low</span></dd>
+        </dl>
+      </div>
+      <div class="crosslink">⛓ On sign-off, this run writes to <b>DG-01 asset history</b> automatically — readings, exception, photos, T-1043 link. Auditors and the builder's DLP team see the same record.</div>
+      <div class="card">
+        <h3 class="panel-title">Last run — 10 May 2026</h3>
+        <div class="muted">All 7 steps passed · fuel 71% · oil 4.4 bar · no exceptions · Ramesh K.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ 8. INVENTORY -->
+<div id="fm-inventory" class="d-screen">
+  <div class="d-head">
+    <div><span class="eyebrow">FM · Daily operations</span><h1>Inventory — Spares &amp; Consumables</h1><div class="sub">Stores, Basement 1 · issue against tickets/PPM only · June consumption ₹38,400</div></div>
+    <div class="actions">
+      <button class="btn secondary sm" onclick="toast('Stock take sheet printed — last full count 1 Jun, variance 0.4%')">🧾 Stock take</button>
+      <button class="btn primary sm" onclick="toast('Goods receipt note opened — scan supplier invoice to add stock')">+ GRN</button>
+    </div>
+  </div>
+
+  <div class="intro-bar"><span class="ib-ico">💡</span><div>Spares and consumables in the store. <b>Nothing leaves without a ticket or PPM reference</b> — that's what keeps consumption auditable.</div></div>
+
+  <div class="two-col">
+    <div class="stack">
+      <table class="dt">
+        <tr><th>Item</th><th>Category</th><th>In stock</th><th>Reorder level</th><th>Status</th></tr>
+        <tr><td><b>AHU filters (24×24 pleated)</b></td><td>HVAC</td><td>3</td><td>5</td><td><span class="badge critical">low stock</span> <button class="btn secondary sm" onclick="toast('Added to PO-0613 draft — 10 nos @ ₹840')">Reorder</button></td></tr>
+        <tr><td>Pump mechanical seals (Grundfos)</td><td>Plumbing</td><td>12</td><td>4</td><td><span class="badge done">ok</span></td></tr>
+        <tr><td>LED tube lights 20W</td><td>Electrical</td><td>48</td><td>20</td><td><span class="badge done">ok</span></td></tr>
+        <tr><td>Diesel (DG yard barrels)</td><td>DG</td><td>400 L</td><td>300 L</td><td><span class="badge done">ok · top-up due ~18 Jun</span></td></tr>
+        <tr><td>Bearing grease (Lithium EP2)</td><td>General</td><td>6 tubs</td><td>2</td><td><span class="badge done">ok</span></td></tr>
+        <tr><td>Housekeeping chemicals (R-series)</td><td>HK</td><td>14 cans</td><td>10</td><td><span class="badge done">ok</span></td></tr>
+      </table>
+
+      <div class="card">
+        <h3 class="panel-title">Consumption log — linked to tickets / PPM</h3>
+        <div class="list-row"><span>🔧</span><div style="flex:1"><b>2 × AHU filters</b> → <a href="#" onclick="event.preventDefault();dGo('fm','ticket-detail','tickets')">T-1042</a> (AC not cooling, Unit 304)<br><span class="muted">10 Jun, 10:55 AM · issued to Ramesh K. · ₹1,680</span></div></div>
+        <div class="list-row"><span>🔧</span><div style="flex:1"><b>1 × pump mechanical seal</b> → T-1040 (low pressure, Unit 702) — held for AquaServ visit tmrw<br><span class="muted">9 Jun · reserved, not issued · ₹1,250</span></div></div>
+        <div class="list-row"><span>🔧</span><div style="flex:1"><b>4 × LED tube lights</b> → T-1038 (corridor flickering, 3rd floor)<br><span class="muted">9 Jun · issued to Imran · ₹1,360</span></div></div>
+        <div class="list-row"><span>🛢</span><div style="flex:1"><b>60 L diesel</b> → DG-01 load test (checklist #14)<br><span class="muted">today, 10:42 AM · auto-logged from checklist</span></div></div>
+      </div>
+    </div>
+
+    <div class="stack">
+      <div class="stat-card"><div class="s-label">June consumption value</div><div class="s-value">₹38,400</div><div class="s-delta up">-12% vs May (₹43,600)</div></div>
+      <div class="card">
+        <h3 class="panel-title">Reorder — pending PO</h3>
+        <dl class="kv">
+          <dt>PO</dt><dd>PO-0612 (draft)</dd>
+          <dt>Items</dt><dd>AHU filters × 10 · ₹8,400</dd>
+          <dt>Supplier</dt><dd>CoolTech HVAC (4.4★)</dd>
+          <dt>Needs</dt><dd>FM Manager approval</dd>
+        </dl>
+        <div class="row" style="margin-top:12px">
+          <button class="btn primary sm" onclick="toast('PO-0612 approved · sent to CoolTech HVAC on WhatsApp · expected delivery 13 Jun')">Approve PO</button>
+          <button class="btn ghost sm" onclick="toast('PO-0612 returned to storekeeper with comment')">Send back</button>
+        </div>
+      </div>
+      <div class="muted">Issue rule: no stock leaves stores without a ticket / PPM reference — keeps consumption auditable for CAM billing.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ 9. METERS -->
+<div id="fm-meters" class="d-screen">
+  <div class="d-head">
+    <div><span class="eyebrow">FM · Daily operations</span><h1>Meter Readings</h1><div class="sub">Daily manual entry (v1) · IoT auto-capture lands in <span class="badge neutral">Phase 2</span> · last entry 9 Jun, 8:10 PM</div></div>
+    <div class="actions"><button class="btn primary sm" onclick="toast('4 readings saved · variance flags updated · MIS energy sheet refreshed')">💾 Save today's readings</button></div>
+  </div>
+
+  <div class="intro-bar"><span class="ib-ico">💡</span><div>Type today's four readings here — <b>the AI flags anything that doesn't look right</b>, like water climbing overnight when the building is empty.</div></div>
+
+  <div class="two-col">
+    <div class="stack">
+      <table class="dt">
+        <tr><th>Meter</th><th>Last (9 Jun)</th><th>Today's entry</th><th>Δ vs yesterday</th><th>7-day trend</th></tr>
+        <tr><td><b>Mains energy (kWh)</b><br><span class="muted">DGVCL meter, basement 2</span></td><td>1,24,860</td><td><input value="1,25,272" style="width:110px"></td><td><span class="s-delta warn">+412 kWh · +3%</span></td>
+          <td><span class="spark"><i style="height:14px"></i><i style="height:16px"></i><i style="height:13px"></i><i style="height:18px"></i><i style="height:17px"></i><i style="height:19px"></i><i style="height:22px"></i></span></td></tr>
+        <tr><td><b>DG-01 energy (kWh)</b><br><span class="muted">runs: power cuts + load test</span></td><td>18,442</td><td><input value="18,460" style="width:110px"></td><td><span class="s-delta">+18 kWh (load test)</span></td>
+          <td><span class="spark"><i style="height:6px"></i><i style="height:4px"></i><i style="height:5px"></i><i style="height:4px"></i><i style="height:6px"></i><i style="height:5px"></i><i style="height:16px"></i></span></td></tr>
+        <tr><td><b>Water (KL)</b><br><span class="muted">municipal + borewell, combined</span></td><td>2,148</td><td><input value="2,186" style="width:110px"></td><td><span class="s-delta down">+38 KL · +22% vs avg</span></td>
+          <td><span class="spark"><i style="height:11px"></i><i style="height:12px"></i><i style="height:11px"></i><i style="height:13px"></i><i style="height:12px"></i><i style="height:18px"></i><i style="height:24px"></i></span></td></tr>
+        <tr><td><b>Solar generation (kWh)</b><br><span class="muted">rooftop 40kWp</span></td><td>9,310</td><td><input value="9,355" style="width:110px"></td><td><span class="s-delta up">+45 kWh · offset 11%</span></td>
+          <td><span class="spark"><i style="height:16px"></i><i style="height:18px"></i><i style="height:12px"></i><i style="height:17px"></i><i style="height:19px"></i><i style="height:18px"></i><i style="height:17px"></i></span></td></tr>
+      </table>
+
+      <div class="ai-panel">
+        <div class="row between"><b>🤖 Anomaly: water +22% vs 7-day average</b><span class="badge ai">confidence 78%</span></div>
+        <div class="muted" style="margin:8px 0">Why: rise concentrated in floors 6–8 riser window (overnight 11 PM–5 AM, when usage should be ~0) — consistent with anomaly A-07 / Booster Pump P-04. Possible leak or pump cycling fault.</div>
+        <div class="row">
+          <button class="btn primary sm" onclick="toast('Ticket T-1045 created: “Suspected leak / pump cycling, floors 6–8” · High · linked to P-04 + anomaly A-07')">Create ticket</button>
+          <button class="btn ghost sm" onclick="toast('Dismissed — AI will re-flag if deviation persists 48h')">Dismiss</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack">
+      <div class="card">
+        <h3 class="panel-title">June so far</h3>
+        <dl class="kv">
+          <dt>Energy spend</dt><dd>₹2.8L <span class="s-delta up">-9% vs May (₹3.1L)</span></dd>
+          <dt>Solar offset</dt><dd>11%</dd>
+          <dt>Water cost</dt><dd>₹64,200 · recovered via CAM</dd>
+          <dt>Entries missed</dt><dd>1 (Sun 7 Jun — caught up Mon)</dd>
+        </dl>
+        <div class="divider"></div>
+        <a class="btn secondary sm" href="fm-business.html#energy">Full energy analytics ↗</a>
+      </div>
+      <div class="card">
+        <div class="row between"><h3 class="panel-title">Phase 2 — IoT auto-capture</h3><span class="badge neutral">Coming</span></div>
+        <div class="muted">Smart meters on mains, DG, water + STP sensors will replace this manual entry. DG-01 fuel (64%) and the STP-01 offline alarm already stream on the dashboard teaser.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ 10. GATE -->
+<div id="fm-gate" class="d-screen">
+  <div class="d-head">
+    <div><span class="eyebrow">FM · People &amp; site</span><h1>Gate Overview</h1><div class="sub">Gate 1 · guard on duty: Vijay Singh · <a href="guard.html">see guard console ↗</a></div></div>
+    <div class="actions"><button class="btn primary sm" onclick="toast('Pre-approved gate pass created — code + QR sent to host on WhatsApp')">+ Pre-approve visitor</button></div>
+  </div>
+
+  <div class="intro-bar"><span class="ib-ico">💡</span><div>Who is inside the building right now — <b>visitors, vendor crews and your own staff</b> — fed live from the guard's console at Gate 1.</div></div>
+
+  <div class="stat-grid">
+    <div class="stat-card"><div class="s-label">Passes today</div><div class="s-value">34</div><div class="s-delta">12 currently inside</div></div>
+    <div class="stat-card"><div class="s-label">Staff in</div><div class="s-value">12/14</div><div class="s-delta">2 on leave</div></div>
+    <div class="stat-card"><div class="s-label">Incidents today</div><div class="s-value">1</div><div class="s-delta warn">tailgating attempt, 11:20 AM</div></div>
+    <div class="stat-card"><div class="s-label">Avg gate clearance</div><div class="s-value">28s</div><div class="s-delta up">QR scan vs 4 min register</div></div>
+  </div>
+
+  <div class="two-col">
+    <div class="stack">
+      <div class="card">
+        <h3 class="panel-title">Expected / active visitors</h3>
+        <div class="list-row"><span>📦</span><div style="flex:1"><b>Suresh Kumar — courier</b> · pass <b>482917</b> · host Unit 304 · expected ~2:30 PM · valid till 8 PM<br><span class="muted">Pre-approved by Rohan Mehta · <span class="badge pending">arrival pending</span></span></div><button class="btn primary sm" onclick="toast('Pass 482917 marked arrived 2:31 PM · host Rohan Mehta auto-notified on WhatsApp')">Mark arrived</button></div>
+        <div class="list-row"><span>🧰</span><div style="flex:1"><b>AquaServ Solutions — Sanjay Patil +1 tech</b> · vendor job VJ-388, Unit 702 · tomorrow 10:00 AM<br><span class="muted">Auto pass from vendor job · tools list attached</span></div><span class="badge assigned">pre-approved</span></div>
+        <div class="list-row"><span>👔</span><div style="flex:1"><b>Tata AIG audit team (4 pax)</b> · host Unit 901 · 3:30 PM<br><span class="muted">ID check at gate · meeting room 9B blocked</span></div><span class="badge pending">expected</span></div>
+        <div class="list-row"><span>👤</span><div style="flex:1"><b>Interview candidate</b> · host Unit 405 · arrived 11:32 AM, exited 12:40 PM<br><span class="muted">pass 482903 · closed</span></div><span class="badge done">completed</span></div>
+      </div>
+
+      <div class="card">
+        <h3 class="panel-title">Incident log — today</h3>
+        <div class="alert-row"><span class="alert-dot" style="background:var(--warning)"></span>
+          <div><b>Tailgating attempt — Gate 1, 11:20 AM</b><br><span class="muted">Unbadged person followed staff through turnstile; stopped, registered as walk-in. Logged by Vijay Singh · photo attached.</span><br>
+          <button class="btn ghost sm" style="margin-top:6px" onclick="toast('Incident INC-0610-01 escalated to UrbanServe security head · CCTV clip 11:18–11:22 bookmarked')">Escalate</button></div></div>
+      </div>
+    </div>
+
+    <div class="stack">
+      <div class="card">
+        <h3 class="panel-title">Staff in / out (biometric + app)</h3>
+        <div class="list-row"><div style="flex:1"><b>Ramesh K.</b> · HVAC tech</div><span class="badge done">in 8:46 AM</span></div>
+        <div class="list-row"><div style="flex:1"><b>Ravi</b> · housekeeping</div><span class="badge done">in 9:02 AM</span></div>
+        <div class="list-row"><div style="flex:1"><b>Meena</b> · HK supervisor</div><span class="badge done">in 8:30 AM</span></div>
+        <div class="list-row"><div style="flex:1"><b>Imran</b> · electrician</div><span class="badge done">in 9:15 AM</span></div>
+        <div class="list-row"><div style="flex:1"><b>Lakshmi</b> · front desk</div><span class="badge done">in 8:55 AM</span></div>
+        <div class="list-row"><div style="flex:1"><b>2 HK staff</b> · approved leave</div><span class="badge neutral">absent</span></div>
+        <div class="muted" style="margin-top:8px">Full roster &amp; attendance payroll feed → <a href="fm-business.html#workforce">Workforce ↗</a></div>
+      </div>
+      <div class="card">
+        <h3 class="panel-title">Overstay alerts</h3>
+        <div class="empty-state"><span class="ico">🕊</span>No visitors overstaying right now.<br><span class="muted">Passes auto-flag 30 min past validity — last alert 6 Jun.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ 11. ANNOUNCEMENTS -->
+<div id="fm-announce" class="d-screen">
+  <div class="d-head">
+    <div><span class="eyebrow">FM · People &amp; site</span><h1>Announcements</h1><div class="sub">Broadcasts to occupants · WhatsApp-first · read receipts tracked</div></div>
+  </div>
+
+  <div class="intro-bar"><span class="ib-ico">💡</span><div>Tell occupants things once, on WhatsApp — <b>read receipts show who actually saw it</b>, so nobody can say they weren't told.</div></div>
+
+  <div class="two-col">
+    <div class="card">
+      <h3 class="panel-title">New announcement</h3>
+      <div class="field"><label>Title</label><input value="Water supply interruption — OHT cleaning, 28 Jun"></div>
+      <div class="field"><label>Message</label><textarea rows="4">Overhead tank cleaning is scheduled Sunday 28 Jun, 10 AM–2 PM. Water supply will be paused on all floors. Please store water in advance. — UrbanServe Facilities, VD Commercial</textarea></div>
+      <div class="field"><label>Audience</label>
+        <select>
+          <option>All units — 120 units · 312 contacts</option>
+          <option>Single tower / wing</option>
+          <option>By floor (pick floors)</option>
+          <option>Owners only</option>
+          <option>Defaulters only (9 units)</option>
+        </select></div>
+      <div class="field"><label>Channels</label>
+        <div class="row" style="flex-wrap:wrap">
+          <label class="row" style="margin:0;font-weight:500"><input type="checkbox" checked style="width:auto"> In-app</label>
+          <label class="row" style="margin:0;font-weight:500"><input type="checkbox" checked style="width:auto"> WhatsApp</label>
+          <label class="row" style="margin:0;font-weight:500"><input type="checkbox" style="width:auto"> SMS (fallback)</label>
+          <label class="row" style="margin:0;font-weight:500"><input type="checkbox" checked style="width:auto"> Notice board PDF</label>
+        </div></div>
+      <div class="field"><label>Schedule</label>
+        <div class="row"><select style="width:auto"><option>Send now</option><option>Schedule…</option></select><input type="text" value="—" style="width:140px"></div></div>
+      <div class="row">
+        <button class="btn primary" onclick="toast('Sent to 312 recipients · WhatsApp delivery 96% · notice-board PDF generated for lobby print')">Send</button>
+        <button class="btn ghost" onclick="toast('Draft saved — visible to UrbanServe team only')">Save draft</button>
+        <button class="btn ghost" onclick="toast('WhatsApp preview rendered — template msg with building header')">Preview</button>
+      </div>
+    </div>
+
+    <div class="stack">
+      <div class="card">
+        <h3 class="panel-title">Past announcements</h3>
+        <div class="list-row"><div style="flex:1"><b>Water supply interruption — OHT cleaning</b><br><span class="muted">5 Jun · all units · in-app + WhatsApp + PDF</span></div><div style="text-align:right"><b>84% read</b><br><span class="muted">WA delivered 97%</span></div></div>
+        <div class="list-row"><div style="flex:1"><b>Lift 2 under maintenance, use Lift 1</b><br><span class="muted">28 May · all units · in-app + WhatsApp</span></div><div style="text-align:right"><b>78% read</b><br><span class="muted">WA delivered 95%</span></div></div>
+        <div class="list-row"><div style="flex:1"><b>Fire drill — mandatory participation</b><br><span class="muted">15 May · all units · all channels</span></div><div style="text-align:right"><b>91% read</b><br><span class="muted">WA delivered 98%</span></div></div>
+        <div class="list-row"><div style="flex:1"><b>CAM invoice June released — due 15 Jun</b><br><span class="muted">1 Jun · owners only · in-app + WhatsApp</span></div><div style="text-align:right"><b>88% read</b><br><span class="muted">→ collections 75%</span></div></div>
+      </div>
+      <div class="card">
+        <h3 class="panel-title">Scheduled</h3>
+        <div class="empty-state"><span class="ico">🗓</span>Nothing scheduled.<br><span class="muted">Tip: schedule the 28 Jun OHT notice 3 days ahead for better read rates.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ 12. PERMIT-TO-WORK -->
+<div id="fm-ptw" class="d-screen">
+  <div class="d-head">
+    <div><span class="eyebrow">FM · Daily operations</span><h1>Permit-to-Work</h1><div class="sub">Hot work · electrical isolation · confined space · work-at-height · safety gate before any high-risk job starts</div></div>
+    <div class="actions">
+      <button class="btn primary sm" onclick="toast('New permit wizard opened — pick work type, vendor, isolations · insurance &amp; method statement auto-checked from vendor profile')">+ New permit</button>
+    </div>
+  </div>
+
+  <div class="intro-bar"><span class="ib-ico">💡</span><div>The safety gate for risky jobs: <b>no welding, height or confined-space work starts</b> until insurance, method statement and isolations all check out.</div></div>
+
+  <div class="two-col">
+    <div class="stack">
+      <div class="card">
+        <div class="row between"><h3 class="panel-title">PTW-09 — Hot work (welding)</h3><span class="badge live">ACTIVE</span></div>
+        <dl class="kv">
+          <dt>Job</dt><dd>STP-01 repair — welding on inlet pipework · Basement 2</dd>
+          <dt>Vendor</dt><dd>SparkSafe Electricals (4.1★)</dd>
+          <dt>Window</dt><dd>Today 10 Jun · 10:00 AM – 5:00 PM</dd>
+          <dt>Issued by</dt><dd>Kavita Rao · 9:48 AM</dd>
+          <dt>Linked ticket</dt><dd>T-1041 (STP-01 broken) · <a href="#" onclick="event.preventDefault();dGo('fm','tickets','tickets')">tickets →</a></dd>
+        </dl>
+        <div class="divider"></div>
+        <h3 class="panel-title">Safety checks — all must pass before issue</h3>
+        <div class="list-row"><span>✓</span><div style="flex:1"><b>Vendor insurance valid</b> — SparkSafe policy valid to <b>Sep 2026</b><br><span class="muted">pulled live from vendor profile</span></div><span class="badge done">verified</span></div>
+        <div class="list-row"><span>✓</span><div style="flex:1"><b>Method statement uploaded</b> — welding procedure + fire precautions<br><span class="muted">reviewed by Kavita Rao</span></div><span class="badge done">verified</span></div>
+        <div class="list-row"><span>✓</span><div style="flex:1"><b>Fire watch assigned</b> — Imran (electrician), extinguisher staged<br><span class="muted">on station 10:00 AM – work end + 30 min</span></div><span class="badge done">verified</span></div>
+        <div class="list-row"><span>✓</span><div style="flex:1"><b>LOTO on DG feeder</b> — lock-out tag-out applied, key with Imran<br><span class="muted">isolation photo logged 9:52 AM</span></div><span class="badge done">verified</span></div>
+        <div class="row" style="margin-top:10px">
+          <button class="btn secondary sm" onclick="toast('PTW-09 extension request opened — needs re-verification of fire watch availability')">Extend window</button>
+          <button class="btn danger sm" onclick="toast('PTW-09 suspended — work stop notice sent to SparkSafe crew + guard at Basement 2 access')">Suspend permit</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="panel-title">Permit history</h3>
+        <table class="dt">
+          <tr><th>Permit</th><th>Type</th><th>Location</th><th>Vendor / crew</th><th>Date</th><th>Status</th></tr>
+          <tr><td><b>PTW-09</b></td><td>Hot work — welding</td><td>Basement 2 · STP-01</td><td>SparkSafe Electricals</td><td>10 Jun</td><td><span class="badge live">ACTIVE</span></td></tr>
+          <tr><td><b>PTW-08</b></td><td>Electrical isolation</td><td>3rd-floor plant room</td><td>Imran (in-house)</td><td>6 Jun</td><td><span class="badge done">closed</span></td></tr>
+          <tr><td><b>PTW-07</b></td><td>Work at height</td><td>Rooftop · solar array</td><td>GreenLeaf Landscaping</td><td>2 Jun</td><td><span class="badge done">closed</span></td></tr>
+          <tr><td><b>PTW-06</b></td><td>Confined space</td><td>Basement 2 · OHT sump</td><td>AquaServ Solutions</td><td>27 May</td><td><span class="badge done">closed</span></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="stack">
+      <div class="card" style="border-color:var(--danger)">
+        <div class="row between"><h3 class="panel-title">Blocked vendor</h3><span class="badge critical">BLOCKED</span></div>
+        <div class="alert-row"><span class="alert-dot" style="background:var(--danger)"></span>
+          <div><b>QuickFix — blocked from new permits</b><br>
+          <span class="muted">Insurance expired — permits cannot be issued until a valid policy is uploaded and verified.</span><br>
+          <button class="btn ghost sm" style="margin-top:6px" onclick="toast('Insurance renewal request sent to QuickFix on WhatsApp · permit block lifts automatically on verified upload')">Request renewal</button></div></div>
+      </div>
+      <div class="crosslink">⛓ Insurance validity, PAN and policy documents come straight from <b>vendor profiles under Money → Vendors</b> — no separate PTW paperwork. <a href="fm-business.html#vendors" style="color:var(--terra);font-weight:700">Vendors ↗</a></div>
+      <div class="card">
+        <h3 class="panel-title">Open permit requests</h3>
+        <div class="empty-state"><span class="ico">🗂</span>No pending permit requests.<br><span class="muted">Vendors request permits from their app — checks run automatically on submission.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ 13. BRIJ AGENTS -->
+<div id="fm-agents" class="d-screen">
+  <div class="d-head">
+    <div><span class="eyebrow">FM · Intelligence</span><h1>Brij Agents</h1><div class="sub">Autonomous agents working the queue · agents act, humans approve — every action in audit_log</div></div>
+    <div class="actions">
+      <button class="btn secondary sm" onclick="toast('Agent audit_log exported (CSV) — 214 actions, June 2026, each with confidence + approver')">⬇ Audit log</button>
+    </div>
+  </div>
+
+  <div class="intro-bar"><span class="ib-ico">💡</span><div>Three AI agents that work the queue for you. <b>They act, you approve</b> — every action lands in the audit log with its confidence score.</div></div>
+
+  <div class="three-col">
+    <div class="ai-panel">
+      <div class="row between"><b>🚦 Dispatch Agent</b><span class="badge ai">avg confidence 91%</span></div>
+      <div style="margin:8px 0">Routed <b>18 tickets</b> this week · <b>2 sent to human review</b> (confidence &lt; 70%)</div>
+      <div class="muted">Why: matches category, asset zone and technician skill/load; low-confidence cases always queue for Kavita.</div>
+      <ul class="timeline" style="margin-top:12px">
+        <li><div class="t-title">T-1044 (BMS auto-created) → flagged Critical, night shift paged</div><div class="t-meta">today 4:12 AM · acked 4:19 AM</div></li>
+        <li><div class="t-title">T-1042 → Ramesh K. (HVAC, AHU-02 zone)</div><div class="t-meta">9 Jun 9:12 AM · confidence 92%</div></li>
+        <li><div class="t-title">T-1039 → human review queue (confidence 54%)</div><div class="t-meta">9 Jun · awaiting Kavita</div></li>
+      </ul>
+      <div class="row" style="margin-top:10px">
+        <button class="btn secondary sm" onclick="dGo('fm','tickets','tickets')">Review queue →</button>
+        <button class="btn ghost sm" onclick="toast('Dispatch Agent routing rules opened — thresholds, skills matrix, override history')">Override rules</button>
+      </div>
+    </div>
+
+    <div class="ai-panel">
+      <div class="row between"><b>🛡 Compliance Agent</b><span class="badge ai">statutory calendar watch</span></div>
+      <div style="margin:8px 0">Caught <b>2 expiries</b> before deadline this month</div>
+      <div class="muted">Why: scans AMC, license and consent registers daily; drafts renewal tasks for human sign-off.</div>
+      <ul class="timeline" style="margin-top:12px">
+        <li><div class="t-title">Lift license renewal due 30 Jun — renewal task drafted</div><div class="t-meta">flagged 1 Jun · awaiting Kavita's approval</div></li>
+        <li><div class="t-title">STP consent-to-operate expiry — GPCB renewal pack pre-filled</div><div class="t-meta">flagged 8 Jun · documents staged</div></li>
+      </ul>
+      <div class="row" style="margin-top:10px">
+        <a class="btn secondary sm" href="fm-business.html#compliance">Compliance register ↗</a>
+        <button class="btn ghost sm" onclick="toast('Both renewal tasks approved — assigned to Kavita Rao, reminders set T-14 and T-7 days')">Approve tasks</button>
+      </div>
+    </div>
+
+    <div class="ai-panel">
+      <div class="row between"><b>₹ Finance Agent</b><span class="badge ai">invoice-vs-WO match</span></div>
+      <div style="margin:8px 0"><b>1 auto-approved · 1 held</b> for human decision</div>
+      <div class="muted">Why: compares vendor invoice to accepted quote/work order; exact match auto-approves, any variance holds for a human.</div>
+      <ul class="timeline" style="margin-top:12px">
+        <li><div class="t-title">VJ-388 (AquaServ) invoice ₹3,500 == quote ₹3,500 → <b>auto-approved</b></div><div class="t-meta">today 11:02 AM · payout joins Friday batch</div></li>
+        <li><div class="t-title">SparkSafe invoice <b>₹6,200</b> vs quote <b>₹4,800</b> → <span class="badge medium">HELD · variance ₹1,400</span></div><div class="t-meta">today 12:30 PM · awaiting human decision</div></li>
+      </ul>
+      <div class="row" style="margin-top:10px">
+        <button class="btn primary sm" onclick="toast('SparkSafe invoice ₹6,200 approved with variance note ₹1,400 · approver Kavita Rao logged in audit_log')">Approve</button>
+        <button class="btn danger sm" onclick="toast('SparkSafe invoice rejected — returned with variance query ₹1,400 vs quote · vendor notified on WhatsApp')">Reject</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="muted" style="margin-top:14px">Agents act, humans approve — every agent action lands in <b>audit_log</b> with confidence, inputs and the approving human. Override anytime; overrides retrain routing.</div>
+</div>
+
+</main>
+</div>
+<script src="brij.js"></script>
+</body>
+</html>

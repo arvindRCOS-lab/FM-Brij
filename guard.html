@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brij — Guard (Gate 1)</title>
+<link rel="stylesheet" href="brij.css">
+</head>
+<body>
+<div class="proto-bar">
+  <a class="proto-logo" href="index.html">brij<span>.</span></a>
+  <div class="proto-tag">Prototype v0.4 · Guard console · Phase 2 preview</div>
+  <div class="role-links">
+    <a href="resident.html">Resident</a>
+    <a href="fm.html">FM Manager</a>
+    <a href="builder.html">Builder</a>
+    <a href="vendor.html">Vendor</a>
+    <a href="guard.html" class="active">Guard</a>
+  </div>
+</div>
+
+<div class="phone-wrap">
+<div class="phone">
+  <div class="notch"></div>
+  <div class="statusrow"><span>9:41</span><span>📶 ⚡ 78%</span></div>
+
+  <!-- ============ GATE (home console) ============ -->
+  <div id="m-gate" class="m-screen active">
+    <div class="m-header">
+      <div style="flex:1">
+        <div class="muted">Gate 1 · VD Commercial · Vijay Singh</div>
+        <h2>Gate console</h2>
+      </div>
+      <span class="badge resolved">On duty</span>
+    </div>
+
+    <div class="intro-bar"><span class="ib-ico">🛡️</span><div>Big buttons on purpose. <b>Scan, verify, allow</b> — under 10 seconds.</div></div>
+
+    <button class="btn primary block" style="font-size:22px;padding:28px 20px;border-radius:20px" onclick="mGo('scan-result','gate')">📷 SCAN QR</button>
+
+    <div class="m-card" style="margin-top:12px">
+      <label style="font-size:13px">Or enter 6-digit pass code</label>
+      <div class="row">
+        <input value="482917" inputmode="numeric" maxlength="6" style="font-size:22px;letter-spacing:6px;font-weight:700;text-align:center;padding:14px">
+        <button class="btn primary" style="font-size:18px;padding:16px 22px" onclick="mGo('scan-result','gate')">Verify</button>
+      </div>
+    </div>
+
+    <button class="btn secondary block" style="font-size:18px;padding:18px;margin-top:12px" onclick="mGo('walkin','gate')">🚶 Walk-in visitor (no pass)</button>
+
+    <div class="stat-grid" style="grid-template-columns:1fr 1fr;margin-top:12px;margin-bottom:0">
+      <div class="stat-card" style="padding:14px"><div class="s-label">Passes today</div><div class="s-value" style="font-size:26px">34</div></div>
+      <div class="stat-card" style="padding:14px"><div class="s-label">Active inside</div><div class="s-value" style="font-size:26px">12</div></div>
+    </div>
+
+    <div class="m-card" style="margin-top:12px">
+      <strong>Next expected</strong>
+      <div class="list-row" onclick="mGo('scan-result','gate')" style="cursor:pointer">
+        <div class="photo-stub" style="width:40px;height:40px;font-size:16px">📦</div>
+        <div style="flex:1"><strong>Suresh Kumar</strong> · Courier<div class="muted">~2:30 PM · host Unit 304 · pass 482917</div></div>
+        <span class="badge pending">Expected</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SCAN RESULT ============ -->
+  <div id="m-scan-result" class="m-screen">
+    <div class="m-header">
+      <button class="m-back" onclick="mGo('gate','gate')">←</button>
+      <h2>Pass 482917</h2>
+    </div>
+
+    <div class="m-card" style="text-align:center;border-color:var(--success)">
+      <div style="width:84px;height:84px;border-radius:50%;background:var(--success-50);color:var(--success);font-size:46px;line-height:84px;margin:6px auto 10px">✓</div>
+      <h2 style="color:var(--success)">PASS VALID</h2>
+      <div class="photo-stub" style="width:72px;height:72px;font-size:28px;margin:12px auto;display:flex">🧑</div>
+      <div style="font-size:18px;font-weight:700;color:var(--ink-900)">Suresh Kumar</div>
+      <div class="muted" style="font-size:13px;margin-top:4px">Courier · Unit 304 · host <strong>Rohan Mehta</strong></div>
+      <div class="muted" style="margin-top:4px">Expected ~2:30 PM · valid till 8:00 PM today</div>
+    </div>
+
+    <div class="stack" style="margin-top:14px">
+      <button class="btn primary block" style="font-size:20px;padding:22px" onclick="toast('Entry logged 2:31 PM · resident notified on WhatsApp');mGo('gate','gate')">✓ ALLOW ENTRY</button>
+      <button class="btn danger block" style="font-size:16px;padding:16px" onclick="toast('Entry denied — host Rohan Mehta + FM desk notified · incident draft created')">✕ Deny entry</button>
+    </div>
+    <div class="muted" style="margin-top:10px;text-align:center">Allowing entry auto-notifies the host and starts the inside-timer.</div>
+  </div>
+
+  <!-- ============ WALK-IN ============ -->
+  <div id="m-walkin" class="m-screen">
+    <div class="m-header">
+      <button class="m-back" onclick="mGo('gate','gate')">←</button>
+      <h2>Walk-in visitor</h2>
+    </div>
+
+    <div class="m-card">
+      <div class="field"><label>Visitor name</label><input value="Mahesh Desai" style="font-size:16px;padding:14px"></div>
+      <div class="field"><label>Phone</label><input value="+91 98XXX 55821" inputmode="tel" style="font-size:16px;padding:14px"></div>
+      <div class="field"><label>Visiting unit</label>
+        <select style="font-size:16px;padding:14px">
+          <option>Unit 304 — Rohan Mehta</option>
+          <option>Unit 511</option>
+          <option>Unit 702</option>
+          <option>FM desk — UrbanServe</option>
+        </select>
+      </div>
+      <label>Purpose</label>
+      <div class="filter-chips" style="margin-top:6px">
+        <span class="chip on" onclick="pickPurpose(this)">Meeting</span>
+        <span class="chip" onclick="pickPurpose(this)">Delivery</span>
+        <span class="chip" onclick="pickPurpose(this)">Maintenance</span>
+        <span class="chip" onclick="pickPurpose(this)">Personal</span>
+      </div>
+    </div>
+
+    <button class="btn wa block" style="font-size:18px;padding:18px;margin-top:12px" onclick="startApproval()">💬 Request approval on WhatsApp</button>
+
+    <div id="wa-flow" class="ai-panel" style="margin-top:12px;display:none">
+      <span class="badge live">Live</span>
+      <div id="wa-status" style="margin-top:8px;font-size:13px">Waiting for resident… message sent to Rohan Mehta (Unit 304) on WhatsApp</div>
+    </div>
+
+    <button id="walkin-allow" class="btn primary block" style="font-size:20px;padding:22px;margin-top:12px;display:none" onclick="toast('Entry logged 2:36 PM · visitor photo + approval saved to gate log');mGo('gate','gate')">✓ ALLOW ENTRY</button>
+  </div>
+
+  <!-- ============ EXPECTED ============ -->
+  <div id="m-expected" class="m-screen">
+    <div class="m-header"><h2>Expected today</h2><span class="muted">Wed 10 Jun</span></div>
+
+    <div class="m-card">
+      <div class="list-row" onclick="mGo('scan-result','expected')" style="cursor:pointer">
+        <div class="photo-stub" style="width:40px;height:40px;font-size:16px">📦</div>
+        <div style="flex:1"><strong>Suresh Kumar</strong> · Courier<div class="muted">~2:30 PM · host Unit 304 (Rohan Mehta) · pass 482917 · valid till 8 PM</div></div>
+        <span class="badge pending">Expected</span>
+      </div>
+      <div class="list-row" onclick="toast('Pass details — Kone AMC engineer · pre-approved by FM (Kavita Rao)')" style="cursor:pointer">
+        <div class="photo-stub" style="width:40px;height:40px;font-size:16px">🛗</div>
+        <div style="flex:1"><strong>Kone service engineer</strong> · Lift AMC visit<div class="muted">4:00 PM · FM desk · AMC expires 30 Jun</div></div>
+        <span class="badge pending">Expected</span>
+      </div>
+      <div class="list-row" onclick="toast('Auto gate pass — AquaServ worker Anil Yadav, job VJ-388 (Unit 702), 11 Jun 9:30 AM–1 PM')" style="cursor:pointer">
+        <div class="photo-stub" style="width:40px;height:40px;font-size:16px">👷</div>
+        <div style="flex:1"><strong>Anil Yadav</strong> · AquaServ Solutions<div class="muted">Tomorrow 10:00 AM · vendor job VJ-388 · Unit 702</div></div>
+        <span class="badge ai">Auto pass</span>
+      </div>
+    </div>
+
+    <div class="crosslink" style="margin-top:12px">⛓ Vendor worker passes are auto-issued by the <strong>Marketplace</strong> module when a job is scheduled — no manual entry.</div>
+
+    <div class="m-card" style="margin-top:12px">
+      <strong>Pending walk-in approvals</strong>
+      <div class="empty-state" style="padding:26px 16px">
+        <span class="ico">✅</span>
+        No walk-ins awaiting resident approval right now.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ STAFF IN/OUT ============ -->
+  <div id="m-staff-inout" class="m-screen">
+    <div class="m-header"><h2>Staff in / out</h2><span class="muted">Wed 10 Jun</span></div>
+
+    <div class="m-card">
+      <strong>Building staff (UrbanServe)</strong>
+      <div class="list-row">
+        <div class="photo-stub" style="width:40px;height:40px;font-size:16px">🧹</div>
+        <div style="flex:1"><strong>Meena</strong> · Housekeeping sup.<div class="muted">Checked in 8:45 AM</div></div>
+        <button class="btn secondary sm" style="padding:10px 16px" onclick="toast('Meena checked OUT 2:40 PM — attendance synced to UrbanServe payroll')">Check out</button>
+      </div>
+      <div class="list-row">
+        <div class="photo-stub" style="width:40px;height:40px;font-size:16px">🔧</div>
+        <div style="flex:1"><strong>Ramesh K.</strong> · HVAC technician<div class="muted">Checked in 8:30 AM · on site Unit 304 (T-1042)</div></div>
+        <button class="btn secondary sm" style="padding:10px 16px" onclick="toast('Ramesh K. checked OUT — FM desk notified')">Check out</button>
+      </div>
+    </div>
+
+    <div class="m-card" style="margin-top:12px">
+      <strong>Household / unit staff</strong>
+      <div class="list-row">
+        <div class="photo-stub" style="width:40px;height:40px;font-size:16px">🧑</div>
+        <div style="flex:1"><strong>Ravi</strong> · Office boy, Unit 304<div class="muted">Checked in 9:02 AM</div></div>
+        <button class="btn secondary sm" style="padding:10px 16px" onclick="toast('Ravi checked OUT 2:41 PM — Unit 304 notified on WhatsApp')">Check out</button>
+      </div>
+      <div class="list-row">
+        <div class="photo-stub" style="width:40px;height:40px;font-size:16px">🧑</div>
+        <div style="flex:1"><strong>Pooja</strong> · Pantry staff, Unit 511<div class="muted">Not arrived yet (usual 10 AM)</div></div>
+        <button class="btn primary sm" style="padding:10px 16px" onclick="toast('Pooja checked IN 2:42 PM — Unit 511 notified')">Check in</button>
+      </div>
+    </div>
+
+    <div class="m-card" style="margin-top:12px">
+      <strong>Vendor workers</strong>
+      <div class="list-row" onclick="toast('Auto gate pass — AquaServ worker Anil Yadav, VJ-388, valid 11 Jun 9:30 AM–1 PM')" style="cursor:pointer">
+        <div class="photo-stub" style="width:40px;height:40px;font-size:16px">👷</div>
+        <div style="flex:1"><strong>Anil Yadav</strong> · AquaServ (VJ-388)<div class="muted">Expected tomorrow 10:00 AM · Unit 702</div></div>
+        <span class="badge ai">Auto pass</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ LOG ============ -->
+  <div id="m-log" class="m-screen">
+    <div class="m-header"><h2>Gate log</h2><span class="muted">Wed 10 Jun</span></div>
+
+    <div class="m-card" style="border-color:var(--danger);margin-bottom:12px">
+      <div class="row between">
+        <strong>SOS broadcast</strong>
+        <span class="badge neutral">No active SOS</span>
+      </div>
+      <div class="muted" style="margin-top:4px">Resident SOS rings here + FM desk instantly. Monthly drill: 28 Jun.</div>
+      <button class="btn ghost sm" style="margin-top:6px" onclick="toast('Test SOS sent to Gate 1 console — drill logged, no residents alerted')">Run test alert</button>
+    </div>
+
+    <div class="m-card" style="margin-bottom:12px">
+      <strong>Incidents today</strong>
+      <div class="list-row">
+        <div class="photo-stub" style="width:40px;height:40px;font-size:16px">📸</div>
+        <div style="flex:1"><strong>Tailgating attempt</strong> · 11:20 AM<div class="muted">Unknown 2-wheeler followed a pass-holder · photo attached</div></div>
+        <span class="badge critical">FM notified</span>
+      </div>
+      <div class="list-row">
+        <div class="photo-stub" style="width:40px;height:40px;font-size:16px">🚛</div>
+        <div style="flex:1"><strong>Water tanker entry</strong> · 12:05 PM<div class="muted">Scheduled supply · logged against STP-01 outage (STP broken)</div></div>
+        <span class="badge neutral">Logged</span>
+      </div>
+    </div>
+
+    <div class="m-card">
+      <strong>Add incident</strong>
+      <div class="filter-chips" style="margin:8px 0">
+        <span class="chip on" onclick="pickPurpose(this)">Tailgating</span>
+        <span class="chip" onclick="pickPurpose(this)">Suspicious</span>
+        <span class="chip" onclick="pickPurpose(this)">Delivery dispute</span>
+        <span class="chip" onclick="pickPurpose(this)">Emergency</span>
+      </div>
+      <div class="field"><label>Note (optional)</label><input placeholder="What happened?" style="font-size:16px;padding:14px"></div>
+      <div class="upload-zone" onclick="toast('Camera opened — photo will attach to incident')" style="margin-bottom:10px">📷 Add photo</div>
+      <button class="btn danger block" style="font-size:18px;padding:18px" onclick="toast('Incident logged 2:43 PM — FM desk (Kavita Rao) notified on WhatsApp')">Log incident</button>
+    </div>
+  </div>
+
+  <!-- single shared tab bar -->
+  <div class="bottom-tabs">
+    <button id="tab-gate" class="active" onclick="mGo('gate','gate')"><span class="ico">🛡️</span>Gate</button>
+    <button id="tab-expected" onclick="mGo('expected','expected')"><span class="ico">🕑</span>Expected</button>
+    <button id="tab-staff" onclick="mGo('staff-inout','staff')"><span class="ico">🧑‍🔧</span>Staff</button>
+    <button id="tab-log" onclick="mGo('log','log')"><span class="ico">📓</span>Log</button>
+  </div>
+
+</div><!-- /phone -->
+
+<div class="annot">
+  <span class="badge terra">Phase 2 preview</span>
+  <h4>Security guard gate console</h4>
+  <p>Vijay Singh's console at Gate 1, VD Commercial. Big-touch UI built for gloves and sunlight: scan a QR or punch a 6-digit code, and every entry/exit becomes structured data.</p>
+  <h4>Why it exists</h4>
+  <p>The gate is where building trust is made or lost. Verified passes, WhatsApp-approved walk-ins, and staff in/out logs give residents proof of safety and give FM a live people-on-site picture — the data moat under the whole Brij OS.</p>
+  <h4>Try clicking</h4>
+  <ul>
+    <li><strong>Verify</strong> code 482917 → PASS VALID for courier Suresh Kumar (host Unit 304)</li>
+    <li><strong>Walk-in visitor</strong> → watch the simulated WhatsApp approval ("Rohan approved ✓ 0:42s")</li>
+    <li><strong>Log tab</strong> → tailgating incident + add a new one with type chips</li>
+  </ul>
+  <h4>Cross-module story</h4>
+  <p>⛓ Anil Yadav's gate pass (Staff &amp; Expected tabs) was auto-issued by the vendor Marketplace when job VJ-388 was scheduled — no phone calls, no register.</p>
+</div>
+</div><!-- /phone-wrap -->
+
+<script src="brij.js"></script>
+<script>
+/* page-specific demo helpers (tiny, allowed per design contract) */
+function pickPurpose(el){
+  el.parentElement.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on')});
+  el.classList.add('on');
+}
+function startApproval(){
+  var box=document.getElementById('wa-flow'), st=document.getElementById('wa-status'),
+      allow=document.getElementById('walkin-allow');
+  box.style.display='block'; allow.style.display='none';
+  st.innerHTML='Waiting for resident… message sent to <strong>Rohan Mehta (Unit 304)</strong> on WhatsApp';
+  setTimeout(function(){ st.innerHTML='Waiting for resident… <em>Rohan is typing…</em>'; },1400);
+  setTimeout(function(){
+    st.innerHTML='<strong style="color:var(--success)">Rohan approved ✓</strong> · response time 0:42s · approval saved to gate log';
+    allow.style.display='inline-flex';
+    toast('Resident approved — you may allow entry');
+  },2800);
+}
+</script>
+</body>
+</html>
